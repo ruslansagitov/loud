@@ -223,7 +223,7 @@ function Loud() {
 /**
  * @type {String}
  */
-Loud.VERSION = '0.7.0';
+Loud.VERSION = '0.7.1';
 
 /**
  * Transform HTML into words.
