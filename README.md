@@ -13,7 +13,7 @@ Get a release tarball or clone the repository, then include the
 
 or use [bower][]:
 
-```console
+```
 bower install loud --save-dev
 ```
 
