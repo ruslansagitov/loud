@@ -1,0 +1,58 @@
+{
+  "name": "loud",
+  "version": "0.7.0",
+  "description": "Web accessibility unit-testing framework",
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "test",
+    "testing",
+    "unit-tests"
+  ],
+  "author": "Ruslan Sagitov <rs@ruslansagitov.name>",
+  "license": "MIT",
+  "homepage": "https://github.com/ruslansagitov/loud",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruslansagitov/loud.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ruslansagitov/loud/issues",
+    "email": "rs@ruslansagitov.name"
+  },
+  "main": "lib/loud.js",
+  "directories": {
+    "lib": "./lib"
+  },
+  "bin": {
+    "loud": "./lib/cli.js"
+  },
+  "scripts": {
+    "test": "npm run-script node-test && npm run-script karma-test",
+    "node-test": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- ./test/test.js",
+    "karma-test": "./node_modules/.bin/karma start --single-run",
+    "build": "npm run-script browserify && npm run-script browserify-tests",
+    "browserify": "./node_modules/.bin/browserify --standalone Loud -x jsdom -o ./dist/loud.js ./lib/loud.js",
+    "browserify-tests": "mkdir -p build && ./node_modules/.bin/browserify -x jsdom -o ./build/test.js ./test/test.js",
+    "jsdoc": "./node_modules/.bin/jsdoc -d ./jsdoc/ ./lib/loud.js ./README.md",
+    "clean": "rm -rf ./build/ ./coverage/ ./jsdoc/ npm-debug.log"
+  },
+  "dependencies": {
+    "jsdom": "^0.10.6",
+    "optimist": "^0.6.1"
+  },
+  "devDependencies": {
+    "browserify": "^4.1.10",
+    "istanbul": "^0.2.11",
+    "jsdoc": "^3.3.0-alpha8",
+    "karma": "^0.12.16",
+    "karma-firefox-launcher": "^0.1.3",
+    "karma-mocha": "^0.1.4",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "mocha": "^1.20.1"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "private": true
+}

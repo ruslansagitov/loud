@@ -1,0 +1,28 @@
+{
+  "name": "loud",
+  "version": "0.7.0",
+  "authors": [
+    "Ruslan Sagitov <rs@ruslansagitov.name>"
+  ],
+  "description": "Web accessibility unit-testing framework",
+  "main": "./dist/loud.js",
+  "keywords": [
+    "accessibility",
+    "a11y",
+    "test",
+    "testing",
+    "unit-tests"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ruslansagitov/loud",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "build",
+    "coverage",
+    "jsdoc",
+    "test"
+  ]
+}

@@ -1,0 +1,8 @@
+build
+coverage
+jsdoc
+test
+.editorconfig
+.jshintrc
+.npmignore
+.travis.yml
