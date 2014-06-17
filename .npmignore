@@ -2,6 +2,8 @@ build
 coverage
 jsdoc
 test
+bower.json
+karma.conf.js
 .editorconfig
 .jshintrc
 .npmignore
