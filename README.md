@@ -1,4 +1,4 @@
-# Loud
+# Loud [![Build Status](https://travis-ci.org/ruslansagitov/loud.svg?branch=master)](https://travis-ci.org/ruslansagitov/loud)
 
 Web accessibility unit-testing framework
 
