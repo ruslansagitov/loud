@@ -4,7 +4,8 @@ node_js:
   - 0.10
 
 env:
-  - secure: Dt1/TndktpPqZlPeqCLfa6WMV66hYgGroNOVs6Kr9XLop3DACutHh9ujk3cRs/qybzEG6rMXj8bZoRkl9Zp/EoYCkWE4RM2eEg28M02s34jhK28NM5Jxcj5znpRvmxxemprkYbRwl3hCWcw3TsFp0dDWHw1/ZhkN8tTs8sGpzxU=
+  global:
+    - secure: UR3Fth+3x7k4zAiYUe/GNM19HhaboA/v1XhHC9IO239beIzZAwqbIi0IKpt8rNWXxnoSS8oVlz7ABoFy3iilXDNGE2t6r53mDllWT8SlcBNMgDp+A56VzClVGodJatTkrPTWmu8dGsa9YaIVOBbAvytalEgd3ib4rk0MQl/y1zs=
 
 before_install:
   - export DISPLAY=:99.0
