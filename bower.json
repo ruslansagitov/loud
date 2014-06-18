@@ -19,9 +19,10 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "build",
-    "coverage",
-    "jsdoc",
-    "test"
+    "lib",
+    "test",
+    "karma.conf.js",
+    "package.json",
+    "README.md"
   ]
 }
