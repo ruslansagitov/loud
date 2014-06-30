@@ -38,15 +38,15 @@
     "clean": "rm -rf ./build/ ./coverage/ ./jsdoc/ npm-debug.log"
   },
   "dependencies": {
-    "jsdom": "^0.10.6",
+    "jsdom": "^0.11.0",
     "optimist": "^0.6.1"
   },
   "devDependencies": {
-    "browserify": "^4.1.10",
-    "istanbul": "^0.2.11",
-    "jsdoc": "^3.3.0-alpha8",
+    "browserify": "^4.2.0",
+    "istanbul": "^0.2.13",
+    "jsdoc": "^3.3.0-alpha9",
     "karma": "^0.12.16",
-    "karma-cli": "0.0.4",
+    "karma-cli": "^0.0.4",
     "karma-firefox-launcher": "^0.1.3",
     "karma-mocha": "^0.1.4",
     "karma-phantomjs-launcher": "^0.1.4",
