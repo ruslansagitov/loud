@@ -6,6 +6,7 @@ node_js:
 env:
   global:
     - secure: UR3Fth+3x7k4zAiYUe/GNM19HhaboA/v1XhHC9IO239beIzZAwqbIi0IKpt8rNWXxnoSS8oVlz7ABoFy3iilXDNGE2t6r53mDllWT8SlcBNMgDp+A56VzClVGodJatTkrPTWmu8dGsa9YaIVOBbAvytalEgd3ib4rk0MQl/y1zs=
+    - secure: QBa2wL7RpzffwO7oKM0pecfnMO9dExnsJv9AuOt8FY60vWD8aoa8nVVo6GbJ8zMxmFRaFK3uNzzezsUBCDXdY8aEjn4+39nczg+yGp5TW60drzs+aJdSI0W7bNOlquueqqfuxFnkptggxWzdFospu4iYAcYELggPVVYTlHkKfbE=
 
 before_install:
   - export DISPLAY=:99.0
