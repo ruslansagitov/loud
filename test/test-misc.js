@@ -10,7 +10,7 @@ describe('loud', function() {
     var loud, elem;
 
     var data = {
-        'Text': ['Text'],
+        Text: ['Text'],
         '<!-- comment -->': [],
         '<?xml-stylesheet?>': [],
 
