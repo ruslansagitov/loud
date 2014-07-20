@@ -13,7 +13,7 @@ describe('loud', function() {
     var data = {
         '<a>Content</a>': ['Content', 'link'],
         '<address>Content</address>': ['contentinfo', 'Content', 'contentinfo end'],
-        '<area alt="Content">': ['Content', 'link' ],
+        '<area alt="Content">': ['Content', 'link'],
         '<article>Content</area>': ['article', 'Content', 'article end'],
         '<aside>Content</aside>': ['complementary', 'Content', 'complementary end'],
         // In browser, it does not work
