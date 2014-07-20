@@ -5,6 +5,7 @@ test
 bower.json
 karma.conf.js
 .editorconfig
+.eslintrc
 .jshintrc
 .npmignore
 .travis.yml
