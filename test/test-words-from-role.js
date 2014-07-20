@@ -1,9 +1,10 @@
-/* global describe, it, beforeEach, afterEach, document */
+/* global describe, it, beforeEach, afterEach, window, document */
 'use strict';
 
 var assert = require('assert'),
-    Loud = require('../lib/loud'),
-    browser = typeof window !== 'undefined';
+    Loud = require('../lib/loud');
+
+var browser = typeof window !== 'undefined';
 
 describe('loud', function() {
     var loud, elem;

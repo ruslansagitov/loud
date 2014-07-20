@@ -1,0 +1,32 @@
+{
+  "env": {
+    "node": true
+  },
+  "rules": {
+    "valid-jsdoc": [2, {
+      "prefer": {
+        "return": "returns"
+      },
+      "requireReturn": false,
+      "requireParamDescription": false
+    }],
+
+    "block-scoped-var": 2,
+    "guard-for-in": 2,
+    "radix": 2,
+    "wrap-iife": 2,
+    "yoda": "never",
+
+    "no-undefined": 2,
+    "no-use-before-define": [2, "nofunc"],
+
+    "brace-style": [2, "1tbs"],
+    "consistent-this": [2, "that"],
+    "quotes": [2, "single"],
+    "no-trailing-spaces": 2,
+    "space-after-keywords": 2,
+    "space-unary-word-ops": 2,
+
+    "no-underscore-dangle": 0
+  }
+}
