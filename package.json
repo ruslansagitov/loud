@@ -44,7 +44,6 @@
   "devDependencies": {
     "browserify": "^4.2.0",
     "istanbul": "^0.2.13",
-    "jsdoc": "^3.3.0-alpha9",
     "karma": "^0.12.16",
     "karma-cli": "^0.0.4",
     "karma-firefox-launcher": "^0.1.3",
