@@ -6,6 +6,7 @@ bower.json
 karma.conf.js
 .editorconfig
 .eslintrc
+.jscsrc
 .jshintrc
 .npmignore
 .travis.yml
