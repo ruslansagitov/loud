@@ -22,7 +22,8 @@ module.exports = function(config) {
             reporters: ['progress', 'saucelabs'],
             captureTimeout: 120000,
             sauceLabs: {
-                testName: 'Loud'
+                testName: 'Loud',
+                tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
             },
             customLaunchers: customLaunchers
         });
