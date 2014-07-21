@@ -5,7 +5,7 @@ module.exports = function(config) {
         files: ['build/test.js']
     });
 
-    if (process.env.CI) {
+    if (process.env.TRAVIS) {
         var customLaunchers = {
             'SauceLabs_Firefox': {
                 base: 'SauceLabs',
