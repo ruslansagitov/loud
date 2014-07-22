@@ -2,7 +2,8 @@ module.exports = function(config) {
     config.set({
         frameworks: ['mocha'],
         browsers: ['Firefox', 'PhantomJS'],
-        files: ['build/test.js']
+        files: ['build/test.js'],
+        reporters: ['dots']
     });
 
     if (process.env.TRAVIS) {
@@ -19,7 +20,7 @@ module.exports = function(config) {
 
         config.set({
             browsers: Object.keys(customLaunchers),
-            reporters: ['progress', 'saucelabs'],
+            reporters: ['dots', 'saucelabs'],
             captureTimeout: 120000,
             sauceLabs: {
                 startConnect: false,
