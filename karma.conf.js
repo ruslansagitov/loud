@@ -8,11 +8,11 @@ module.exports = function(config) {
 
     if (process.env.TRAVIS) {
         var customLaunchers = {
-            'SauceLabs_Firefox': {
+            sauceLabsFirefox: {
                 base: 'SauceLabs',
                 browserName: 'firefox'
             },
-            'SauceLabs_Chrome': {
+            sauceLabsChrome: {
                 base: 'SauceLabs',
                 browserName: 'chrome'
             }
