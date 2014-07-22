@@ -18,7 +18,7 @@ addons:
   sauce_connect: true
 
 before_script:
-  - npm install karma-sauce-launcher
+  - npm install eslint jscs jshint karma-sauce-launcher
   - npm run-script build
 
 after_success:
