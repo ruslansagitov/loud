@@ -20,6 +20,7 @@ addons:
 before_install:
   - uname -a
   - ulimit -a
+  - free -h
   - df -h
 
 before_script:
