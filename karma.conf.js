@@ -6,7 +6,7 @@ module.exports = function(config) {
         reporters: ['dots']
     });
 
-    if (process.env.TRAVIS) {
+    if (process.env.CI) {
         var customLaunchers = {
             sauceLabsFirefox: {
                 base: 'SauceLabs',
@@ -23,9 +23,7 @@ module.exports = function(config) {
             reporters: ['dots', 'saucelabs'],
             captureTimeout: 120000,
             sauceLabs: {
-                startConnect: false,
-                testName: 'Loud',
-                tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
+                testName: 'Loud'
             },
             customLaunchers: customLaunchers
         });

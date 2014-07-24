@@ -14,9 +14,6 @@ env:
     # SAUCE_ACCESS_KEY
     - secure: c8UoNP1xrL5ww3mss7/ltV6pZbPNlMCLPYSbO6+ofonx8eQRQPyjin9VD5fslAcfL5nCbgOilxoD3K6iWWBIypuJJFuRM0463kiXXS3X0bG2FJHKvHqw7tCpyLT/tXsaa94TjukhkqHYN9PavHlemz/ZUg8IwZKa4bsdrOfTjKE=
 
-addons:
-  sauce_connect: true
-
 before_script:
   - npm install -g eslint jscs jshint
   - npm install karma-sauce-launcher
