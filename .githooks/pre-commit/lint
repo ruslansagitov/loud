@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+CHANGED=`git diff --staged --name-only --diff-filter=ACMR`
+
+JS=`echo "$CHANGED" | grep --color=never '\.js$'`
+if test -n "$JS"; then
+    set -e
+    eslint $JS
+    jscs $JS
+    jshint $JS
+fi
