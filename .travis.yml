@@ -27,3 +27,12 @@ after_success:
   - ./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- ./test/test.js
   - cat ./coverage/lcov.info | ./node_modules/.bin/codeclimate
   - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+
+deploy:
+  - provider: npm
+    email: rs@ruslansagitov.name
+    api_key:
+      secure: aBHJltDzWk/QIsMk/FJUWF4glByXAXIizh+bbB1f3d5As6c4u6pJvCUxQBkrQWmV71Nf/MfBVvhuqHKH+ZifGzIpWKAtdO5yGzaVdxRUhNU7GEfxX0HQkkKIjUe0pOz8RkQXe7Vln8UV5eLGyeHLXs5HyN2VnFSOQKrw4dh3DPk=
+    on:
+      tags: true
+      repo: ruslansagitov/loud
