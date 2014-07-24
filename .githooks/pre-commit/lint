@@ -6,5 +6,4 @@ if test -n "$JS"; then
     set -e
     eslint $JS
     jscs $JS
-    jshint $JS
 fi

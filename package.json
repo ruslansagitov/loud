@@ -31,7 +31,7 @@
     "test": "npm run-script lint && npm run-script node-test && npm run-script karma-test",
     "node-test": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- ./test/test.js",
     "karma-test": "./node_modules/.bin/karma start --single-run",
-    "lint": "eslint lib/ test/ && jscs lib/ test/ && jshint lib/ test/",
+    "lint": "eslint lib/ test/ && jscs lib/ test/",
     "build": "npm run-script browserify && npm run-script browserify-tests",
     "browserify": "./node_modules/.bin/browserify --standalone Loud -x jsdom -o ./dist/loud.js ./lib/loud.js",
     "browserify-tests": "mkdir -p build && ./node_modules/.bin/browserify -x jsdom -o ./build/test.js ./test/test.js",
