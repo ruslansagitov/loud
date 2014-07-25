@@ -20,12 +20,13 @@ env:
 
 before_script:
   - npm install -g eslint jscs
-  - npm install karma-sauce-launcher
   - npm run-script build
   - |
         if test "$TRAVIS_PULL_REQUEST" != "false"; then
             export DISPLAY=:99.0
             sh -e /etc/init.d/xvfb start
+        else
+            npm install karma-sauce-launcher
         fi
 
 after_success:
