@@ -106,7 +106,6 @@ describe('loud', function() {
         '<datalist></datalist>': [],
         '<datalist><option>Content</option></datalist>': ['listbox', 'Content', 'option'],
 
-        '<input type="range">': ['slider'],
         '<input type="range" value="10">': ['slider', 10],
         '<input type="range" min="0" value="1" max="4">': ['slider', 1],
 
@@ -171,7 +170,7 @@ describe('loud', function() {
 
         /* Has readonly */
         '<input readonly>': ['textbox', 'readonly'],
-        '<input type="range" readonly>': ['slider'],
+        '<input type="range" value="50" readonly>': ['slider', 50],
 
         /* Cannot be presentation */
         '<aside role="presentation">Content</aside>': ['Content'],
