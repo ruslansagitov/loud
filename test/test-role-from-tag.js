@@ -114,7 +114,7 @@ describe('loud', function() {
         '<input type="number" value="10">': ['spinbutton', 10],
         '<input type="number" min="0" value="1" max="4">': ['spinbutton', 1],
 
-        '<progress>': ['progressbar'],
+        '<progress value="1">': ['progressbar', 1],
         '<progress value="10">': ['progressbar', 10],
         '<progress min="0" value="1" max="4">': ['progressbar', 25, 'percent'],
 
@@ -204,7 +204,7 @@ describe('loud', function() {
         '<input role="presentation">': ['textbox'],
         '<select><option role="presentation">Content</option></select>': ['listbox', 'Content', 'option'],
         '<select role="presentation"><option>Content</option></select>': ['listbox', 'Content', 'option'],
-        '<progress role="presentation">': ['progressbar'],
+        '<progress value="1" role="presentation">': ['progressbar', 1],
         '<textarea role="presentation">Content</textarea>': ['multiline', 'textbox', 'Content'],
         '<video role="presentation">Content</video>': ['Content'],
 
