@@ -1,13 +1,11 @@
-/* global describe, it, beforeEach, afterEach, window, document */
+/* global describe, it, beforeEach, afterEach */
 'use strict';
 
 var assert = require('assert'),
     Loud = require('../lib/loud');
 
-var browser = typeof window !== 'undefined';
-
 describe('loud', function() {
-    var loud, elem;
+    var loud;
 
     var data = {
         /* aria-labelledby */
@@ -83,29 +81,15 @@ describe('loud', function() {
 
     beforeEach(function() {
         loud = new Loud();
-
-        if (browser) {
-            elem = document.createElement('div');
-            document.body.appendChild(elem);
-        }
     });
 
     afterEach(function() {
-        if (browser) {
-            document.body.removeChild(elem);
-        }
-
         loud = null;
     });
 
     Object.keys(data).forEach(function(key) {
         it('handles ' + key, function() {
-            if (browser) {
-                elem.innerHTML = key;
-                assert.deepEqual(loud.say(elem), data[key]);
-            } else {
-                assert.deepEqual(loud.say(key), data[key]);
-            }
+            assert.deepEqual(loud.say(key), data[key]);
         });
     });
 });

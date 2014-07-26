@@ -106,7 +106,6 @@ describe('loud', function() {
         '<datalist></datalist>': [],
         '<datalist><option>Content</option></datalist>': ['listbox', 'Content', 'option'],
 
-        '<input type="range">': ['slider'],
         '<input type="range" value="10">': ['slider', 10],
         '<input type="range" min="0" value="1" max="4">': ['slider', 1],
 
@@ -114,7 +113,7 @@ describe('loud', function() {
         '<input type="number" value="10">': ['spinbutton', 10],
         '<input type="number" min="0" value="1" max="4">': ['spinbutton', 1],
 
-        '<progress>': ['progressbar'],
+        '<progress value="1">': ['progressbar', 1],
         '<progress value="10">': ['progressbar', 10],
         '<progress min="0" value="1" max="4">': ['progressbar', 25, 'percent'],
 
@@ -171,7 +170,7 @@ describe('loud', function() {
 
         /* Has readonly */
         '<input readonly>': ['textbox', 'readonly'],
-        '<input type="range" readonly>': ['slider'],
+        '<input type="range" value="50" readonly>': ['slider', 50],
 
         /* Cannot be presentation */
         '<aside role="presentation">Content</aside>': ['Content'],
@@ -204,7 +203,7 @@ describe('loud', function() {
         '<input role="presentation">': ['textbox'],
         '<select><option role="presentation">Content</option></select>': ['listbox', 'Content', 'option'],
         '<select role="presentation"><option>Content</option></select>': ['listbox', 'Content', 'option'],
-        '<progress role="presentation">': ['progressbar'],
+        '<progress value="1" role="presentation">': ['progressbar', 1],
         '<textarea role="presentation">Content</textarea>': ['multiline', 'textbox', 'Content'],
         '<video role="presentation">Content</video>': ['Content'],
 
@@ -375,12 +374,7 @@ describe('loud', function() {
 
     Object.keys(data).forEach(function(key) {
         it('handles ' + key, function() {
-            if (browser) {
-                elem.innerHTML = key;
-                assert.deepEqual(loud.say(elem), data[key]);
-            } else {
-                assert.deepEqual(loud.say(key), data[key]);
-            }
+            assert.deepEqual(loud.say(key), data[key]);
         });
     });
 
