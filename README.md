@@ -37,11 +37,9 @@ describe('something', function() {
         loud = new Loud();
         button = document.createElement('button');
         button.innerHTML = 'Join';
-        document.appendChild(button);
     });
 
     afterEach(function() {
-        document.removeChild(button);
         loud = null;
     });
 
@@ -52,10 +50,6 @@ describe('something', function() {
     });
 });
 ```
-
-_Important!_ You need always add the elements to DOM! The famous
-`getElementById()` function can find elements only within DOM, and this
-famous function is used internally a lot.
 
 ## Modes of Operation
 

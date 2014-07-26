@@ -374,12 +374,7 @@ describe('loud', function() {
 
     Object.keys(data).forEach(function(key) {
         it('handles ' + key, function() {
-            if (browser) {
-                elem.innerHTML = key;
-                assert.deepEqual(loud.say(elem), data[key]);
-            } else {
-                assert.deepEqual(loud.say(key), data[key]);
-            }
+            assert.deepEqual(loud.say(key), data[key]);
         });
     });
 
