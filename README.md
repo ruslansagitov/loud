@@ -156,10 +156,6 @@ wrong. I guess.
 
 Also note that the Loud is good for regression testing only.
 
-## License
-
-MIT
-
  [bower]: <https://github.com/bower/bower> "Bower — A package manager for the web"
  [Jasmine]: <http://jasmine.github.io/> "Jasmine — Behavior-Driven JavaScript"
  [WAI-ARIA]: <http://www.w3.org/TR/wai-aria/> "WAI-ARIA — Accessible Rich Internet Applications"
