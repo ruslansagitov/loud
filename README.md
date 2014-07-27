@@ -31,16 +31,12 @@ Use this in your unit-tests! For example, with [Jasmine][]:
 
 ```javascript
 describe('something', function() {
-    var loud, button;
+    var loud = new Loud(),
+        button;
 
     beforeEach(function() {
-        loud = new Loud();
         button = document.createElement('button');
         button.innerHTML = 'Join';
-    });
-
-    afterEach(function() {
-        loud = null;
     });
 
     it('works', function() {

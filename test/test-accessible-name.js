@@ -1,11 +1,11 @@
-/* global describe, it, beforeEach, afterEach */
+/* global describe, it */
 'use strict';
 
 var assert = require('assert'),
     Loud = require('../lib/loud');
 
 describe('loud', function() {
-    var loud;
+    var loud = new Loud();
 
     var data = {
         /* aria-labelledby */
@@ -78,14 +78,6 @@ describe('loud', function() {
         /* cache */
         '<img id="label" alt="Label"><button aria-labelledby="label"></button>': ['Label', 'img', 'Label', 'button']
     };
-
-    beforeEach(function() {
-        loud = new Loud();
-    });
-
-    afterEach(function() {
-        loud = null;
-    });
 
     Object.keys(data).forEach(function(key) {
         it('handles ' + key, function() {

@@ -8,7 +8,8 @@ var browser = typeof window !== 'undefined',
     jsdom = browser ? null : require('jsdom').jsdom;
 
 describe('loud', function() {
-    var loud, elem;
+    var loud = new Loud(),
+        elem;
 
     var data = {
         '<a>Content</a>': ['Content', 'link'],
@@ -356,8 +357,6 @@ describe('loud', function() {
     };
 
     beforeEach(function() {
-        loud = new Loud();
-
         if (browser) {
             elem = document.createElement('div');
             document.body.appendChild(elem);
@@ -368,8 +367,6 @@ describe('loud', function() {
         if (browser) {
             document.body.removeChild(elem);
         }
-
-        loud = null;
     });
 
     Object.keys(data).forEach(function(key) {

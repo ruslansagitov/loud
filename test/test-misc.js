@@ -1,11 +1,11 @@
-/* global describe, it, beforeEach, afterEach */
+/* global describe, it */
 'use strict';
 
 var assert = require('assert'),
     Loud = require('../lib/loud');
 
 describe('loud', function() {
-    var loud;
+    var loud = new Loud();
 
     var data = {
         Text: ['Text'],
@@ -34,14 +34,6 @@ describe('loud', function() {
 
         '<div>Content</div>': ['Content']
     };
-
-    beforeEach(function() {
-        loud = new Loud();
-    });
-
-    afterEach(function() {
-        loud = null;
-    });
 
     Object.keys(data).forEach(function(key) {
         it('handles ' + key, function() {
