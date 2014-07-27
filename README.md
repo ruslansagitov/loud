@@ -37,6 +37,11 @@ describe('something', function() {
     beforeEach(function() {
         button = document.createElement('button');
         button.innerHTML = 'Join';
+        document.appendChild(button);
+    });
+
+    afterEach(function() {
+        document.removeChild(button);
     });
 
     it('works', function() {
@@ -46,6 +51,9 @@ describe('something', function() {
     });
 });
 ```
+
+_Important!_ You need to add the elements to DOM! Otherwise,
+the style data from external stylesheets won’t be properly handled.
 
 ## Modes of Operation
 
