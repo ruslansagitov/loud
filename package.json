@@ -29,7 +29,7 @@
   },
   "scripts": {
     "test": "npm run-script lint && npm run-script node-test && npm run-script karma-test",
-    "node-test": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- ./test/test.js",
+    "node-test": "./node_modules/.bin/istanbul test ./node_modules/.bin/_mocha -- --reporter=dot ./test/test.js",
     "karma-test": "./node_modules/.bin/karma start --single-run",
     "lint": "eslint lib/ test/ && jscs lib/ test/",
     "build": "npm run-script browserify && npm run-script browserify-tests",
