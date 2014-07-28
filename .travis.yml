@@ -22,7 +22,7 @@ before_script:
   - npm install -g eslint jscs
   - npm run-script build
   - |
-        if test "$TRAVIS_PULL_REQUEST" != "false"; then
+        if test -n "$SAUCE_ACCESS_KEY"; then
             export DISPLAY=:99.0
             sh -e /etc/init.d/xvfb start
         else

@@ -6,8 +6,7 @@ module.exports = function(config) {
         reporters: ['dots']
     });
 
-    if (process.env.CI &&
-        process.env.TRAVIS_PULL_REQUEST === 'false') {
+    if (process.env.CI && process.env.SAUCE_ACCESS_KEY) {
         var customLaunchers = {
             sauceLabsFirefox: {
                 base: 'SauceLabs',
