@@ -8,5 +8,6 @@ karma.conf.js
 .eslintignore
 .eslintrc
 .jscsrc
+.jshintrc
 .npmignore
 .travis.yml
