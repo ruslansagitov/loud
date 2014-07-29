@@ -2,7 +2,7 @@ module.exports = function(config) {
     config.set({
         frameworks: ['mocha'],
         browsers: ['Firefox', 'PhantomJS'],
-        files: ['build/test.js'],
+        files: [require.resolve('es5-shim'), 'build/test.js'],
         reporters: ['dots']
     });
 
