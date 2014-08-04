@@ -61,17 +61,17 @@ the style data from external stylesheets won’t be properly handled.
 
 ## Modes of Operation
 
-A screen reader application can work in different modes. The Loud
+A screen reader application can work in different modes. Loud
 currently works in just one mode. It’s oftenly called “Say All”.
 
-The Loud takes an HTML string or a DOM element and tries to “say”
-everything as it would a screen reader. In general, the Loud is based on
+Loud takes an HTML string or a DOM element and tries to “say”
+everything as it would a screen reader. In general, Loud is based on
 the [WAI-ARIA][] specification and [W3C HTML5][]. It tries to mimic the
 popular JAWS screen reader where possible.
 
 However, it’s impossible to say everything in one mode. Currently, the
 live regions are not that “live” — it’s static but you still can test
-them. In essence, the Loud is a unit-testing framework, not a screen
+them. In essence, Loud is a unit-testing framework, not a screen
 reader.
 
 In future, new modes can be added.
@@ -84,13 +84,13 @@ Takes an HTML string or a DOM element and returns an array of words.
 
 ## Elements
 
-The Loud returns an array of “words”. Each word is a string. It has to
+Loud returns an array of “words”. Each word is a string. It has to
 be constants though, it’s much easy to write tests in words as strings
 than importing constants with names as words.
 
 ### Basics
 
-The Loud mimics WAI-ARIA for the role, state and property names. For
+Loud mimics WAI-ARIA for the role, state and property names. For
 example, the resulting word for the button role is `'button'`.
 
 ### Accessible name
@@ -106,14 +106,14 @@ Usually, the accessible name precedes the role name in the result.
 
 ### Regions
 
-WAI-ARIA defines plenty of regions. For each region, the Loud outputs
+WAI-ARIA defines plenty of regions. For each region, Loud outputs
 the region name, its contents and _the end marker_. For example, the end
 marker for the banner region is `'banner end'` and the whole result is
 `['banner', '…', 'banner end']`.
 
 ### Tables
 
-Tables are special in the Loud. In case of the `<table>` tag, the result
+Tables are special in Loud. In case of the `<table>` tag, the result
 is `['table', '…']`. WAI-ARAI doesn’t have such role though.
 
 ### Other elements
@@ -144,9 +144,9 @@ this property is the names of the elements from the ID list, not the ID
 list itself! The result for `aria-controls` and `aria-flowto` is the ID
 list, not the names of the elements.
 
-Currently, the Loud has weak support of `aria-posinset` and
+Currently, Loud has weak support of `aria-posinset` and
 `aria-setsize`. In case of both attributes are present, the result is
-`[posinset, 'of', setsize]`. The Loud are not trying to guess these
+`[posinset, 'of', setsize]`. Loud are not trying to guess these
 values from HTML markup. It can be added later.
 
 ## How it should be said?!
@@ -158,7 +158,7 @@ values from HTML markup. It can be added later.
 The result is in plain Engligh, so you should know if something went
 wrong. I guess.
 
-Also note that the Loud is good for regression testing only.
+Also note that Loud is good for regression testing only.
 
  [bower]: <https://github.com/bower/bower> "Bower — A package manager for the web"
  [es5-shim]: <https://github.com/es-shims/es5-shim> "es5-shim"
