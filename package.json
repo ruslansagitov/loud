@@ -47,7 +47,6 @@
     "benchmark": "^1.0.0",
     "browserify": "^5.9.1",
     "es5-shim": "^4.0.1",
-    "git-hooks": "^0.0.7",
     "istanbul": "^0.3.0",
     "karma": "^0.12.19",
     "karma-cli": "^0.0.4",

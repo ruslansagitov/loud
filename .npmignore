@@ -4,7 +4,6 @@ jsdoc
 test
 bower.json
 karma.conf.js
-.githooks
 .editorconfig
 .eslintignore
 .eslintrc
