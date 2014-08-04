@@ -1,4 +1,4 @@
-# Loud [![Build Status](https://travis-ci.org/ruslansagitov/loud.svg?branch=master)](https://travis-ci.org/ruslansagitov/loud) [![Coverage Status](https://coveralls.io/repos/ruslansagitov/loud/badge.png?branch=master)](https://coveralls.io/r/ruslansagitov/loud?branch=master) [![Code Climate](https://codeclimate.com/github/ruslansagitov/loud.png)](https://codeclimate.com/github/ruslansagitov/loud)
+# Loud [![Build Status](https://travis-ci.org/ruslansagitov/loud.svg?branch=master)](https://travis-ci.org/ruslansagitov/loud) [![Test Coverage](https://codeclimate.com/github/ruslansagitov/loud/badges/coverage.svg)](https://codeclimate.com/github/ruslansagitov/loud) [![Code Climate](https://codeclimate.com/github/ruslansagitov/loud.png)](https://codeclimate.com/github/ruslansagitov/loud)
 
 Web accessibility unit-testing framework
 
