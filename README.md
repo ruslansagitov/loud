@@ -17,6 +17,10 @@ or use [bower][]:
 bower install loud --save-dev
 ```
 
+### Old browsers
+
+You need to use [es5-shim][] when using Loud in old browsers.
+
 ## Getting Started
 
 Transform a DOM element to array of words:
@@ -157,6 +161,7 @@ wrong. I guess.
 Also note that the Loud is good for regression testing only.
 
  [bower]: <https://github.com/bower/bower> "Bower — A package manager for the web"
+ [es5-shim]: <https://github.com/es-shims/es5-shim> "es5-shim"
  [Jasmine]: <http://jasmine.github.io/> "Jasmine — Behavior-Driven JavaScript"
  [WAI-ARIA]: <http://www.w3.org/TR/wai-aria/> "WAI-ARIA — Accessible Rich Internet Applications"
  [W3C HTML5]: <http://www.w3.org/TR/html/> "HTML5"
