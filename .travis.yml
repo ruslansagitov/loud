@@ -7,8 +7,6 @@ env:
   global:
     # CODECLIMATE_REPO_TOKEN
     - secure: UR3Fth+3x7k4zAiYUe/GNM19HhaboA/v1XhHC9IO239beIzZAwqbIi0IKpt8rNWXxnoSS8oVlz7ABoFy3iilXDNGE2t6r53mDllWT8SlcBNMgDp+A56VzClVGodJatTkrPTWmu8dGsa9YaIVOBbAvytalEgd3ib4rk0MQl/y1zs=
-    # COVERALLS_REPO_TOKEN
-    - secure: QBa2wL7RpzffwO7oKM0pecfnMO9dExnsJv9AuOt8FY60vWD8aoa8nVVo6GbJ8zMxmFRaFK3uNzzezsUBCDXdY8aEjn4+39nczg+yGp5TW60drzs+aJdSI0W7bNOlquueqqfuxFnkptggxWzdFospu4iYAcYELggPVVYTlHkKfbE=
 
 before_script:
   - npm install -g eslint jscs
@@ -17,10 +15,9 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
 after_success:
-  - npm install codeclimate-test-reporter coveralls
+  - npm install codeclimate-test-reporter
   - ./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --reporter=dot ./test/test.js
   - cat ./coverage/lcov.info | ./node_modules/.bin/codeclimate
-  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
 
 deploy:
   - provider: npm
