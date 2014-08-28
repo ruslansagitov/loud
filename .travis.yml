@@ -11,6 +11,8 @@ env:
 before_script:
   - npm install -g eslint jscs
   - npm install -g karma-cli
+  - npm install karma-firefox-launcher karma-phantomjs-launcher
+  - export KARMA_BROWSERS=Firefox,PhantomJS
   - mkdir build
   - npm run-script build
   - export DISPLAY=:99.0
