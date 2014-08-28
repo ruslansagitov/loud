@@ -36,8 +36,7 @@
     "browserify": "browserify --standalone Loud -x jsdom -o ./dist/loud.js ./lib/loud.js",
     "browserify-tests": "browserify -x jsdom -o ./build/test.js ./test/test.js",
     "benchmark": "node test/benchmark.js",
-    "jsdoc": "jsdoc -d ./jsdoc/ ./lib/loud.js ./README.md",
-    "clean": "rm -rf ./build/ ./coverage/ ./jsdoc/ npm-debug.log"
+    "jsdoc": "jsdoc -d ./jsdoc/ ./lib/loud.js ./README.md"
   },
   "dependencies": {
     "jsdom": "^0.11.1",
