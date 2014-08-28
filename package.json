@@ -34,7 +34,7 @@
     "lint": "eslint lib/ test/ && jscs lib/ test/",
     "build": "npm run-script browserify && npm run-script browserify-tests",
     "browserify": "browserify --standalone Loud -x jsdom -o ./dist/loud.js ./lib/loud.js",
-    "browserify-tests": "mkdir -p build && browserify -x jsdom -o ./build/test.js ./test/test.js",
+    "browserify-tests": "browserify -x jsdom -o ./build/test.js ./test/test.js",
     "benchmark": "node test/benchmark.js",
     "jsdoc": "jsdoc -d ./jsdoc/ ./lib/loud.js ./README.md",
     "clean": "rm -rf ./build/ ./coverage/ ./jsdoc/ npm-debug.log"
