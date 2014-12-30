@@ -136,7 +136,7 @@ describe('loud', function() {
 
         '<div role="main" aria-busy="true">Content</div>': ['main', 'busy', 'Content', 'main end'],
         '<div role="main" aria-busy="false">Content</div>': ['main', 'Content', 'main end'],
-        '<div role="main" aria-busy="unknown">Content</div>':  ['main', 'Content', 'main end'],
+        '<div role="main" aria-busy="unknown">Content</div>': ['main', 'Content', 'main end'],
         '<div role="main" aria-busy="">Content</div>': ['main', 'Content', 'main end'],
 
         '<div role="textbox" aria-required="true">Content</div>': ['textbox', 'required', 'Content'],
