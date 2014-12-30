@@ -42,11 +42,11 @@
   },
   "devDependencies": {
     "benchmark": "^1.0.0",
-    "browserify": "^5.9.1",
-    "istanbul": "^0.3.0",
-    "karma": "^0.12.19",
-    "karma-mocha": "^0.1.6",
-    "mocha": "^1.21.3"
+    "browserify": "^8.0.2",
+    "istanbul": "^0.3.5",
+    "karma": "^0.12.28",
+    "karma-mocha": "^0.1.10",
+    "mocha": "^2.1.0"
   },
   "engines": {
     "node": ">= 0.10.0"
