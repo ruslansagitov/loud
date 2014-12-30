@@ -115,7 +115,6 @@ describe('loud', function() {
         '<input type="number" min="0" value="1" max="4">': ['spinbutton', 1],
 
         '<progress value="1">': ['progressbar', 1],
-        '<progress value="10">': ['progressbar', 10],
         '<progress min="0" value="1" max="4">': ['progressbar', 25, 'percent'],
 
         '<dd>Content</dd>': ['Content'],
