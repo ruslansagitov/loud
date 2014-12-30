@@ -1,3 +1,5 @@
+'use strict';
+
 var Util = require('util'),
     Benchmark = require('benchmark'),
     Loud = require('../lib/loud');
