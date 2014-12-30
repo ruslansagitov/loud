@@ -1263,7 +1263,7 @@ Loud.prototype.handleNode = function loudHandleNode(node) {
 
 module.exports = Loud;
 
-},{"./a11y-node":1,"./util":5,"./words-from-role":7,"jsdom":undefined}],4:[function(require,module,exports){
+},{"./a11y-node":1,"./util":5,"./words-from-role":7,"jsdom":"jsdom"}],4:[function(require,module,exports){
 /*
  * The MIT License (MIT)
  *
