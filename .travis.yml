@@ -29,5 +29,6 @@ deploy:
     api_key:
       secure: aBHJltDzWk/QIsMk/FJUWF4glByXAXIizh+bbB1f3d5As6c4u6pJvCUxQBkrQWmV71Nf/MfBVvhuqHKH+ZifGzIpWKAtdO5yGzaVdxRUhNU7GEfxX0HQkkKIjUe0pOz8RkQXe7Vln8UV5eLGyeHLXs5HyN2VnFSOQKrw4dh3DPk=
     on:
+      all_branches: true
       tags: true
       repo: ruslansagitov/loud
