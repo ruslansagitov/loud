@@ -4,22 +4,21 @@ Web accessibility unit-testing framework
 
 ## Installing
 
-Get a release tarball or clone the repository, then include the
-`./dist/loud.js` onto your pages:
-
-```html
-<script src="…/dist/loud.js"></script>
-```
-
-or use [bower][]:
+Get a release tarball, or clone the repository, or use [bower][]:
 
 ```
 bower install loud --save-dev
 ```
 
+Include the `./dist/loud.js` on your pages:
+
+```html
+<script src="…/dist/loud.js"></script>
+```
+
 ### Old browsers
 
-You need to use [es5-shim][] when using Loud in old browsers.
+You need to use [es5-shim][] for using Loud in old browsers.
 
 ## Getting Started
 
@@ -31,7 +30,7 @@ Transform a DOM element to array of words:
 ['Join', 'button']
 ```
 
-Use this in your unit-tests! For example, with [Jasmine][]:
+Use it in your unit-tests! For example, using [Jasmine][]:
 
 ```javascript
 describe('something', function() {
@@ -56,13 +55,13 @@ describe('something', function() {
 });
 ```
 
-_Important!_ You need to add the elements to DOM! Otherwise,
-the style data from external stylesheets won’t be properly handled.
+_Important!_ Add the elements to DOM! Otherwise, style data from
+external stylesheets won’t be properly handled.
 
 ## Modes of Operation
 
 A screen reader application can work in different modes. Loud
-currently works in just one mode. It’s oftenly called “Say All”.
+currently works in just one mode. It’s often called “Say All”.
 
 Loud takes an HTML string or a DOM element and tries to “say”
 everything as it would a screen reader. In general, Loud is based on
