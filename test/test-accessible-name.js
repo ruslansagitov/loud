@@ -29,7 +29,7 @@ describe('loud', function() {
         '<button aria-label="Label1">Label2</button>': ['Label1', 'button'],
         '<button aria-label="Label2" aria-labelledby="label1"><span id="label1">Label1</span></button>': ['Label1', 'button'],
 
-        '<button aria-labelledby="label"></button><menu><menuitem id="label">Label</menuitem></menu>': ['Label', 'button', 'menu', 'Label', 'menuitem'],
+        '<button aria-labelledby="label"></button><menu><menuitem id="label" title="Label"></menu>': ['Label', 'button', 'menu', 'Label', 'menuitem'],
 
         '<button aria-labelledby="label"></button><input id="label" type="range" value="1">': ['button', 'slider', '1'],
 
