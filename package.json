@@ -24,9 +24,6 @@
   "directories": {
     "lib": "./lib"
   },
-  "bin": {
-    "loud": "./lib/cli.js"
-  },
   "scripts": {
     "test": "npm run-script lint && npm run-script node-test && npm run-script karma-test",
     "node-test": "istanbul test _mocha -- --reporter=dot ./test/test.js",
@@ -37,8 +34,7 @@
     "browserify-tests": "browserify -x jsdom -o ./build/test.js ./test/test.js"
   },
   "dependencies": {
-    "jsdom": "^0.11.1",
-    "optimist": "^0.6.1"
+    "jsdom": "^0.11.1"
   },
   "devDependencies": {
     "benchmark": "^1.0.0",
