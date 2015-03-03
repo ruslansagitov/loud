@@ -1,7 +1,7 @@
 {
   "name": "loud",
   "version": "0.7.3",
-  "description": "Web accessibility unit-testing framework",
+  "description": "Web accessibility testing helper",
   "keywords": [
     "accessibility",
     "a11y",
