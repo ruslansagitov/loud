@@ -23,9 +23,10 @@ module.exports = function(config) {
                 browserName: 'internet explorer',
                 version: 11
             },
-            sauceLabsChrome: {
+            sauceLabsIE8: {
                 base: 'SauceLabs',
-                browserName: 'chrome'
+                browserName: 'internet explorer',
+                version: 8
             }
         };
 
