@@ -10,6 +10,7 @@ module.exports = function(config) {
         browsers: browsers,
         files: [
             require.resolve('es5-shim'),
+            require.resolve('html5shiv/dist/html5shiv'),
             'build/test.js'
         ],
         reporters: ['dots']
