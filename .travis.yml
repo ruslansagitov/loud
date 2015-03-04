@@ -7,11 +7,16 @@ env:
   global:
     # CODECLIMATE_REPO_TOKEN
     - secure: UR3Fth+3x7k4zAiYUe/GNM19HhaboA/v1XhHC9IO239beIzZAwqbIi0IKpt8rNWXxnoSS8oVlz7ABoFy3iilXDNGE2t6r53mDllWT8SlcBNMgDp+A56VzClVGodJatTkrPTWmu8dGsa9YaIVOBbAvytalEgd3ib4rk0MQl/y1zs=
+    # SAUCE_USERNAME
+    - secure: cRiggKCu0Y7SW1qkOt3JzaOcZVgZ8sJcJ30kTCRUhHCP9cIUFhqT61NYAtYJ9yLVPdystKzyphO7YoXmVYhuOdn/qFvGGFOCekkSG2VlQZU8q5cwA7QxMp+YYU+MBq+C7xEerzOF+wo7YYfv0w2VqcpfJgFb4eha13vz/HueqK4=
+    # SAUCE_ACCESS_KEY
+    - secure: Besc0YZAzEyo0o+BJx+h8d5NqTanQr0jaQbfop5HUCfbrmakzQrxbdXdmW0cZUr2f12jYN/k2FXo6uZ19tPCLoWF9aGlIDLMX9yRJdiVWQU8voPVpwY+rsVG5Io4UOmrEmeyP0cwKfuzkaq7dJZe9Zd/DKz3ND5761HkJJEgdF4=
 
 before_script:
   - npm install -g eslint jscs
   - npm install -g karma-cli
   - npm install karma-firefox-launcher karma-phantomjs-launcher
+  - test -n "$SAUCE_ACCESS_KEY" && npm install karma-sauce-launcher
   - export KARMA_BROWSERS=Firefox,PhantomJS
   - mkdir build
   - npm run-script build
