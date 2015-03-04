@@ -39,6 +39,7 @@
   "devDependencies": {
     "benchmark": "^1.0.0",
     "browserify": "^9.0.3",
+    "es5-shim": "^4.1.0",
     "istanbul": "^0.3.6",
     "karma": "^0.12.31",
     "karma-mocha": "^0.1.10",
