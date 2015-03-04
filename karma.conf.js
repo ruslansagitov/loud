@@ -8,7 +8,11 @@ module.exports = function(config) {
     config.set({
         frameworks: ['mocha'],
         browsers: browsers,
-        files: ['build/test.js'],
+        files: [
+            require.resolve('es5-shim'),
+            require.resolve('html5shiv/dist/html5shiv'),
+            'build/test.js'
+        ],
         reporters: ['dots']
     });
 

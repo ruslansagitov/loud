@@ -89,29 +89,17 @@ describe('loud', function() {
         '<section><header>Content</header></section>': ['region', 'Content', 'region end'],
         '<section><div><header>Content</header></div></section>': ['region', 'Content', 'region end'],
 
-        '<input list="datalist"><datalist id="datalist"><option>Option</option></datalist>': ['combobox', 'collapsed', 'haspopup'],
-        '<input type="email" list="datalist"><datalist id="datalist"><option>Option</option></datalist>': ['combobox', 'collapsed', 'haspopup'],
-        '<input type="search" list="datalist"><datalist id="datalist"><option>Option</option></datalist>': ['combobox', 'collapsed', 'haspopup'],
-        '<input type="tel" list="datalist"><datalist id="datalist"><option>Option</option></datalist>': ['combobox', 'collapsed', 'haspopup'],
-        '<input type="text" list="datalist"><datalist id="datalist"><option>Option</option></datalist>': ['combobox', 'collapsed', 'haspopup'],
-        '<input type="url" list="datalist"><datalist id="datalist"><option>Option</option></datalist>': ['combobox', 'collapsed', 'haspopup'],
-        '<input list="datalist1"><datalist id="datalist"><option>Option</option></datalist>': ['textbox', 'listbox', 'Option', 'option'],
-        '<input list=""><datalist id="datalist"><option>Option</option></datalist>': ['textbox', 'listbox', 'Option', 'option'],
-
         '<select>Content</select>': ['Content'],
         '<select></select>': [],
-        '<select><option>Content</option></select>': ['listbox', 'Content', 'option'],
-        '<select><option selected>Content</option></select>': ['listbox', 'Content', 'option', 'selected'],
+        '<select><option>Item1</option><option>Item2</option></select>': ['listbox', 'Item1', 'option', 'selected', 'Item2', 'option'],
+        '<select><option>Item1</option><option selected>Item2</option></select>': ['listbox', 'Item1', 'option', 'Item2', 'option', 'selected'],
         '<select multiple><option>Content</option></select>': ['listbox', 'multiselectable', 'Content', 'option'],
         '<option>Content</option>': ['Content'],
         '<optgroup>Content</optgroup>': ['Content'],
-        '<select><optgroup><option>Content</option></optgroup></select>': ['listbox', 'group', 'Content', 'option', 'group end'],
+        '<select><optgroup><option>Content</option></optgroup></select>': ['listbox', 'group', 'Content', 'option', 'selected', 'group end'],
         '<optgroup><option>Content</option></optgroup>': ['Content'],
 
         '<summary>Content</summary>': ['Content'],
-
-        '<datalist></datalist>': [],
-        '<datalist><option>Content</option></datalist>': ['listbox', 'Content', 'option'],
 
         '<input type="range" value="10">': ['slider', 10],
         '<input type="range" min="0" value="1" max="4">': ['slider', 1],
@@ -190,12 +178,10 @@ describe('loud', function() {
         '<h6 role="presentation">Content</h6>': ['Content'],
         '<header role="presentation">Content</header>': ['Content'],
         '<hr role="presentation">': [],
-        '<iframe role="presentation">Content</iframe>': ['Content'],
         '<li role="presentation">Content</li>': ['Content'],
         '<main role="presentation">Content</main>': ['Content'],
         '<menu role="presentation">Content</menu>': ['Content'],
         '<nav role="presentation">Content</nav>': ['Content'],
-        '<object role="presentation">Content</object>': ['Content'],
         '<ol role="presentation">Content</ol>': ['Content'],
         '<ul role="presentation">Content</ul>': ['Content'],
 
@@ -207,8 +193,8 @@ describe('loud', function() {
         '<audio role="presentation">Content</audio>': ['Content'],
         '<button role="presentation">Content</button>': ['Content', 'button'],
         '<input role="presentation">': ['textbox'],
-        '<select><option role="presentation">Content</option></select>': ['listbox', 'Content', 'option'],
-        '<select role="presentation"><option>Content</option></select>': ['listbox', 'Content', 'option'],
+        '<select><option role="presentation">Content</option></select>': ['listbox', 'Content', 'option', 'selected'],
+        '<select role="presentation"><option>Content</option></select>': ['listbox', 'Content', 'option', 'selected'],
         '<progress value="1" role="presentation">': ['progressbar', 1],
         '<textarea role="presentation">Content</textarea>': ['multiline', 'textbox', 'Content'],
         '<video role="presentation">Content</video>': ['Content'],
@@ -245,7 +231,6 @@ describe('loud', function() {
 
         /* Strong role */
         '<area role="region" alt="Content">': ['Content', 'link'],
-        '<datalist role="region"><option>Content</option></datalist>': ['listbox', 'Content', 'option'],
         '<fieldset role="region">Content</fieldset>': ['group', 'Content', 'group end'],
         '<footer role="region">Content</footer>': ['contentinfo', 'Content', 'contentinfo end'],
 
@@ -305,10 +290,6 @@ describe('loud', function() {
         '<div role="tablist"><h4 role="tab">Content</h4></div>': ['tablist', 'Content', 'tab'],
         '<div role="tablist"><h5 role="tab">Content</h5></div>': ['tablist', 'Content', 'tab'],
         '<div role="tablist"><h6 role="tab">Content</h6></div>': ['tablist', 'Content', 'tab'],
-        '<iframe role="region">Content</iframe>': ['Content'],
-        '<iframe role="application">Content</iframe>': ['application', 'Content', 'application end'],
-        '<iframe role="document">Content</iframe>': ['document', 'Content', 'document end'],
-        '<iframe role="img">Content</iframe>': ['img'],
         '<ul><li role="region">Content</li></ul>': ['list', 'Content', 'listitem', 'list end'],
         '<ul><li role="listitem">Content</li></ul>': ['list', 'Content', 'listitem', 'list end'],
         '<ul role="menu"><li role="menuitem">Content</li></ul>': ['menu', 'Content', 'menuitem'],
@@ -326,10 +307,6 @@ describe('loud', function() {
         '<menu role="tablist"><menuitem role="tab" title="Content"></menu>': ['tablist', 'Content', 'tab'],
         '<menu role="toolbar">Content</menu>': ['toolbar', 'Content', 'toolbar end'],
         '<menu role="tree"><menuitem role="treeitem" title="Content"></menu>': ['tree', 'Content', 'treeitem'],
-        '<object role="region">Content</object>': ['Content'],
-        '<object role="application">Content</object>': ['application', 'Content', 'application end'],
-        '<object role="document">Content</object>': ['document', 'Content', 'document end'],
-        '<object role="img">Content</object>': ['img'],
         '<ol role="region"><li>Content</li></ol>': ['list', 'Content', 'listitem', 'list end'],
         '<ol role="directory"><li>Content</li></ol>': ['directory', 'Content', 'directory end'],
         '<ol role="list"><li>Content</li></ol>': ['list', 'Content', 'listitem', 'list end'],
@@ -352,6 +329,36 @@ describe('loud', function() {
         /* already '<ul role="tree"><li role="treeitem">Content</li></ul>': ['tree', 'Content', 'treeitem'], */
         '<video role="region">Content</video>': ['Content'],
         '<video role="application">Content</video>': ['application', 'Content', 'application end']
+
+        /*
+        <iframe>, <object>, <datalist> does not properly work in old browsers.
+
+        '<input list="datalist"><datalist id="datalist"><option>Option</option></datalist>': ['combobox', 'collapsed', 'haspopup'],
+        '<input type="email" list="datalist"><datalist id="datalist"><option>Option</option></datalist>': ['combobox', 'collapsed', 'haspopup'],
+        '<input type="search" list="datalist"><datalist id="datalist"><option>Option</option></datalist>': ['combobox', 'collapsed', 'haspopup'],
+        '<input type="tel" list="datalist"><datalist id="datalist"><option>Option</option></datalist>': ['combobox', 'collapsed', 'haspopup'],
+        '<input type="text" list="datalist"><datalist id="datalist"><option>Option</option></datalist>': ['combobox', 'collapsed', 'haspopup'],
+        '<input type="url" list="datalist"><datalist id="datalist"><option>Option</option></datalist>': ['combobox', 'collapsed', 'haspopup'],
+        '<input list="datalist1"><datalist id="datalist"><option>Option</option></datalist>': ['textbox', 'listbox', 'Option', 'option'],
+        '<input list=""><datalist id="datalist"><option>Option</option></datalist>': ['textbox', 'listbox', 'Option', 'option'],
+
+        '<datalist></datalist>': [],
+        '<datalist><option>Content</option></datalist>': ['listbox', 'Content', 'option'],
+
+        '<datalist role="region"><option>Content</option></datalist>': ['listbox', 'Content', 'option'],
+
+        '<iframe role="region">Content</iframe>': ['Content'],
+        '<iframe role="application">Content</iframe>': ['application', 'Content', 'application end'],
+        '<iframe role="document">Content</iframe>': ['document', 'Content', 'document end'],
+        '<iframe role="img">Content</iframe>': ['img'],
+        '<iframe role="presentation">Content</iframe>': ['Content'],
+
+        '<object role="region">Content</object>': ['Content'],
+        '<object role="application">Content</object>': ['application', 'Content', 'application end'],
+        '<object role="document">Content</object>': ['document', 'Content', 'document end'],
+        '<object role="img">Content</object>': ['img'],
+        '<object role="presentation">Content</object>': ['Content'],
+        */
     };
 
     beforeEach(function() {
