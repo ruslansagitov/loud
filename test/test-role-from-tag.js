@@ -1,28 +1,12 @@
-/* global describe, it, beforeEach, afterEach, window, document */
+/* global describe, it */
 'use strict';
 
 var assert = require('assert'),
-    Loud = require('../lib/loud');
-
-var browser = typeof window !== 'undefined',
-    realJSDom = browser ? null : require('jsdom').jsdom,
-    jsdom = function() {
-        var doc = realJSDom.apply(this, arguments),
-            div = doc.createElement('div'),
-            node = doc.body.firstChild,
-            next;
-
-        for (; node; node = next) {
-            next = node.nextSibling;
-            div.appendChild(node);
-        }
-
-        return div;
-    };
+    Loud = require('../lib/loud'),
+    jsdom = require('./jsdom');
 
 describe('loud', function() {
-    var loud = new Loud(),
-        elem;
+    var loud = new Loud();
 
     var data = {
         '<a>Content</a>': ['Content', 'link'],
@@ -361,34 +345,15 @@ describe('loud', function() {
         */
     };
 
-    beforeEach(function() {
-        if (browser) {
-            elem = document.createElement('div');
-            document.body.appendChild(elem);
-        }
-    });
-
-    afterEach(function() {
-        if (browser) {
-            document.body.removeChild(elem);
-        }
-    });
-
     Object.keys(data).forEach(function(key) {
         it('handles ' + key, function() {
-            assert.deepEqual(loud.say(key), data[key]);
+            assert.deepEqual(loud.say(jsdom(key)), data[key]);
         });
     });
 
     it('handles indeterminate', function() {
-        var key = '<input type="checkbox">',
+        var elem = jsdom('<input type="checkbox">'),
             value = ['checkbox', 'mixed'];
-
-        if (browser) {
-            elem.innerHTML = key;
-        } else {
-            elem = jsdom(key);
-        }
 
         elem.firstChild.indeterminate = true;
         assert.deepEqual(loud.say(elem), value);

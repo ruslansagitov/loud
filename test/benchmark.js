@@ -2,7 +2,8 @@
 
 var Util = require('util'),
     Benchmark = require('benchmark'),
-    Loud = require('../lib/loud');
+    Loud = require('../lib/loud'),
+    jsdom = require('./jsdom');
 
 var suite = new Benchmark.Suite(),
     loud = new Loud();
@@ -19,7 +20,7 @@ var data = [
 
 data.forEach(function(item) {
     suite.add(item, function() {
-        loud.say(item);
+        loud.say(jsdom(item));
     });
 });
 
