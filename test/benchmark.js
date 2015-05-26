@@ -1,7 +1,6 @@
 'use strict';
 
-var Util = require('util'),
-    Benchmark = require('benchmark'),
+var Benchmark = require('benchmark'),
     Loud = require('../lib/loud'),
     jsdom = require('./jsdom');
 
@@ -25,7 +24,7 @@ data.forEach(function(item) {
 });
 
 suite.on('cycle', function(e) {
-    Util.puts(e.target.toString());
+    console.log(e.target.toString());
 }).run({
     async: true
 });
