@@ -2,12 +2,10 @@
 'use strict';
 
 var assert = require('assert'),
-    Loud = require('../lib/loud'),
+    loud = require('../lib/loud'),
     jsdom = require('./jsdom');
 
 describe('loud', function() {
-    var loud = new Loud();
-
     var data = {
         '<a>Content</a>': ['Content', 'link'],
         '<address>Content</address>': ['contentinfo', 'Content', 'contentinfo end'],

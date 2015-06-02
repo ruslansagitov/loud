@@ -25,7 +25,6 @@ You need to use [es5-shim][] for using Loud in old browsers.
 Transform a DOM element to array of words:
 
 ```javascript
-> var loud = new Loud();
 > loud.say(document.getElementById('join'))
 ['Join', 'button']
 ```
@@ -34,8 +33,7 @@ Use it in your unit-tests! For example, using [Jasmine][]:
 
 ```javascript
 describe('something', function() {
-    var loud = new Loud(),
-        button;
+    var button;
 
     beforeEach(function() {
         button = document.createElement('button');

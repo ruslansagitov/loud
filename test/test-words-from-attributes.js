@@ -2,12 +2,10 @@
 'use strict';
 
 var assert = require('assert'),
-    Loud = require('../lib/loud'),
+    loud = require('../lib/loud'),
     jsdom = require('./jsdom');
 
 describe('loud', function() {
-    var loud = new Loud();
-
     var data = {
         '<div role="button" aria-pressed="unknown">Content</div>': ['Content', 'button'],
         '<div role="button" aria-pressed="true">Content</div>': ['Content', 'toggle button', 'pressed'],

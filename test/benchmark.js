@@ -1,11 +1,10 @@
 'use strict';
 
 var Benchmark = require('benchmark'),
-    Loud = require('../lib/loud'),
+    loud = require('../lib/loud'),
     jsdom = require('./jsdom');
 
-var suite = new Benchmark.Suite(),
-    loud = new Loud();
+var suite = new Benchmark.Suite();
 
 var data = [
     'Text',

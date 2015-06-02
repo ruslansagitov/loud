@@ -30,7 +30,7 @@
     "karma-test": "karma start --single-run",
     "lint": "eslint lib/ test/ && jscs lib/ test/",
     "build": "npm run-script browserify && npm run-script browserify-tests",
-    "browserify": "browserify --standalone Loud -o ./dist/loud.js ./lib/loud.js",
+    "browserify": "browserify --standalone loud -o ./dist/loud.js ./lib/loud.js",
     "browserify-tests": "browserify -x jsdom -o ./build/test.js ./test/test.js"
   },
   "dependencies": {

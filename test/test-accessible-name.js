@@ -2,12 +2,10 @@
 'use strict';
 
 var assert = require('assert'),
-    Loud = require('../lib/loud'),
+    loud = require('../lib/loud'),
     jsdom = require('./jsdom');
 
 describe('loud', function() {
-    var loud = new Loud();
-
     var data = {
         /* aria-labelledby */
         '<button aria-labelledby="label"><span id="label">Label</span></button>': ['Label', 'button'],
