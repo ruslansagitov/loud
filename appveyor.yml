@@ -13,6 +13,6 @@ install:
   - npm install
 
 test_script:
-  - npm run-script node-test
+  - mocha --reporter=dot --reporter=dot ./test/test.js
 
 build: off
