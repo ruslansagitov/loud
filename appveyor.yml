@@ -10,12 +10,15 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - node --version
   - npm --version
+  - npm install -g eslint@^0.21.2 jscs@^1.13.1
+  - npm install -g karma-cli@^0.0.4
   - npm install
   - npm install karma-ie-launcher@^0.1.5
   - set KARMA_BROWSERS=IE
 
 test_script:
-  - npm run-script node-test
-  - npm run-script karma-test
+  - npm test
 
-build: off
+build:
+  - mkdir build
+  - npm run-script build
