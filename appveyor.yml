@@ -11,8 +11,11 @@ install:
   - node --version
   - npm --version
   - npm install
+  - npm install karma-ie-launcher@^0.1.5
+  - set KARMA_BROWSERS=IE
 
 test_script:
   - npm run-script node-test
+  - npm run-script karma-test
 
 build: off
