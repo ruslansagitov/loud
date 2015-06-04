@@ -20,8 +20,9 @@ module.exports = function(config) {
         var customLaunchers = {
             sauceLabsIE11: {
                 base: 'SauceLabs',
-                browserName: 'internet explorer',
-                version: 11
+                browserName: 'Android',
+                deviceName: 'Android Emulator',
+                version: '5.1'
             },
             sauceLabsIE8: {
                 base: 'SauceLabs',
