@@ -19,7 +19,7 @@ install:
 test_script:
   - npm test
 
-before_build:
+before_test:
   - mkdir build
   - npm run-script build
 
