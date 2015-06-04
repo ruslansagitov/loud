@@ -16,9 +16,11 @@ env:
     # SAUCE_ACCESS_KEY
     - secure: Besc0YZAzEyo0o+BJx+h8d5NqTanQr0jaQbfop5HUCfbrmakzQrxbdXdmW0cZUr2f12jYN/k2FXo6uZ19tPCLoWF9aGlIDLMX9yRJdiVWQU8voPVpwY+rsVG5Io4UOmrEmeyP0cwKfuzkaq7dJZe9Zd/DKz3ND5761HkJJEgdF4=
 
-before_script:
+before_install:
   - npm install -g eslint@^0.21.2 jscs@^1.13.1
   - npm install -g karma-cli@^0.0.4
+
+before_script:
   - npm install karma-firefox-launcher@^0.1.6 karma-phantomjs-launcher@^0.1.4
   - test -n "$SAUCE_ACCESS_KEY" && npm install karma-sauce-launcher@^0.2.11
   - export KARMA_BROWSERS=Firefox,PhantomJS
