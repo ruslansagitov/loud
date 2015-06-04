@@ -19,6 +19,8 @@ install:
 test_script:
   - npm test
 
-build:
+before_build:
   - mkdir build
   - npm run-script build
+
+build: off
