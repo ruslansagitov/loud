@@ -26,9 +26,10 @@
   },
   "scripts": {
     "test": "npm run-script lint && npm run-script node-test && npm run-script karma-test",
-    "node-test": "istanbul test _mocha -- --reporter=dot ./test/test.js",
+    "node-test": "mocha --reporter=dot ./test/test.js",
     "karma-test": "karma start --single-run",
     "lint": "eslint lib/ test/ && jscs lib/ test/",
+    "coverage": "istanbul cover _mocha -- --reporter=dot ./test/test.js",
     "jsdoc": "jsdoc -d jsdoc lib/loud.js README.md",
     "build": "npm run-script browserify && npm run-script browserify-tests",
     "browserify": "browserify --standalone loud -o ./dist/loud.js ./lib/loud.js",
