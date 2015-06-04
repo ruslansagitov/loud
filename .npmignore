@@ -2,6 +2,7 @@ build
 coverage
 jsdoc
 test
+appveyor.yml
 bower.json
 karma.conf.js
 .editorconfig
