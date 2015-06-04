@@ -9,6 +9,8 @@ env:
   global:
     # CODECLIMATE_REPO_TOKEN
     - secure: UR3Fth+3x7k4zAiYUe/GNM19HhaboA/v1XhHC9IO239beIzZAwqbIi0IKpt8rNWXxnoSS8oVlz7ABoFy3iilXDNGE2t6r53mDllWT8SlcBNMgDp+A56VzClVGodJatTkrPTWmu8dGsa9YaIVOBbAvytalEgd3ib4rk0MQl/y1zs=
+    # COVERALLS_REPO_TOKEN
+    - secure: RH5Gn2xCyZ8wlN9TRt0Sdn6oQuonjpOVqdIC3BRNhAK1r5tUCZuhAj8KSN6IjAaajXmN5/6sw1FpRFy29SSqs98bIuMseqqN7Q7XVQrJ7H9CM3SsJr9lbBWUbpH4l1wqTb+WLP2rC0oNXbA0JcU46o6Wx7NdiTKPa77kYmf1Ey0=
     # SAUCE_USERNAME
     - secure: cRiggKCu0Y7SW1qkOt3JzaOcZVgZ8sJcJ30kTCRUhHCP9cIUFhqT61NYAtYJ9yLVPdystKzyphO7YoXmVYhuOdn/qFvGGFOCekkSG2VlQZU8q5cwA7QxMp+YYU+MBq+C7xEerzOF+wo7YYfv0w2VqcpfJgFb4eha13vz/HueqK4=
     # SAUCE_ACCESS_KEY
@@ -26,9 +28,10 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
 after_success:
-  - npm install codeclimate-test-reporter@^0.0.4
+  - npm install codeclimate-test-reporter@^0.0.4 coveralls@^2.11.2
   - ./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --reporter=dot ./test/test.js
   - cat ./coverage/lcov.info | ./node_modules/.bin/codeclimate
+  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
 
 deploy:
   - provider: npm
