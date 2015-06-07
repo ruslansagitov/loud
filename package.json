@@ -25,10 +25,11 @@
     "lib": "./lib"
   },
   "scripts": {
-    "test": "npm run-script lint && npm run-script node-test && npm run-script karma-test",
+    "test": "npm run-script lint && npm run-script check-writing && npm run-script node-test && npm run-script karma-test",
     "node-test": "mocha --reporter=dot ./test/test.js",
     "karma-test": "karma start --single-run",
     "lint": "eslint lib/ test/ && jscs lib/ test/",
+    "check-writing": "write-good README.md && write-good CONTRIBUTING.md --no-tooWordy",
     "coverage": "istanbul cover _mocha -- --reporter=dot ./test/test.js",
     "jsdoc": "jsdoc -d jsdoc lib/loud.js README.md",
     "build": "npm run-script browserify && npm run-script browserify-tests",

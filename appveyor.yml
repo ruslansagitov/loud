@@ -10,7 +10,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - node --version
   - npm --version
-  - npm install --global eslint@^0.21.2 jscs@^1.13.1
+  - npm install --global eslint@^0.21.2 jscs@^1.13.1 write-good@^0.9.1
   - npm install --global karma-cli@^0.0.4
   - npm install
   - npm install karma-ie-launcher@^0.1.5
