@@ -1,5 +1,12 @@
-/* global describe, it */
+/* global describe, it, window, document */
 'use strict';
+
+if (typeof window !== 'undefined') {
+    var html5 = window.html5;
+    if (html5) {
+        html5.addElements(['menu', 'menuitem', document]);
+    }
+}
 
 var assert = require('assert'),
     loud = require('../lib/loud'),
