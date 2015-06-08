@@ -129,7 +129,7 @@ describe('loud', function() {
         '<div role="tree"><div role="treeitem" aria-selected="true">Content</div></div>': ['tree', 'Content', 'treeitem', 'selected'],
 
         '<div role="img" aria-grabbed="true"></div>': ['img', 'grabbed'],
-        '<div role="img" aria-grabbed="false"></div>': ['img', 'can be grabbed'],
+        '<div role="img" aria-grabbed="false"></div>': ['img', 'grabbable'],
         '<div role="img" aria-grabbed="unknown"></div>': ['img'],
         '<div role="img" aria-grabbed=""></div>': ['img'],
 
