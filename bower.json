@@ -22,6 +22,8 @@
     "lib",
     "doc",
     "test",
+    "appveyor.yml",
+    "CONTRIBUTING.md",
     "karma.conf.js",
     "package.json",
     "README.md"
