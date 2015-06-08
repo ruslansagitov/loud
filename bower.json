@@ -20,6 +20,7 @@
     "node_modules",
     "bower_components",
     "lib",
+    "doc",
     "test",
     "karma.conf.js",
     "package.json",
