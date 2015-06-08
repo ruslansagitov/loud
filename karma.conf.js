@@ -8,7 +8,37 @@ module.exports = function(config) {
     config.set({
         frameworks: ['mocha'],
         browsers: browsers,
-        files: ['build/test.js'],
+        files: [
+            require.resolve('es5-shim'),
+            require.resolve('html5shiv/dist/html5shiv'),
+            'build/test.js'
+        ],
         reporters: ['dots']
     });
+
+    if (process.env.CI && process.env.SAUCE_ACCESS_KEY) {
+        var customLaunchers = {
+            sauceLabsIE11: {
+                base: 'SauceLabs',
+                browserName: 'Android',
+                deviceName: 'Android Emulator',
+                version: '5.1'
+            },
+            sauceLabsIE8: {
+                base: 'SauceLabs',
+                browserName: 'internet explorer',
+                version: 8
+            }
+        };
+
+        config.set({
+            browsers: browsers.concat(Object.keys(customLaunchers)),
+            reporters: ['dots', 'saucelabs'],
+            captureTimeout: 120000,
+            sauceLabs: {
+                testName: 'Loud'
+            },
+            customLaunchers: customLaunchers
+        });
+    }
 };

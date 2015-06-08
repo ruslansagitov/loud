@@ -2,11 +2,10 @@
 'use strict';
 
 var assert = require('assert'),
-    Loud = require('../lib/loud');
+    loud = require('../lib/loud'),
+    jsdom = require('./jsdom');
 
 describe('loud', function() {
-    var loud = new Loud();
-
     var data = {
         /* aria-labelledby */
         '<button aria-labelledby="label"><span id="label">Label</span></button>': ['Label', 'button'],
@@ -29,7 +28,7 @@ describe('loud', function() {
         '<button aria-label="Label1">Label2</button>': ['Label1', 'button'],
         '<button aria-label="Label2" aria-labelledby="label1"><span id="label1">Label1</span></button>': ['Label1', 'button'],
 
-        '<button aria-labelledby="label"></button><menu><menuitem id="label">Label</menuitem></menu>': ['Label', 'button', 'menu', 'Label', 'menuitem'],
+        '<button aria-labelledby="label"></button><menu><menuitem id="label" title="Label"></menu>': ['Label', 'button', 'menu', 'Label', 'menuitem'],
 
         '<button aria-labelledby="label"></button><input id="label" type="range" value="1">': ['button', 'slider', '1'],
 
@@ -81,7 +80,7 @@ describe('loud', function() {
 
     Object.keys(data).forEach(function(key) {
         it('handles ' + key, function() {
-            assert.deepEqual(loud.say(key), data[key]);
+            assert.deepEqual(loud.say(jsdom(key)), data[key]);
         });
     });
 });

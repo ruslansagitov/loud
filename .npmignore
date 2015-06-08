@@ -2,7 +2,9 @@ build
 coverage
 jsdoc
 test
+appveyor.yml
 bower.json
+CONTRIBUTING.md
 karma.conf.js
 .editorconfig
 .eslintrc

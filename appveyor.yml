@@ -1,0 +1,26 @@
+version: '{build}'
+
+environment:
+  nodejs_version: 0.12
+
+matrix:
+  fast_finish: true
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - node --version
+  - npm --version
+  - npm install --global eslint@^0.21.2 jscs@^1.13.1 write-good@^0.9.1
+  - npm install --global karma-cli@^0.0.4
+  - npm install
+  - npm install karma-ie-launcher@^0.1.5
+  - set KARMA_BROWSERS=IE
+
+before_test:
+  - mkdir build
+  - npm run-script build
+
+test_script:
+  - npm test
+
+build: off

@@ -2,11 +2,10 @@
 'use strict';
 
 var assert = require('assert'),
-    Loud = require('../lib/loud');
+    loud = require('../lib/loud'),
+    jsdom = require('./jsdom');
 
 describe('loud', function() {
-    var loud = new Loud();
-
     var data = {
         '<div role="button" aria-pressed="unknown">Content</div>': ['Content', 'button'],
         '<div role="button" aria-pressed="true">Content</div>': ['Content', 'toggle button', 'pressed'],
@@ -130,7 +129,7 @@ describe('loud', function() {
         '<div role="tree"><div role="treeitem" aria-selected="true">Content</div></div>': ['tree', 'Content', 'treeitem', 'selected'],
 
         '<div role="img" aria-grabbed="true"></div>': ['img', 'grabbed'],
-        '<div role="img" aria-grabbed="false"></div>': ['img', 'can be grabbed'],
+        '<div role="img" aria-grabbed="false"></div>': ['img', 'grabbable'],
         '<div role="img" aria-grabbed="unknown"></div>': ['img'],
         '<div role="img" aria-grabbed=""></div>': ['img'],
 
@@ -171,6 +170,11 @@ describe('loud', function() {
         '<div role="slider" aria-controls="unknown">Content</div><div id="id"></div>': ['slider'],
         '<div role="slider" aria-controls="">Content</div><div id="id"></div>': ['slider'],
 
+        '<div role="button" aria-owns="id">Content</div><div id="id"></div>': ['Content', 'button', 'owns', 'id'],
+        '<div role="button" aria-owns="id1 id2">Content</div><div id="id1"></div><div id="id2"></div>': ['Content', 'button', 'owns', 'id1', 'id2'],
+        '<div role="button" aria-owns="unknown">Content</div><div id="id"></div>': ['Content', 'button'],
+        '<div role="button" aria-owns="">Content</div><div id="id"></div>': ['Content', 'button'],
+
         '<div role="button" aria-flowto="id">Content</div><div id="id"></div>': ['Content', 'button', 'flowto', 'id'],
         '<div role="button" aria-flowto="id1 id2">Content</div><div id="id1"></div><div id="id2"></div>': ['Content', 'button', 'flowto', 'id1', 'id2'],
         '<div role="button" aria-flowto="unknown">Content</div><div id="id"></div>': ['Content', 'button'],
@@ -184,7 +188,7 @@ describe('loud', function() {
 
     Object.keys(data).forEach(function(key) {
         it('handles ' + key, function() {
-            assert.deepEqual(loud.say(key), data[key]);
+            assert.deepEqual(loud.say(jsdom(key)), data[key]);
         });
     });
 });

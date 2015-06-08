@@ -4,7 +4,7 @@
   "authors": [
     "Ruslan Sagitov <rs@ruslansagitov.name>"
   ],
-  "description": "Web accessibility unit-testing framework",
+  "description": "Web accessibility testing helper",
   "main": "./dist/loud.js",
   "keywords": [
     "accessibility",

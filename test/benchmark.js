@@ -1,11 +1,10 @@
 'use strict';
 
-var Util = require('util'),
-    Benchmark = require('benchmark'),
-    Loud = require('../lib/loud');
+var Benchmark = require('benchmark'),
+    loud = require('../lib/loud'),
+    jsdom = require('./jsdom');
 
-var suite = new Benchmark.Suite(),
-    loud = new Loud();
+var suite = new Benchmark.Suite();
 
 var data = [
     'Text',
@@ -19,12 +18,12 @@ var data = [
 
 data.forEach(function(item) {
     suite.add(item, function() {
-        loud.say(item);
+        loud.say(jsdom(item));
     });
 });
 
 suite.on('cycle', function(e) {
-    Util.puts(e.target.toString());
+    console.log(e.target.toString());
 }).run({
     async: true
 });

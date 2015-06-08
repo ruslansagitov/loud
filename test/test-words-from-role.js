@@ -2,11 +2,10 @@
 'use strict';
 
 var assert = require('assert'),
-    Loud = require('../lib/loud');
+    loud = require('../lib/loud'),
+    jsdom = require('./jsdom');
 
 describe('loud', function() {
-    var loud = new Loud();
-
     var data = {
         '<div role="alert">Content</div>': ['alert', 'Content', 'alert end'],
         '<div role="alertdialog">Content</div>': ['alertdialog', 'Content', 'alertdialog end'],
@@ -101,7 +100,7 @@ describe('loud', function() {
 
     Object.keys(data).forEach(function(key) {
         it('handles ' + key, function() {
-            assert.deepEqual(loud.say(key), data[key]);
+            assert.deepEqual(loud.say(jsdom(key)), data[key]);
         });
     });
 });
