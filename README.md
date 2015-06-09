@@ -11,7 +11,7 @@ Loud ships under terms of the MIT License.
 
 ## Why do I need it?
 
-You break HTML pages on elements and each element you can create in
+You break HTML pages on elements. Each element you can create in
 different ways. For example, you can create a button like this (with
 a little bit of JavaScript):
 
@@ -63,7 +63,12 @@ describe('loud', function() {
 });
 ```
 
+## Going Further
+
+Read the full documentation on [loud.readthedocs.org][].
+
  [npm]: <https://github.com/npm/npm> "npm — A package manager for JavaScript"
  [browserify]: <https://github.com/substack/node-browserify> "browserify — Browser-side require() the Node.js way"
  [bower]: <https://github.com/bower/bower> "Bower — A package manager for the web"
  [Jasmine]: <http://jasmine.github.io/> "Jasmine — Behavior-Driven JavaScript"
+ [loud.readthedocs.org]: <https://loud.readthedocs.org> "Loud Documentation"

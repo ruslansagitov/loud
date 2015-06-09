@@ -14,7 +14,7 @@ Loud ships under terms of the MIT License.
 Why do I need it?
 -----------------
 
-You break HTML pages on elements and each element you can create in
+You break HTML pages on elements. Each element you can create in
 different ways. For example, you can create a button like this (with
 a little bit of JavaScript):
 
@@ -35,3 +35,13 @@ are the same.
 Loud knows how elements look like from the accessibility point of view.
 You can use this information to track accessibility regression of your
 web pages.
+
+Table of Contents
+-----------------
+
+.. toctree::
+   :maxdepth: 2
+
+   getting-started
+   api
+   examples
