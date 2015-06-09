@@ -1,8 +1,8 @@
-!function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.Loud=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.loud = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Ruslan Sagitov
+ * Copyright (c) 2014-2015 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -30,7 +30,7 @@ var ROLE_FROM_TAG = require('./role-from-tag'),
 var extend = UTIL.extend,
     flatten = UTIL.flatten,
     toArray = UTIL.toArray,
-    toCamelCase = UTIL.toCamelCase;
+    capitalize = UTIL.capitalize;
 
 var TAG_NO_ROLE = {
     base: 1,
@@ -82,9 +82,10 @@ var TAG_CAN_BE_PRESENTATION = {
 };
 
 var TAG_NO_CLOSING = {
-    input: 1,
-    img: 1,
     hr: 1,
+    img: 1,
+    input: 1,
+    menuitem: 1,
     progress: 1
 };
 
@@ -478,7 +479,7 @@ function A11yNode(node) {
     this.nodeType = node.nodeType;
     this.nodeValue = node.nodeValue;
     this.value = node.value;
-    this.textContent = node.textContent;
+    this.textContent = node.textContent || node.innerText;
     this.tag = node.nodeName.toLowerCase();
 
     return this;
@@ -526,10 +527,7 @@ A11yNode.prototype.free = function() {
     'fixRole'
 ].forEach(function(item) {
     A11yNode.prototype[item] = function(inst) {
-        /* this could be a document element */
-        if (this.nodeType === 1) {
-            ROLE_FROM_TAG[item].call(inst, this);
-        }
+        ROLE_FROM_TAG[item].call(inst, this);
 
         var node = this.firstChild;
         for (; node; node = node.nextSibling) {
@@ -590,7 +588,7 @@ extend(A11yNode.prototype, {
         return !!ROLE_INLINE_VALUE[this.role];
     },
 
-    isHyperlink: function() {
+    isHyperlink: /* istanbul ignore next */ function() {
         var rel = this.getAttribute('rel') || '';
         rel = rel.toLowerCase();
         return !!HYPERLINK_TYPES[rel];
@@ -635,10 +633,6 @@ extend(A11yNode.prototype, {
     hasParent: function(parentName) {
         var node = this.parentNode;
         for (; node; node = node.parentNode) {
-            if (node.nodeType !== 1) {
-                break;
-            }
-
             if (node.tag === parentName) {
                 return node;
             }
@@ -735,18 +729,9 @@ extend(A11yNode.prototype, {
             return true;
         }
 
-        if (!this.parentNode ||
-            this.parentNode.nodeType !== 1) {
-            return false;
-        }
-
         var node = this.parentNode,
             parentRole;
         for (; node; node = node.parentNode) {
-            if (node.nodeType !== 1) {
-                break;
-            }
-
             if (typeof node.role !== 'undefined') {
                 parentRole = node.role;
                 if (context[parentRole]) {
@@ -823,7 +808,7 @@ extend(A11yNode.prototype, {
     'live',
     'relevant'
 ].forEach(function(item) {
-    var funcName = toCamelCase('get-' + item);
+    var funcName = 'get' + capitalize(item);
 
     A11yNode.prototype[funcName] = function() {
         var data = this.getAttribute('aria-' + item);
@@ -837,33 +822,22 @@ extend(A11yNode.prototype, {
 });
 
 [
-    'selected',
-    'grabbed',
-    'busy',
-    'haspopup'
+    'expanded',
+    'pressed',
+    'grabbed'
 ].forEach(function(item) {
-    var funcName = toCamelCase('get-' + item);
+    var funcName = 'get' + capitalize(item);
 
     A11yNode.prototype[funcName] = function() {
-        if (this.hasAttribute('aria-' + item)) {
-            return this.getAttribute('aria-' + item) === 'true';
+        var attr = 'aria-' + item;
+        if (this.hasAttribute(attr)) {
+            var a = this.getAttribute(attr);
+            return a === 'true' ? true : (a === 'false' ? false : a);
         }
     };
 });
 
 extend(A11yNode.prototype, {
-    getExpanded: function() {
-        if (this.hasAttribute('aria-expanded')) {
-            return this.getAttribute('aria-expanded');
-        }
-    },
-
-    getPressed: function() {
-        if (this.hasAttribute('aria-pressed')) {
-            return this.getAttribute('aria-pressed');
-        }
-    },
-
     getChecked: function() {
         /* Firefox defines node.checked on <menuitem>. */
         if (this.tag === 'menuitem') {
@@ -881,6 +855,12 @@ extend(A11yNode.prototype, {
         }
 
         return this.node.checked;
+    },
+
+    getSelected: function() {
+        if (this.hasAttribute('aria-selected')) {
+            return this.getAttribute('aria-selected') === 'true';
+        }
     },
 
     getReadonly: function() {
@@ -909,6 +889,10 @@ extend(A11yNode.prototype, {
 
 /* states */
 extend(A11yNode.prototype, {
+    isSelected: function() {
+        return this.node.selected;
+    },
+
     isDisabled: function() {
         var fieldset = this.hasParent('fieldset');
 
@@ -925,6 +909,7 @@ extend(A11yNode.prototype, {
     },
 
     isHidden: function(inst) {
+        /* istanbul ignore next */
         if (this.tag === 'datalist') {
             var id = this.getAttribute('id');
             if (id) {
@@ -957,7 +942,7 @@ module.exports = A11yNode;
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Ruslan Sagitov
+ * Copyright (c) 2014-2015 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -998,7 +983,7 @@ var getFrom = [
             return ids.split(/\s+/).map(function(id) {
                 var elem = that.getElementById(id);
                 if (elem) {
-                    var val = getAccessibleName.call(that, elem, true);
+                    var val = that.getAccessibleName(elem, true);
                     return val && val.trim();
                 }
             }).filter(function(str) {
@@ -1041,7 +1026,7 @@ var getFrom = [
                 });
 
                 if (elems.length) {
-                    return getAccessibleName.call(this, elems[0], recurse);
+                    return this.getAccessibleName(elems[0], recurse);
                 }
             }
         }
@@ -1060,7 +1045,7 @@ var getFrom = [
             switch (node.nodeType) {
                 case 1:
                     if (!node.isEmbeddedControl()) {
-                        value = getAccessibleName.call(this, node, recurse);
+                        value = this.getAccessibleName(node, recurse);
                     } else if (node.valuetext) {
                         value = node.valuetext;
                     } else if (typeof node.valuenow !== 'undefined') {
@@ -1093,38 +1078,28 @@ var getFrom = [
     }
 ];
 
-var getFromNode = function(node, recurse) {
-    var that = this,
-        name;
+module.exports = function(node, recurse) {
+    var name = node.accessibleName,
+        that = this;
+    if (typeof name !== 'undefined') {
+        return name;
+    }
 
     getFrom.some(function(callback) {
         name = callback.call(that, node, recurse);
         return name;
     });
 
-    return name || '';
-};
-
-function getAccessibleName(node, recurse) {
-    /* jshint validthis:true */
-    var name = node.accessibleName;
-    if (typeof name !== 'undefined') {
-        return name;
-    }
-
-    name = getFromNode.call(this, node, recurse);
-    node.accessibleName = name;
+    node.accessibleName = name || '';
 
     return name;
-}
-
-exports.get = getAccessibleName;
+};
 
 },{"./util":5}],3:[function(require,module,exports){
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Ruslan Sagitov
+ * Copyright (c) 2014-2015 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -1144,55 +1119,25 @@ exports.get = getAccessibleName;
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
-/* global window, document */
 'use strict';
 
 /**
  * @module loud
  */
 
-var WORDS_FROM_ROLE = require('./words-from-role'),
+var getWordsFromRole = require('./words-from-role'),
+    getWordsFromAttributes = require('./words-from-attributes'),
+    getAccessibleName = require('./accessible-name'),
     A11yNode = require('./a11y-node'),
     UTIL = require('./util');
 
-var isString = UTIL.isString,
-    isFunction = UTIL.isFunction,
-    flatten = UTIL.flatten,
-    jsdom;
+var flatten = UTIL.flatten;
 
-/* istanbul ignore next */
-if (typeof window !== 'undefined') {
-    jsdom = function jsdom(data) {
-        var elem = document.createElement('div');
-        elem.innerHTML = data;
-
-        return elem;
-    };
-} else {
-    jsdom = require('jsdom').jsdom;
-}
-
-/**
- * @constructor
- */
 function Loud() {
     return this;
 }
 
-/**
- * @type {String}
- */
-Loud.VERSION = '0.7.3';
-
-/**
- * Transform HTML into words.
- *
- * @param {(String|Object)} data - HTML string or DOM element
- * @returns {String[]} Words
- */
-Loud.prototype.say = function loudSay(data) {
-    var node = isString(data) ? jsdom(data) : data;
-
+Loud.prototype.say = function(node) {
     this.elementById = {};
 
     this.root = new A11yNode(node, this);
@@ -1207,19 +1152,19 @@ Loud.prototype.say = function loudSay(data) {
     return result;
 };
 
-Loud.prototype.setElementId = function loudSetElementId(id, node) {
+Loud.prototype.setElementId = function(id, node) {
     this.elementById[id] = node;
 };
 
-Loud.prototype.getElementById = function loudGetElementById(id) {
+Loud.prototype.getElementById = function(id) {
     return this.elementById[id];
 };
 
-Loud.prototype.getElementsByTagName = function loudGetElementsByTagName(name) {
+Loud.prototype.getElementsByTagName = function(name) {
     return this.root.getElementsByTagName(name);
 };
 
-Loud.prototype.traverse = function loudTraverse(node) {
+Loud.prototype.traverse = function(node) {
     var iter = node.firstChild,
         value = [],
         val;
@@ -1233,41 +1178,47 @@ Loud.prototype.traverse = function loudTraverse(node) {
     return flatten(value);
 };
 
-Loud.prototype.handleNode = function loudHandleNode(node) {
+Loud.prototype.handleNode = function(node) {
     switch (node.nodeType) {
         case 1: /* ELEMENT */
             break;
         case 3: /* TEXTNODE */
             return node.nodeValue.trim();
-        case 9: /* DOCUMENT */
-            return this.traverse(node);
-        default:
-            return '';
     }
 
     if (node.hidden) {
         return '';
     }
 
-    var handler = WORDS_FROM_ROLE.getHandler(node.role);
-    if (!isFunction(handler)) {
-        return this.traverse(node);
-    }
-
-    var value = flatten(handler.call(this, node));
-
-    return value.filter(function(str) {
-        return str;
-    });
+    return this.getWordsFromRole(node);
 };
 
-module.exports = Loud;
+Loud.prototype.getAccessibleName = getAccessibleName;
+Loud.prototype.getWordsFromRole = getWordsFromRole;
+Loud.prototype.getWordsFromAttributes = getWordsFromAttributes;
 
-},{"./a11y-node":1,"./util":5,"./words-from-role":7,"jsdom":"jsdom"}],4:[function(require,module,exports){
+module.exports = {
+    /**
+     * @type {String}
+     */
+    VERSION: '0.7.3',
+
+    /**
+     * Transform a DOM element to words.
+     *
+     * @param {(Object)} node - DOM element
+     * @returns {String[]} Words
+     */
+    say: function(node) {
+        return (new Loud()).say(node);
+    }
+};
+
+},{"./a11y-node":1,"./accessible-name":2,"./util":5,"./words-from-attributes":6,"./words-from-role":7}],4:[function(require,module,exports){
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Ruslan Sagitov
+ * Copyright (c) 2014-2015 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -1291,10 +1242,9 @@ module.exports = Loud;
 
 var UTIL = require('./util');
 
-var isString = UTIL.isString,
-    isFunction = UTIL.isFunction,
+var isFunction = UTIL.isFunction,
     extend = UTIL.extend,
-    toCamelCase = UTIL.toCamelCase;
+    capitalize = UTIL.capitalize;
 
 var ROLE_LOCAL_ATTRS = {
     alert: ['expanded'],
@@ -1369,7 +1319,7 @@ var DEFAULT_FOR = {
     },
     combobox: {
         haspopup: true,
-        expanded: 'false'
+        expanded: false
     },
     log: {
         live: 'polite'
@@ -1395,22 +1345,24 @@ var DEFAULT_FOR = {
     }
 };
 
-function roleToObject(roleData) {
-    if (isString(roleData)) {
+var roleToObject = function(roleData) {
+    if (typeof roleData === 'string') {
         return { role: roleData };
     }
 
     return extend({}, roleData || {});
-}
+};
 
 var getTextboxRole = function(node) {
     var listId = node.getAttribute('list'),
         datalist;
 
+    /* istanbul ignore if */
     if (listId) {
         datalist = this.getElementById(listId);
     }
 
+    /* istanbul ignore next */
     if (datalist && datalist.tag === 'datalist') {
         return {
             role: 'combobox',
@@ -1421,7 +1373,7 @@ var getTextboxRole = function(node) {
     return 'textbox';
 };
 
-function range(role) {
+var range = function(role) {
     return function(node) {
         return {
             role: role,
@@ -1430,7 +1382,7 @@ function range(role) {
             valuemax: node.getAttribute('max')
         };
     };
-}
+};
 
 var TAG_INPUT_GET_ROLE = {
     checkbox: 'checkbox',
@@ -1457,6 +1409,7 @@ var TAG_TO_ROLE = {
     body: 'document',
     button: 'button',
     caption: function(node) {
+        /* istanbul ignore else */
         if (node.hasParent('table')) {
             return {
                 part: true,
@@ -1465,6 +1418,7 @@ var TAG_TO_ROLE = {
         }
     },
     colgroup: function(node) {
+        /* istanbul ignore else */
         if (node.hasParent('table')) {
             return { part: true };
         }
@@ -1502,7 +1456,7 @@ var TAG_TO_ROLE = {
         return '';
     },
     hr: 'separator',
-    img: function imgHandler(node) {
+    img: function(node) {
         var alt = node.getAttribute('alt');
         if (alt === '') {
             return 'presentation';
@@ -1528,7 +1482,7 @@ var TAG_TO_ROLE = {
         }
     },
     li: 'listitem',
-    link: function(node) {
+    link: /* istanbul ignore next */ function(node) {
         if (node.isHyperlink()) {
             return 'link';
         }
@@ -1553,7 +1507,7 @@ var TAG_TO_ROLE = {
     option: function(node) {
         return {
             role: 'option',
-            selected: node.hasAttribute('selected')
+            selected: node.isSelected()
         };
     },
     progress: range('progressbar'),
@@ -1596,7 +1550,7 @@ var setGlobalAttrs = function(node) {
         flowto: node.getAttribute('aria-flowto'),
         haspopup: node.getAttribute('aria-haspopup') === 'true',
         dropeffect: node.getDropeffect(),
-        grabbed: node.getAttribute('aria-grabbed'),
+        grabbed: node.getGrabbed(),
 
         busy: node.getAttribute('aria-busy') === 'true',
         atomic: node.getAttribute('aria-atomic') === 'true',
@@ -1618,7 +1572,7 @@ var setLocalAttrs = function(node) {
             return;
         }
 
-        var funcName = toCamelCase('get-' + attr),
+        var funcName = 'get' + capitalize(attr),
             value;
         if (isFunction(node[funcName])) {
             value = node[funcName]();
@@ -1700,7 +1654,7 @@ exports.fixRole = fixRole;
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Ruslan Sagitov
+ * Copyright (c) 2014-2015 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -1722,7 +1676,7 @@ exports.fixRole = fixRole;
  */
 'use strict';
 
-exports.extend = function extend(obj, src) {
+exports.extend = function(obj, src) {
     var props = Object.keys(src),
         length = props.length,
         i = -1,
@@ -1736,19 +1690,13 @@ exports.extend = function extend(obj, src) {
     return obj;
 };
 
-exports.isString = function isString(val) {
-    return typeof val === 'string' ||
-           val && typeof val === 'object' &&
-           Object.prototype.toString.call(val) === '[object String]';
-};
-
-exports.isFunction = function isFunction(val) {
+exports.isFunction = function(val) {
     return typeof val === 'function';
 };
 
 exports.toArray = Array.prototype.slice;
 
-exports.flatten = function flatten(array) {
+var flatten = exports.flatten = function(array) {
     var i = -1,
         length = array.length,
         res = [];
@@ -1774,17 +1722,15 @@ exports.flatten = function flatten(array) {
     return res;
 };
 
-exports.toCamelCase = function toCamelCase(str) {
-    return str.replace(/-([a-z])/g, function(m) {
-        return m[1].toUpperCase();
-    });
+exports.capitalize = function(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 },{}],6:[function(require,module,exports){
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Ruslan Sagitov
+ * Copyright (c) 2014-2015 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -1806,25 +1752,21 @@ exports.toCamelCase = function toCamelCase(str) {
  */
 'use strict';
 
-var ACCESSIBLE_NAME = require('./accessible-name');
-
-var getAccessibleName = ACCESSIBLE_NAME.get;
-
 var pushStates = function(result, node) {
     if (typeof node.checked !== 'undefined') {
         result.push(node.checked === 'mixed' ? 'mixed' :
                     node.checked ? 'checked' : 'not checked');
     }
 
-    if (node.expanded === 'true') {
+    if (node.expanded === true) {
         result.push('expanded');
-    } else if (node.expanded === 'false') {
+    } else if (node.expanded === false) {
         result.push('collapsed');
     }
 
-    if (node.pressed === 'true') {
+    if (node.pressed === true) {
         result.push('pressed');
-    } else if (node.pressed === 'false') {
+    } else if (node.pressed === false) {
         result.push('not pressed');
     }
 
@@ -1832,10 +1774,10 @@ var pushStates = function(result, node) {
         result.push('selected');
     }
 
-    if (node.grabbed === 'true') {
+    if (node.grabbed === true) {
         result.push('grabbed');
-    } else if (node.grabbed === 'false') {
-        result.push('can be grabbed');
+    } else if (node.grabbed === false) {
+        result.push('grabbable');
     }
 
     if (node.busy) {
@@ -1869,7 +1811,7 @@ var pushActiveDescendant = function(result, node) {
     if (node.activedescendant) {
         var elem = this.getElementById(node.activedescendant);
         if (elem) {
-            var name = getAccessibleName.call(this, elem);
+            var name = this.getAccessibleName(elem);
             if (name) {
                 result.push(name);
             }
@@ -1895,7 +1837,7 @@ var pushDescribedBy = function(result, node) {
     }
 };
 
-var getAttrs = function(node) {
+module.exports = function(node) {
     var that = this,
         result = [],
         ids;
@@ -1923,10 +1865,9 @@ var getAttrs = function(node) {
     pushStates.call(this, result, node);
     pushProperties.call(this, result, node);
 
-    pushActiveDescendant.call(this, result, node);
-
     [
         'controls',
+        'owns',
         'flowto'
     ].forEach(function(item) {
         if (node[item]) {
@@ -1944,16 +1885,16 @@ var getAttrs = function(node) {
 
     pushDescribedBy.call(this, result, node);
 
+    pushActiveDescendant.call(this, result, node);
+
     return result;
 };
 
-exports.get = getAttrs;
-
-},{"./accessible-name":2}],7:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 Ruslan Sagitov
+ * Copyright (c) 2014-2015 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -1975,40 +1916,38 @@ exports.get = getAttrs;
  */
 'use strict';
 
-var ACCESSIBLE_NAME = require('./accessible-name'),
-    WORDS_FROM_ATTRIBUTES = require('./words-from-attributes');
+var UTIL = require('./util');
 
-var getAccessibleName = ACCESSIBLE_NAME.get,
-    getAttrs = WORDS_FROM_ATTRIBUTES.get;
+var flatten = UTIL.flatten;
 
 var ROLE_USE_PROCENT = {
     progressbar: 1,
     scrollbar: 1
 };
 
-function deep(roleName) {
-    return function wordsFromRoleDeepHandler(node) {
+var deep = function(roleName) {
+    return function(node) {
         return [
-            getAccessibleName.call(this, node),
+            this.getAccessibleName(node),
             roleName,
-            getAttrs.call(this, node),
+            this.getWordsFromAttributes(node),
             this.traverse(node)
         ];
     };
-}
+};
 
-function flat(roleName) {
-    return function wordsFromRoleFlatHandler(node) {
+var flat = function(roleName) {
+    return function(node) {
         return [
-            getAccessibleName.call(this, node),
+            this.getAccessibleName(node),
             roleName,
-            getAttrs.call(this, node)
+            this.getWordsFromAttributes(node)
         ];
     };
-}
+};
 
-function range(roleName) {
-    return function wordsFromRoleRangeHandler(node) {
+var range = function(roleName) {
+    return function(node) {
         var role = node.role,
             valuetext = node.valuetext,
             valuenow = node.valuenow,
@@ -2040,31 +1979,31 @@ function range(roleName) {
         }
 
         return [
-            getAccessibleName.call(this, node),
+            this.getAccessibleName(node),
             orientation && orientation !== 'none' ? orientation : '',
             roleName,
             value,
-            getAttrs.call(this, node)
+            this.getWordsFromAttributes(node)
         ];
     };
-}
+};
 
-function region(before, after) {
-    return function wordsFromRoleRegionHandler(node) {
+var region = function(before, after) {
+    return function(node) {
         if (node.isEmpty()) {
             return [];
         }
 
-        var name = getAccessibleName.call(this, node);
+        var name = this.getAccessibleName(node);
 
         return [
             name, before,
-            getAttrs.call(this, node),
+            this.getWordsFromAttributes(node),
             this.traverse(node),
             after
         ];
     };
-}
+};
 
 var HANDLERS = {
     alert: region('alert', 'alert end'),
@@ -2074,14 +2013,14 @@ var HANDLERS = {
     banner: region('banner', 'banner end'),
     button: function(node) {
         return [
-            getAccessibleName.call(this, node),
-            (node.expanded === 'true' ||
-             node.expanded === 'false' ?
+            this.getAccessibleName(node),
+            (node.expanded === true ||
+             node.expanded === false ?
                 'button menu' :
-                (node.pressed === 'true' ||
-                 node.pressed === 'false' ?
+                (node.pressed === true ||
+                 node.pressed === false ?
                     'toggle button' : 'button')),
-            getAttrs.call(this, node)
+            this.getWordsFromAttributes(node)
         ];
     },
     checkbox: flat('checkbox'),
@@ -2097,9 +2036,9 @@ var HANDLERS = {
     grid: function(node) {
         var table = node.table;
         return [
-            getAccessibleName.call(this, node),
+            this.getAccessibleName(node),
             table ? 'table' : 'grid',
-            getAttrs.call(this, node),
+            this.getWordsFromAttributes(node),
             this.traverse(node),
             table ? 'table end' : 'grid end'
         ];
@@ -2137,7 +2076,7 @@ var HANDLERS = {
         return [
             orientation && orientation !== 'none' ? orientation : '',
             'separator',
-            getAttrs.call(this, node)
+            this.getWordsFromAttributes(node)
         ];
     },
     scrollbar: range('scrollbar'),
@@ -2151,11 +2090,11 @@ var HANDLERS = {
         var multiline = node.multiline,
             password = node.password;
         return [
-            getAccessibleName.call(this, node),
+            this.getAccessibleName(node),
             multiline ? 'multiline' : '',
             password ? 'password' : '',
             'textbox',
-            getAttrs.call(this, node),
+            this.getWordsFromAttributes(node),
             this.traverse(node)
         ];
     },
@@ -2167,11 +2106,18 @@ var HANDLERS = {
     treeitem: flat('treeitem')
 };
 
-function getWordsFromRoleHandler(role) {
-    return HANDLERS[role];
-}
+module.exports = function(node) {
+    var handler = HANDLERS[node.role];
+    if (!handler) {
+        return this.traverse(node);
+    }
 
-exports.getHandler = getWordsFromRoleHandler;
+    var value = flatten(handler.call(this, node));
 
-},{"./accessible-name":2,"./words-from-attributes":6}]},{},[3])(3)
+    return value.filter(function(str) {
+        return str;
+    });
+};
+
+},{"./util":5}]},{},[3])(3)
 });
