@@ -37,16 +37,15 @@
     "browserify": "browserify --standalone loud -o ./dist/loud.js ./lib/loud.js",
     "browserify-tests": "browserify -x jsdom -o ./build/test.js ./test/test.js"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "benchmark": "^1.0.0",
-    "browserify": "^10.2.1",
-    "es5-shim": "^4.1.3",
+    "browserify": "^10.2.4",
+    "es5-shim": "^4.1.5",
     "html5shiv": "^3.7.2",
     "istanbul": "^0.3.14",
     "jsdom": "^3.1.2",
-    "karma": "^0.12.32",
+    "karma": "^0.12.36",
     "karma-mocha": "^0.1.10",
     "mocha": "^2.2.5"
   },
