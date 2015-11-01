@@ -40,14 +40,14 @@
   "dependencies": {},
   "devDependencies": {
     "benchmark": "^1.0.0",
-    "browserify": "^10.2.4",
-    "es5-shim": "^4.1.5",
-    "html5shiv": "^3.7.2",
-    "istanbul": "^0.3.14",
-    "jsdom": "^3.1.2",
-    "karma": "^0.12.36",
-    "karma-mocha": "^0.1.10",
-    "mocha": "^2.2.5"
+    "browserify": "^12.0.1",
+    "es5-shim": "^4.2.0",
+    "html5shiv": "^3.7.3",
+    "istanbul": "^0.4.0",
+    "jsdom": "^7.0.2",
+    "karma": "^0.13.14",
+    "karma-mocha": "^0.2.0",
+    "mocha": "^2.3.3"
   },
   "engines": {
     "node": ">= 0.10.0"
