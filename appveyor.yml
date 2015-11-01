@@ -9,7 +9,8 @@ matrix:
 cache:
   - node_modules -> package.json
   - '%APPDATA%\npm\node_modules -> appveyor.yml'
-  - '%APPDATA%\npm-cache -> package.json appveyor.yml'
+  - '%APPDATA%\npm-cache -> package.json'
+  - '%APPDATA%\npm-cache -> appveyor.yml'
 
 install:
   - ps: Install-Product node $env:nodejs_version
@@ -27,7 +28,7 @@ before_test:
 
 test_script:
   - npm test
-  - mocha --reporter=xunit > xunit-results.xml
+  - npm run node-test-xunit
 
 after_test:
   - ps: |
