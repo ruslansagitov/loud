@@ -1,7 +1,7 @@
 language: node_js
 
 node_js:
-  - 0.12
+  - 4
 
 sudo: false
 
@@ -16,13 +16,17 @@ env:
     # SAUCE_ACCESS_KEY
     - secure: Besc0YZAzEyo0o+BJx+h8d5NqTanQr0jaQbfop5HUCfbrmakzQrxbdXdmW0cZUr2f12jYN/k2FXo6uZ19tPCLoWF9aGlIDLMX9yRJdiVWQU8voPVpwY+rsVG5Io4UOmrEmeyP0cwKfuzkaq7dJZe9Zd/DKz3ND5761HkJJEgdF4=
 
+cache:
+  directories:
+    - node_modules
+
 before_install:
-  - npm install --global eslint@^0.21.2 jscs@^1.13.1 write-good@^0.9.1
-  - npm install --global karma-cli@^0.0.4
+  - npm install --global eslint@^1.8.0 jscs@^2.5.0 write-good@^0.9.1 nsp@^2.0.0
+  - npm install --global karma-cli@^0.1.1
 
 before_script:
-  - npm install karma-firefox-launcher@^0.1.6 karma-phantomjs-launcher@^0.1.4
-  - test -n "$SAUCE_ACCESS_KEY" && npm install karma-sauce-launcher@^0.2.11
+  - npm install karma-firefox-launcher@^0.1.6 karma-phantomjs-launcher@^0.2.1
+  - test -n "$SAUCE_ACCESS_KEY" && npm install karma-sauce-launcher@^0.3.0
   - export KARMA_BROWSERS=Firefox,PhantomJS
   - mkdir build
   - npm run-script build
@@ -30,7 +34,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
 after_success:
-  - npm install codeclimate-test-reporter@^0.0.4 coveralls@^2.11.2
+  - npm install codeclimate-test-reporter@^0.1.1 coveralls@^2.11.4
   - ./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --reporter=dot
   - cat ./coverage/lcov.info | ./node_modules/.bin/codeclimate
   - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls

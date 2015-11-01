@@ -1,19 +1,25 @@
 version: '{build}'
 
 environment:
-  nodejs_version: 0.12
+  nodejs_version: 4
 
 matrix:
   fast_finish: true
+
+cache:
+  - node_modules -> package.json
+  - '%APPDATA%\npm\node_modules -> appveyor.yml'
+  - '%APPDATA%\npm-cache -> package.json'
+  - '%APPDATA%\npm-cache -> appveyor.yml'
 
 install:
   - ps: Install-Product node $env:nodejs_version
   - node --version
   - npm --version
-  - npm install --global eslint@^0.21.2 jscs@^1.13.1 write-good@^0.9.1
-  - npm install --global karma-cli@^0.0.4
+  - npm install --global eslint@^1.8.0 jscs@^2.5.0 write-good@^0.9.1 nsp@^2.0.0
+  - npm install --global karma-cli@^0.1.1
   - npm install
-  - npm install karma-ie-launcher@^0.1.5
+  - npm install karma-ie-launcher@^0.2.0
   - set KARMA_BROWSERS=IE
 
 before_test:
@@ -22,5 +28,11 @@ before_test:
 
 test_script:
   - npm test
+  - npm run node-test-xunit
+
+after_test:
+  - ps: |
+      $wc = New-Object 'System.Net.WebClient'
+      $wc.UploadFile("https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\xunit-results.xml))
 
 build: off
