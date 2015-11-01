@@ -6,6 +6,11 @@ environment:
 matrix:
   fast_finish: true
 
+cache:
+  - node_modules -> package.json
+  - '%APPDATA%\npm\node_modules -> appveyor.yml'
+  - '%APPDATA%\npm-cache -> package.json appveyor.yml'
+
 install:
   - ps: Install-Product node $env:nodejs_version
   - node --version

@@ -16,6 +16,10 @@ env:
     # SAUCE_ACCESS_KEY
     - secure: Besc0YZAzEyo0o+BJx+h8d5NqTanQr0jaQbfop5HUCfbrmakzQrxbdXdmW0cZUr2f12jYN/k2FXo6uZ19tPCLoWF9aGlIDLMX9yRJdiVWQU8voPVpwY+rsVG5Io4UOmrEmeyP0cwKfuzkaq7dJZe9Zd/DKz3ND5761HkJJEgdF4=
 
+cache:
+  directories:
+    - node_modules
+
 before_install:
   - npm install --global eslint@^1.8.0 jscs@^2.5.0 write-good@^0.9.1 nsp@^2.0.0
   - npm install --global karma-cli@^0.1.1
