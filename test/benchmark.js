@@ -22,8 +22,14 @@ data.forEach(function(item) {
     });
 });
 
-suite.on('cycle', function(e) {
-    console.log(e.target.toString());
-}).run({
-    async: true
-});
+function main() {
+    suite.on('cycle', function(e) {
+        console.log(e.target.toString());
+    }).run({
+        async: true
+    });
+}
+
+if (require.main === module) {
+    main();
+}
