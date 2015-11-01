@@ -28,7 +28,7 @@
     "test": "npm run-script lint && npm run-script check-writing && npm run-script node-test && npm run-script karma-test",
     "node-test": "mocha --reporter=dot",
     "karma-test": "karma start --single-run",
-    "lint": "eslint lib/ test/ && jscs lib/ test/",
+    "lint": "eslint . && jscs .",
     "check-writing": "write-good README.md && write-good CONTRIBUTING.md --no-tooWordy",
     "coverage": "istanbul cover _mocha -- --reporter=dot",
     "doc": "sphinx-build -b html doc/ build/doc/",

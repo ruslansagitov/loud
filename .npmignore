@@ -9,6 +9,7 @@ CONTRIBUTING.md
 karma.conf.js
 .editorconfig
 .eslintrc
+.eslintignore
 .jscsrc
 .jshintrc
 .npmignore

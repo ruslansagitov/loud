@@ -19,8 +19,8 @@ describe('loud', function() {
         '<area alt="Content">': ['Content', 'link'],
         '<article>Content</area>': ['article', 'Content', 'article end'],
         '<aside>Content</aside>': ['complementary', 'Content', 'complementary end'],
-        // In browser, it does not work
-        // '<body>Content</body>': ['document', 'Content', 'document end'],
+        /* In browser, it does not work */
+        /* '<body>Content</body>': ['document', 'Content', 'document end'], */
         '<button>Content</button>': ['Content', 'button'],
         '<caption>Content</caption>': ['Content'],
         '<colgroup>Content</colgroup>': ['Content'],
@@ -199,15 +199,15 @@ describe('loud', function() {
         '<base role="region">Content</base>': ['Content'],
         '<head role="region">Content</base>': ['Content'],
         '<html role="region">Content</html>': ['Content'],
-        // Firefox thinks that it's an <option>
-        // '<keygen role="region">Content</keygen>': ['Content'],
+        /* Firefox thinks that it's an <option> */
+        /* '<keygen role="region">Content</keygen>': ['Content'], */
         '<label role="region">Content</label>': ['Content'],
         '<meter role="region">Content</meter>': ['Content'],
         '<optgroup role="region">Content</optgroup>': ['Content'],
         '<param role="region">Content</param>': ['Content'],
         '<source role="region">Content</source>': ['Content'],
-        // In browser, it does not work
-        // '<template role="region">Content</template>': ['Content'],
+        /* In browser, it does not work */
+        /* '<template role="region">Content</template>': ['Content'], */
 
         '<input type="color" role="textbox">': [],
         '<input type="date" role="textbox">': [],
@@ -246,9 +246,9 @@ describe('loud', function() {
         '<aside role="search">Content</aside>': ['search', 'Content', 'search end'],
         '<audio role="region">Content</audio>': ['Content'],
         '<audio role="application">Content</audio>': ['application', 'Content', 'application end'],
-        // In browser, it does not work
-        // '<body role="region">Content</body>': ['document', 'Content', 'document end'],
-        // '<body role="application">Content</body>': ['application', 'Content', 'application end'],
+        /* In browser, it does not work */
+        /* '<body role="region">Content</body>': ['document', 'Content', 'document end'], */
+        /* '<body role="application">Content</body>': ['application', 'Content', 'application end'], */
         '<button role="region">Content</button>': ['Content', 'button'],
         '<button role="button">Content</button>': ['Content', 'button'],
         '<button role="link">Content</button>': ['Content', 'link'],
@@ -257,9 +257,9 @@ describe('loud', function() {
         '<menu><button role="menuitemradio">Content</button></menu>': ['menu', 'Content', 'menuitemradio', 'not checked'],
         '<button role="radio">Content</button>': ['Content', 'radio', 'not checked'],
         '<embed role="region">Content</embed>': ['Content'],
-        // In browser, it does not work
-        // '<embed role="application">Content</embed>': ['application', 'Content', 'application'],
-        // '<embed role="document">Content</embed>': ['document', 'Content', 'document end'],
+        /* In browser, it does not work */
+        /* '<embed role="application">Content</embed>': ['application', 'Content', 'application'], */
+        /* '<embed role="document">Content</embed>': ['document', 'Content', 'document end'], */
         '<embed role="img">Content</embed>': ['img', 'Content'],
         '<h1 role="region">Content</h1>': ['Content', 'heading', 'level', '1'],
         '<h2 role="region">Content</h2>': ['Content', 'heading', 'level', '2'],
