@@ -1347,7 +1347,7 @@ var DEFAULT_FOR = {
 
 var roleToObject = function(roleData) {
     if (typeof roleData === 'string') {
-        return { role: roleData };
+        return {role: roleData};
     }
 
     return extend({}, roleData || {});
@@ -1389,7 +1389,7 @@ var TAG_INPUT_GET_ROLE = {
     email: getTextboxRole,
     image: 'button',
     number: range('spinbutton'),
-    password: { role: 'textbox', password: true },
+    password: {role: 'textbox', password: true},
     radio: 'radio',
     range: range('slider'),
     reset: 'button',
@@ -1420,10 +1420,10 @@ var TAG_TO_ROLE = {
     colgroup: function(node) {
         /* istanbul ignore else */
         if (node.hasParent('table')) {
-            return { part: true };
+            return {part: true};
         }
     },
-    datalist: { role: 'listbox', multiselectable: false },
+    datalist: {role: 'listbox', multiselectable: false},
     dialog: 'dialog',
     dd: 'listitem',
     dl: 'list',
@@ -1432,7 +1432,7 @@ var TAG_TO_ROLE = {
     figcaption: function(node) {
         if (node.hasParent('figure') &&
             node.hasOnlyTextChilds()) {
-            return { hidden: true };
+            return {hidden: true};
         }
     },
     footer: function(node) {
@@ -1478,7 +1478,7 @@ var TAG_TO_ROLE = {
     legend: function(node) {
         if (node.hasParent('fieldset') &&
             node.hasOnlyTextChilds()) {
-            return { hidden: true };
+            return {hidden: true};
         }
     },
     li: 'listitem',
@@ -1521,13 +1521,13 @@ var TAG_TO_ROLE = {
     summary: function(node) {
         if (node.hasParent('details') &&
             node.hasOnlyTextChilds()) {
-            return { hidden: true };
+            return {hidden: true};
         }
     },
-    table: { role: 'grid', table: true },
+    table: {role: 'grid', table: true},
     tbody: 'rowgroup',
     td: 'gridcell',
-    textarea: { role: 'textbox', multiline: true },
+    textarea: {role: 'textbox', multiline: true},
     tfoot: 'rowgroup',
     th: function(node) {
         if (node.getAttribute('scope') === 'row') {
@@ -1538,7 +1538,7 @@ var TAG_TO_ROLE = {
     },
     thead: 'rowgroup',
     tr: 'row',
-    ul: { role: 'list', numbered: true }
+    ul: {role: 'list', numbered: true}
 };
 
 var setGlobalAttrs = function(node) {
