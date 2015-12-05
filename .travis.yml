@@ -41,6 +41,7 @@ after_success:
 
 deploy:
   - provider: npm
+    email: rs@ruslansagitov.name
     api_key:
       secure: ECZLkx5BEvOmpslzN5I6sKO++W0fB8upneBfvU4qkIEsaeYY5mOdNW81reUcC6ZIrGzKQ2hVAm06e0+flbHN9x1iyw3IZv+GWOUo2RdpdRQZLXWqKayXxCVx90lQNk5GaUjTOgrlwpymh+j7Lpw6CI9WsvWbGtkJCQpVRJ8zz+0=
     on:
