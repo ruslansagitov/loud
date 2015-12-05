@@ -1138,18 +1138,28 @@ function Loud() {
 }
 
 Loud.prototype.say = function(node) {
-    this.elementById = {};
+    if (!Array.isArray(node)) {
+        node = [node];
+    }
 
-    this.root = new A11yNode(node, this);
-    this.root.parse().setIds(this).setRole(this).fixRole(this);
+    return flatten(node.map(function(node) {
+        if (!node) {
+            return;
+        }
 
-    var result = this.handleNode(this.root);
+        this.elementById = {};
 
-    this.root.free();
-    delete this.root;
-    delete this.elementById;
+        this.root = new A11yNode(node, this);
+        this.root.parse().setIds(this).setRole(this).fixRole(this);
 
-    return result;
+        var result = this.handleNode(this.root);
+
+        this.root.free();
+        delete this.root;
+        delete this.elementById;
+
+        return result;
+    }.bind(this)));
 };
 
 Loud.prototype.setElementId = function(id, node) {
@@ -1206,7 +1216,8 @@ module.exports = {
     /**
      * Transform a DOM element to words.
      *
-     * @param {(Object)} node - DOM element
+     * @param {Object|Object[]} node - DOM element or array of
+     *                                 DOM elements
      * @returns {String[]} Words
      */
     say: function(node) {
