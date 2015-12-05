@@ -53,4 +53,8 @@ describe('loud', function() {
             'Agree', 'checkbox', 'not checked'
         ]);
     });
+
+    it('handles undefined', function() {
+        assert(loud.say(), []);
+    });
 });
