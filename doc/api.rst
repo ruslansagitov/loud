@@ -11,7 +11,7 @@ API
 
 .. js:function:: loud.say(node)
 
-   :param Object node: DOM element
+   :param Object|Object[] node: DOM element or array of DOM elements
    :rtype: Array of Strings
    :returns: Words
 

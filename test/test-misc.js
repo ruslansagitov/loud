@@ -43,4 +43,14 @@ describe('loud', function() {
     it('provides VERSION as String', function() {
         assert(typeof loud.VERSION === 'string');
     });
+
+    it('handles arrays', function() {
+        assert(loud.say([
+            jsdom('<button>Join</button>'),
+            jsdom('<input type="checkbox" title="Agree">')
+        ]), [
+            'Join', 'button',
+            'Agree', 'checkbox', 'not checked'
+        ]);
+    });
 });
