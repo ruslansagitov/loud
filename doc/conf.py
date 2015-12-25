@@ -4,6 +4,6 @@ project = 'Loud'
 copyright = u'2014–2015, Ruslan Sagitov'
 
 version = '0.8'
-release = '0.8.2'
+release = '0.8.3'
 
 master_doc = 'index'
