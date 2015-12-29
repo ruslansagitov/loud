@@ -36,7 +36,7 @@ before_script:
 after_success:
   - npm install codeclimate-test-reporter@^0.1.1 coveralls@^2.11.6
   - ./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --reporter=dot
-  - cat ./coverage/lcov.info | ./node_modules/.bin/codeclimate
+  - cat ./coverage/lcov.info | ./node_modules/.bin/codeclimate-test-reporter
   - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
 
 deploy:
