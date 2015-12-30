@@ -45,6 +45,8 @@ describe('loud', function() {
         '<input type="checkbox" id="checkbox"><label for="checkbox">Label</label>': ['Label', 'checkbox', 'not checked', 'Label'],
         '<input type="checkbox" id="checkbox"><label for="checkbox1">Label</label>': ['checkbox', 'not checked', 'Label'],
         '<input type="checkbox" id="checkbox1"><label for="checkbox">Label</label>': ['checkbox', 'not checked', 'Label'],
+        '<label for="checkbox"><div><input type="checkbox" id="checkbox">Label</div></label>': ['Label', 'checkbox', 'not checked', 'Label'],
+        '<label for="checkbox"><input type="checkbox" id="checkbox1">Label</label>': ['checkbox', 'not checked', 'Label'],
         '<fieldset><legend>Label</legend>Content</fieldset>': ['Label', 'group', 'Content', 'group end'],
         '<fieldset><legend>Label</legend></fieldset>': [],
         '<fieldset><legend></legend>Content</fieldset>': ['group', 'Content', 'group end'],
