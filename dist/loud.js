@@ -1228,7 +1228,7 @@ module.exports = {
     /**
      * @type {String}
      */
-    VERSION: '0.8.3',
+    VERSION: '0.8.4',
 
     /**
      * Transform a DOM element to words.
