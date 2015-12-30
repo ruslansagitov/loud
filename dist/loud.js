@@ -667,6 +667,19 @@ extend(A11yNode.prototype, {
         return (!role || ACCESSIBLE_NAME_FROM_CONTENTS[role]);
     },
 
+    isInputInsideLabel: function() {
+        var id = this.getAttribute('id');
+        if (id && this.tag === 'input') {
+            var node = this.parentNode;
+            for (; node; node = node.parentNode) {
+                if (node.tag === 'label' &&
+                    node.getAttribute('for') === id) {
+                    return true;
+                }
+            }
+        }
+    },
+
     mayHaveAlt: function() {
         return !!TAG_HAS_ALT[this.tag];
     },
@@ -1044,7 +1057,9 @@ var getFrom = [
         for (; node; node = node.nextSibling) {
             switch (node.nodeType) {
                 case 1:
-                    if (!node.isEmbeddedControl()) {
+                    if (node.isInputInsideLabel()) {
+                        value = '';
+                    } else if (!node.isEmbeddedControl()) {
                         value = this.getAccessibleName(node, recurse);
                     } else if (node.valuetext) {
                         value = node.valuetext;
