@@ -1,4 +1,3 @@
-/* global describe, it, window, document */
 'use strict';
 
 if (typeof window !== 'undefined') {
