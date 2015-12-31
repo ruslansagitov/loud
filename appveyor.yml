@@ -28,11 +28,5 @@ before_test:
 
 test_script:
   - npm test
-  - npm run node-test-xunit
-
-after_test:
-  - ps: |
-      $wc = New-Object 'System.Net.WebClient'
-      $wc.UploadFile("https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\xunit-results.xml))
 
 build: off

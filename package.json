@@ -27,7 +27,6 @@
   "scripts": {
     "test": "npm run-script lint && npm run-script check-writing && npm run-script security && npm run-script node-test && npm run-script karma-test",
     "node-test": "mocha --reporter=dot",
-    "node-test-xunit": "mocha --reporter=xunit -O output=xunit-results.xml",
     "karma-test": "karma start --single-run",
     "lint": "eslint . && jscs .",
     "check-writing": "write-good README.md && write-good CONTRIBUTING.md --no-tooWordy",
