@@ -1,4 +1,4 @@
-# -*- coding: utf8 -*-
+# -*- coding: utf-8 -*-
 
 project = 'Loud'
 copyright = u'2014–2015, Ruslan Sagitov'
