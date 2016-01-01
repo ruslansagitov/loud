@@ -2,7 +2,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2015 Ruslan Sagitov
+ * Copyright (c) 2014-2016 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -955,7 +955,7 @@ module.exports = A11yNode;
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2015 Ruslan Sagitov
+ * Copyright (c) 2014-2016 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -1114,7 +1114,7 @@ module.exports = function(node, recurse) {
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2015 Ruslan Sagitov
+ * Copyright (c) 2014-2016 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -1246,7 +1246,7 @@ module.exports = {
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2015 Ruslan Sagitov
+ * Copyright (c) 2014-2016 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -1682,7 +1682,7 @@ exports.fixRole = fixRole;
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2015 Ruslan Sagitov
+ * Copyright (c) 2014-2016 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -1758,7 +1758,7 @@ exports.capitalize = function(str) {
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2015 Ruslan Sagitov
+ * Copyright (c) 2014-2016 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -1922,7 +1922,7 @@ module.exports = function(node) {
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2015 Ruslan Sagitov
+ * Copyright (c) 2014-2016 Ruslan Sagitov
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
