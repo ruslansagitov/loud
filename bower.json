@@ -5,6 +5,7 @@
   ],
   "description": "Web accessibility testing helper",
   "main": "./dist/loud.js",
+  "moduleType": "globals",
   "keywords": [
     "accessibility",
     "a11y",
