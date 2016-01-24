@@ -22,7 +22,7 @@ cache:
 
 before_install:
   - npm install --global npm@^3.5.3
-  - npm install --global eslint@^1.10.3 jscs@^2.7.0 write-good@^0.9.1 nsp@^2.2.0
+  - npm install --global eslint@^1.10.3 jscs@^2.8.0 write-good@^0.9.1 nsp@^2.2.0
   - npm install --global karma-cli@^0.1.2
 
 before_script:
@@ -35,7 +35,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 
 after_success:
-  - npm install codeclimate-test-reporter@^0.1.1 coveralls@^2.11.6
+  - npm install codeclimate-test-reporter@^0.3.0 coveralls@^2.11.6
   - ./node_modules/.bin/istanbul cover --report lcovonly ./node_modules/.bin/_mocha -- --reporter=dot
   - cat ./coverage/lcov.info | ./node_modules/.bin/codeclimate-test-reporter
   - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
