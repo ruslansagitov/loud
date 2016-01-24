@@ -26,6 +26,9 @@ describe('loud', function() {
         '<div role="  button  ">Content</div>': ['Content', 'button'],
         '<div role="">Content</div>': ['Content'],
 
+        /* spaces */
+        '<ul> <li> Content </li> </ul>': ['list', 'Content', 'listitem', 'list end'],
+
         '<div>Content</div>': ['Content']
     };
 
