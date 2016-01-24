@@ -9,6 +9,14 @@ if (typeof window !== 'undefined') {
 
         return elem;
     };
+
+    jsdom.text = function(data) {
+        return document.createTextNode(data);
+    };
+
+    jsdom.comment = function(data) {
+        return document.createComment(data);
+    };
 } else {
     var realJSDom = require('jsdom').jsdom;
     jsdom = function() {
@@ -23,6 +31,14 @@ if (typeof window !== 'undefined') {
         }
 
         return div;
+    };
+
+    jsdom.text = function(data) {
+        return realJSDom.apply(this, arguments);
+    };
+
+    jsdom.comment = function(data) {
+        return realJSDom.apply(this, ['<!-- ' + data + '-->']);
     };
 }
 

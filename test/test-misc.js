@@ -6,10 +6,6 @@ var assert = require('assert'),
 
 describe('loud', function() {
     var data = {
-        Text: ['Text'],
-        '<!-- comment -->': [],
-        '<?xml-stylesheet?>': [],
-
         /* abstract roles */
         '<div role="command">Content</div>': ['Content'],
         '<div role="composite">Content</div>': ['Content'],
@@ -55,5 +51,13 @@ describe('loud', function() {
 
     it('handles undefined', function() {
         assert(loud.say(), []);
+    });
+
+    it('handles text', function() {
+        assert(loud.say(jsdom.text('Text')), ['Text']);
+    });
+
+    it('handles comments', function() {
+        assert(loud.say(jsdom.comment('comment')), []);
     });
 });
