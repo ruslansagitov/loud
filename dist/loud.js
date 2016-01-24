@@ -689,9 +689,13 @@ extend(A11yNode.prototype, {
     },
 
     getRoleFromAttr: function() {
+        if (this.nodeType !== 1) {
+            return;
+        }
+
         var roles = this.getAttribute('role');
         if (!roles) {
-            return '';
+            return;
         }
 
         return roles.split(/\s+/).filter(function(role) {
@@ -1206,11 +1210,8 @@ Loud.prototype.traverse = function(node) {
 };
 
 Loud.prototype.handleNode = function(node) {
-    switch (node.nodeType) {
-        case 1: /* ELEMENT */
-            break;
-        case 3: /* TEXTNODE */
-            return node.nodeValue.trim();
+    if (node.nodeType === 3) {
+        return node.nodeValue.trim();
     }
 
     if (node.hidden) {
