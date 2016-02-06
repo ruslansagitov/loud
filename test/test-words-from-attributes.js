@@ -1,5 +1,11 @@
 describe('loud', function() {
     var data = {
+        '<div role="button" style="display:none">Content</div>': [],
+        '<div role="button" aria-hidden="true">Content</div>': [],
+        '<div role="button" style="visibility:hidden">Content</div>': [],
+        '<div role="button" hidden>Content</div>': [],
+        '<div style="display:none"><div role="button">Content</div></div>': [],
+
         '<div role="button" aria-pressed="unknown">Content</div>': ['Content', 'button'],
         '<div role="button" aria-pressed="true">Content</div>': ['Content', 'toggle button', 'pressed'],
         '<div role="button" aria-pressed="false">Content</div>': ['Content', 'toggle button', 'not pressed'],

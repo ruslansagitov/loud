@@ -69,6 +69,9 @@ describe('loud', function() {
         '<a href="/"></a>': ['/', 'link'],
         '<a></a>': ['link'],
 
+        /* hidden */
+        '<button aria-labelledby="label">Label 1</button><span id="label" style="display:none">Label 2</span>': ['Label 2', 'button'],
+
         /* cache */
         '<img id="label" alt="Label"><button aria-labelledby="label"></button>': ['Label', 'img', 'Label', 'button']
     };
