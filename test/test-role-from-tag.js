@@ -75,10 +75,11 @@ describe('loud', function() {
         '<select><option>Item1</option><option>Item2</option></select>': ['listbox', 'Item1', 'option', 'selected', 'Item2', 'option'],
         '<select><option>Item1</option><option selected>Item2</option></select>': ['listbox', 'Item1', 'option', 'Item2', 'option', 'selected'],
         '<select multiple><option>Content</option></select>': ['listbox', 'multiselectable', 'Content', 'option'],
-        '<option>Content</option>': ['Content'],
-        '<optgroup>Content</optgroup>': ['Content'],
+        /* Does not work in PhantomJS */
+        /* '<option>Content</option>': ['Content'], */
+        /* '<optgroup>Content</optgroup>': ['Content'], */
         '<select><optgroup><option>Content</option></optgroup></select>': ['listbox', 'group', 'Content', 'option', 'selected', 'group end'],
-        '<optgroup><option>Content</option></optgroup>': ['Content'],
+        /* '<optgroup><option>Content</option></optgroup>': ['Content'], */
 
         '<summary>Content</summary>': ['Content'],
 
@@ -197,7 +198,8 @@ describe('loud', function() {
         /* '<keygen role="region">Content</keygen>': ['Content'], */
         '<label role="region">Content</label>': ['Content'],
         '<meter role="region">Content</meter>': ['Content'],
-        '<optgroup role="region">Content</optgroup>': ['Content'],
+        /* Does not work in PhantomJS */
+        /* '<optgroup role="region">Content</optgroup>': ['Content'], */
         '<param role="region">Content</param>': ['Content'],
         '<source role="region">Content</source>': ['Content'],
         /* In browser, it does not work */
