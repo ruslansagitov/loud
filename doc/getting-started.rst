@@ -26,6 +26,11 @@ Test with Loud (using `Jasmine`_, for example):
        beforeEach(function() {
            this.button = document.createElement('button');
            this.button.innerHTML = 'Join';
+           document.body.appendChild(this.button);
+       });
+
+       beforeEach(function() {
+           document.body.removeChild(this.button);
        });
 
        it('works', function() {
@@ -35,12 +40,10 @@ Test with Loud (using `Jasmine`_, for example):
        });
    });
 
-.. warning::
+.. versionchanged:: 0.9.0
 
-   If you don’t add the elements to DOM, style data from the external
-   stylesheets won’t be properly handled. Adding to DOM is important if
-   you use :code:`display:none` or :code:`visibility:hidden` in your
-   stylesheets.
+   Adding elements to DOM is mandatory. Otherwise, an element visibility
+   will not be properly detected.
 
 .. _repository: https://github.com/ruslansagitov/loud
 .. _npm: https://github.com/npm/npm

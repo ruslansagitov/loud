@@ -65,6 +65,11 @@ Controls
        beforeEach(function() {
            this.checkbox = document.createElement('input');
            this.checkbox.type = 'checkbox';
+           document.body.appendChild(this.checkbox);
+       });
+
+       afterEach(function() {
+           document.body.removeChild(this.checkbox);
        });
 
        it('not checked', function() {
