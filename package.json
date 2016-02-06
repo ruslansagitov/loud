@@ -25,29 +25,28 @@
     "lib": "./lib"
   },
   "scripts": {
-    "test": "npm run-script lint && npm run-script check-writing && npm run-script security && npm run-script node-test && npm run-script karma-test",
-    "node-test": "mocha --reporter=dot",
+    "test": "npm run-script lint && npm run-script check-writing && npm run-script security && npm run-script karma-test",
     "karma-test": "karma start --single-run",
     "lint": "eslint . && jscs .",
     "check-writing": "write-good README.md && write-good CONTRIBUTING.md --no-tooWordy",
     "security": "nsp check",
-    "coverage": "istanbul cover _mocha -- --reporter=dot",
+    "coverage": "npm run-script build-coverage && KARMA_COVERAGE=html npm run karma-test",
     "doc": "sphinx-build -b html doc/ build/doc/",
     "jsdoc": "jsdoc -d jsdoc lib/loud.js README.md",
-    "build": "npm run-script browserify && npm run-script browserify-tests",
-    "browserify": "browserify --standalone loud -o ./dist/loud.js ./lib/loud.js",
-    "browserify-tests": "browserify -x jsdom -o ./build/test.js ./test/test.js"
+    "build": "browserify --standalone loud -o ./dist/loud.js ./lib/loud.js",
+    "build-coverage": "browserify -d -g browserify-istanbul --standalone loud -o ./dist/loud.js ./lib/loud.js"
   },
   "dependencies": {},
   "devDependencies": {
     "browserify": "^13.0.0",
+    "browserify-istanbul": "^0.2.1",
     "es5-shim": "^4.4.1",
     "html5shiv": "^3.7.3",
-    "istanbul": "^0.4.2",
-    "jsdom": "^7.2.2",
+    "jasmine-core": "^2.4.1",
     "karma": "^0.13.19",
-    "karma-mocha": "^0.2.1",
-    "mocha": "^2.3.4"
+    "karma-coverage": "^0.5.3",
+    "karma-jasmine": "^0.3.7",
+    "karma-sourcemap-loader": "^0.3.7"
   },
   "engines": {
     "node": ">= 4.0.0"

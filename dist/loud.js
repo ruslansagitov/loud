@@ -785,7 +785,7 @@ extend(A11yNode.prototype, {
             role, lim;
         for (; node; node = node.nextSibling) {
             if (node.nodeType !== 1) {
-                return false;
+                continue;
             }
 
             if (!node.part) {
@@ -920,8 +920,7 @@ extend(A11yNode.prototype, {
                 this.hasAttribute('disabled') ||
 
                 fieldset &&
-                (fieldset.node.disabled ||
-                 fieldset.hasAttribute('disabled')) &&
+                fieldset.node.disabled &&
                 !this.hasParent('legend'));
     },
 
@@ -1157,7 +1156,7 @@ function Loud() {
 }
 
 Loud.prototype.say = function(node) {
-    if (!node || !node.length) {
+    if (!node || !node.length || node.nodeType === 3) {
         node = [node];
     }
 

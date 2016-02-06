@@ -1,21 +1,22 @@
 'use strict';
 
 module.exports = function(config) {
-    var browsers;
+    var browsers,
+        reporters = ['dots'];
 
     if (process.env.KARMA_BROWSERS) {
         browsers = process.env.KARMA_BROWSERS.split(',');
     }
 
     config.set({
-        frameworks: ['mocha'],
+        frameworks: ['jasmine'],
         browsers: browsers,
         files: [
             require.resolve('es5-shim'),
             require.resolve('html5shiv/dist/html5shiv'),
-            'build/test.js'
-        ],
-        reporters: ['dots']
+            'dist/loud.js',
+            'test/**/*.js'
+        ]
     });
 
     if (process.env.CI && process.env.SAUCE_ACCESS_KEY) {
@@ -33,9 +34,9 @@ module.exports = function(config) {
             }
         };
 
+        reporters.push('saucelabs');
         config.set({
             browsers: browsers.concat(Object.keys(customLaunchers)),
-            reporters: ['dots', 'saucelabs'],
             captureTimeout: 120000,
             sauceLabs: {
                 testName: 'Loud'
@@ -43,4 +44,22 @@ module.exports = function(config) {
             customLaunchers: customLaunchers
         });
     }
+
+    if (process.env.KARMA_COVERAGE) {
+        reporters.push('coverage');
+        config.set({
+            preprocessors: {
+                'dist/loud.js': ['sourcemap'],
+                'lib/*.js': ['coverage']
+            },
+            coverageReporter: {
+                type: process.env.KARMA_COVERAGE,
+                dir: 'coverage/'
+            }
+        });
+    }
+
+    config.set({
+        reporters: reporters
+    });
 };

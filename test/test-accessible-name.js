@@ -1,9 +1,3 @@
-'use strict';
-
-var assert = require('assert'),
-    loud = require('../lib/loud'),
-    jsdom = require('./jsdom');
-
 describe('loud', function() {
     var data = {
         /* aria-labelledby */
@@ -29,7 +23,7 @@ describe('loud', function() {
 
         '<button aria-labelledby="label"></button><menu><menuitem id="label" title="Label"></menu>': ['Label', 'button', 'menu', 'Label', 'menuitem'],
 
-        '<button aria-labelledby="label"></button><input id="label" type="range" value="1">': ['button', 'slider', '1'],
+        '<button aria-labelledby="label"></button><input id="label" type="range" value="1">': ['button', 'slider', 1],
 
         /* presentation */
         '<h1 role="presentation">Label</h1>': ['Label'],
@@ -66,7 +60,7 @@ describe('loud', function() {
 
         /* contents */
         '<ul><li>One</li></ul>': ['list', 'One', 'listitem', 'list end'],
-        '<ul><li><input type="range" value="1"></li></ul>': ['list', 1, 'listitem', 'list end'],
+        '<ul><li><input type="range" value="1"></li></ul>': ['list', '1', 'listitem', 'list end'],
         '<ul><li><input type="range" aria-valuetext="Text"></li></ul>': ['list', 'Text', 'listitem', 'list end'],
         '<ul><li><input type="range" value="1" aria-valuetext="Text"></li></ul>': ['list', 'Text', 'listitem', 'list end'],
 
@@ -79,9 +73,17 @@ describe('loud', function() {
         '<img id="label" alt="Label"><button aria-labelledby="label"></button>': ['Label', 'img', 'Label', 'button']
     };
 
+    afterEach(function() {
+        this.elem.remove();
+        this.elem = null;
+    });
+
     Object.keys(data).forEach(function(key) {
         it('handles ' + key, function() {
-            assert.deepEqual(loud.say(jsdom(key)), data[key]);
+            this.elem = document.createElement('div');
+            this.elem.innerHTML = key;
+            document.body.appendChild(this.elem);
+            expect(loud.say(this.elem)).toEqual(data[key]);
         });
     });
 });

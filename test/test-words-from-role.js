@@ -1,9 +1,3 @@
-'use strict';
-
-var assert = require('assert'),
-    loud = require('../lib/loud'),
-    jsdom = require('./jsdom');
-
 describe('loud', function() {
     var data = {
         '<div role="alert">Content</div>': ['alert', 'Content', 'alert end'],
@@ -97,9 +91,17 @@ describe('loud', function() {
         '<div role="list"><div role="group"><div role="button">Content</div></div></div></div>': ['group', 'Content', 'button', 'group end']
     };
 
+    afterEach(function() {
+        this.elem.remove();
+        this.elem = null;
+    });
+
     Object.keys(data).forEach(function(key) {
         it('handles ' + key, function() {
-            assert.deepEqual(loud.say(jsdom(key)), data[key]);
+            this.elem = document.createElement('div');
+            this.elem.innerHTML = key;
+            document.body.appendChild(this.elem);
+            expect(loud.say(this.elem)).toEqual(data[key]);
         });
     });
 });

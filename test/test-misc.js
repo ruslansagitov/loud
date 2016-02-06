@@ -1,9 +1,3 @@
-'use strict';
-
-var assert = require('assert'),
-    loud = require('../lib/loud'),
-    jsdom = require('./jsdom');
-
 describe('loud', function() {
     var data = {
         /* abstract roles */
@@ -32,35 +26,62 @@ describe('loud', function() {
         '<div>Content</div>': ['Content']
     };
 
-    Object.keys(data).forEach(function(key) {
-        it('handles ' + key, function() {
-            assert.deepEqual(loud.say(jsdom(key)), data[key]);
+    describe('handles', function() {
+        afterEach(function() {
+            this.elem.remove();
+            this.elem = null;
+        });
+
+        Object.keys(data).forEach(function(key) {
+            it(key, function() {
+                this.elem = document.createElement('div');
+                this.elem.innerHTML = key;
+                document.body.appendChild(this.elem);
+                expect(loud.say(this.elem)).toEqual(data[key]);
+            });
+        });
+
+        describe('arrays', function() {
+            afterEach(function() {
+                this.elem2.remove();
+                this.elem2 = null;
+            });
+
+            it('as usual', function() {
+                this.elem = document.createElement('button');
+                this.elem.innerHTML = 'Join';
+                document.body.appendChild(this.elem);
+
+                this.elem2 = document.createElement('input');
+                this.elem2.setAttribute('type', 'checkbox');
+                this.elem2.setAttribute('title', 'Agree');
+                document.body.appendChild(this.elem2);
+
+                expect(loud.say([this.elem, this.elem2])).toEqual([
+                    'Join', 'button',
+                    'Agree', 'checkbox', 'not checked'
+                ]);
+            });
+        });
+
+        it('handles text', function() {
+            this.elem = document.createTextNode('Text');
+            document.body.appendChild(this.elem);
+            expect(loud.say(this.elem)).toEqual(['Text']);
+        });
+
+        it('handles comments', function() {
+            this.elem = document.createComment('comment');
+            document.body.appendChild(this.elem);
+            expect(loud.say(this.elem)).toEqual([]);
         });
     });
 
     it('provides VERSION as String', function() {
-        assert(typeof loud.VERSION === 'string');
-    });
-
-    it('handles arrays', function() {
-        assert(loud.say([
-            jsdom('<button>Join</button>'),
-            jsdom('<input type="checkbox" title="Agree">')
-        ]), [
-            'Join', 'button',
-            'Agree', 'checkbox', 'not checked'
-        ]);
+        expect(typeof loud.VERSION).toEqual('string');
     });
 
     it('handles undefined', function() {
-        assert(loud.say(), []);
-    });
-
-    it('handles text', function() {
-        assert(loud.say(jsdom.text('Text')), ['Text']);
-    });
-
-    it('handles comments', function() {
-        assert(loud.say(jsdom.comment('comment')), []);
+        expect(loud.say()).toEqual([]);
     });
 });

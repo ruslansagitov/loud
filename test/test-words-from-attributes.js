@@ -1,9 +1,3 @@
-'use strict';
-
-var assert = require('assert'),
-    loud = require('../lib/loud'),
-    jsdom = require('./jsdom');
-
 describe('loud', function() {
     var data = {
         '<div role="button" aria-pressed="unknown">Content</div>': ['Content', 'button'],
@@ -18,7 +12,7 @@ describe('loud', function() {
         '<div role="button" aria-expanded="false" aria-pressed="false">Content</div>': ['Content', 'button menu', 'collapsed', 'not pressed'],
 
         '<div role="list" aria-setsize="1"><div role="listitem">Content</div></div>': ['list', 'Content', 'listitem', 'list end'],
-        '<div role="list"><div role="listitem" aria-posinset="1" aria-setsize="1">Content</div></div>': ['list', 'Content', 'listitem', 1, 'of', 1, 'list end'],
+        '<div role="list"><div role="listitem" aria-posinset="1" aria-setsize="1">Content</div></div>': ['list', 'Content', 'listitem', '1', 'of', '1', 'list end'],
         '<div role="list"><div role="listitem" aria-posinset="1">Content</div></div>': ['list', 'Content', 'listitem', 'list end'],
         '<div role="list"><div role="listitem" aria-setsize="1">Content</div></div>': ['list', 'Content', 'listitem', 'list end'],
 
@@ -185,9 +179,17 @@ describe('loud', function() {
         '<div role="button" aria-describedby="">Content</div><div id="id">Text</div>': ['Content', 'button', 'Text']
     };
 
+    afterEach(function() {
+        this.elem.remove();
+        this.elem = null;
+    });
+
     Object.keys(data).forEach(function(key) {
         it('handles ' + key, function() {
-            assert.deepEqual(loud.say(jsdom(key)), data[key]);
+            this.elem = document.createElement('div');
+            this.elem.innerHTML = key;
+            document.body.appendChild(this.elem);
+            expect(loud.say(this.elem)).toEqual(data[key]);
         });
     });
 });

@@ -1,15 +1,6 @@
-'use strict';
-
-if (typeof window !== 'undefined') {
-    var html5 = window.html5;
-    if (html5) {
-        html5.addElements(['menu', 'menuitem', document]);
-    }
+if (window.html5) {
+    window.html5.addElements(['menu', 'menuitem', document]);
 }
-
-var assert = require('assert'),
-    loud = require('../lib/loud'),
-    jsdom = require('./jsdom');
 
 describe('loud', function() {
     var data = {
@@ -26,12 +17,12 @@ describe('loud', function() {
         '<dialog>Content</dialog>': ['dialog', 'Content', 'dialog end'],
         '<fieldset>Content</fieldset>': ['group', 'Content', 'group end'],
         '<figcaption>Content</figcaption>': ['Content'],
-        '<h1>Content</h1>': ['Content', 'heading', 'level', '1'],
-        '<h2>Content</h2>': ['Content', 'heading', 'level', '2'],
-        '<h3>Content</h3>': ['Content', 'heading', 'level', '3'],
-        '<h4>Content</h4>': ['Content', 'heading', 'level', '4'],
-        '<h5>Content</h5>': ['Content', 'heading', 'level', '5'],
-        '<h6>Content</h6>': ['Content', 'heading', 'level', '6'],
+        '<h1>Content</h1>': ['Content', 'heading', 'level', 1],
+        '<h2>Content</h2>': ['Content', 'heading', 'level', 2],
+        '<h3>Content</h3>': ['Content', 'heading', 'level', 3],
+        '<h4>Content</h4>': ['Content', 'heading', 'level', 4],
+        '<h5>Content</h5>': ['Content', 'heading', 'level', 5],
+        '<h6>Content</h6>': ['Content', 'heading', 'level', 6],
         '<hr>': ['separator'],
         '<img alt="Alt">': ['Alt', 'img'],
         '<img alt="">': [],
@@ -260,18 +251,18 @@ describe('loud', function() {
         /* '<embed role="application">Content</embed>': ['application', 'Content', 'application'], */
         /* '<embed role="document">Content</embed>': ['document', 'Content', 'document end'], */
         '<embed role="img">Content</embed>': ['img', 'Content'],
-        '<h1 role="region">Content</h1>': ['Content', 'heading', 'level', '1'],
-        '<h2 role="region">Content</h2>': ['Content', 'heading', 'level', '2'],
-        '<h3 role="region">Content</h3>': ['Content', 'heading', 'level', '3'],
-        '<h4 role="region">Content</h4>': ['Content', 'heading', 'level', '4'],
-        '<h5 role="region">Content</h5>': ['Content', 'heading', 'level', '5'],
-        '<h6 role="region">Content</h6>': ['Content', 'heading', 'level', '6'],
-        '<h1 role="heading">Content</h1>': ['Content', 'heading', 'level', '1'],
-        '<h2 role="heading">Content</h2>': ['Content', 'heading', 'level', '2'],
-        '<h3 role="heading">Content</h3>': ['Content', 'heading', 'level', '3'],
-        '<h4 role="heading">Content</h4>': ['Content', 'heading', 'level', '4'],
-        '<h5 role="heading">Content</h5>': ['Content', 'heading', 'level', '5'],
-        '<h6 role="heading">Content</h6>': ['Content', 'heading', 'level', '6'],
+        '<h1 role="region">Content</h1>': ['Content', 'heading', 'level', 1],
+        '<h2 role="region">Content</h2>': ['Content', 'heading', 'level', 2],
+        '<h3 role="region">Content</h3>': ['Content', 'heading', 'level', 3],
+        '<h4 role="region">Content</h4>': ['Content', 'heading', 'level', 4],
+        '<h5 role="region">Content</h5>': ['Content', 'heading', 'level', 5],
+        '<h6 role="region">Content</h6>': ['Content', 'heading', 'level', 6],
+        '<h1 role="heading">Content</h1>': ['Content', 'heading', 'level', 1],
+        '<h2 role="heading">Content</h2>': ['Content', 'heading', 'level', 2],
+        '<h3 role="heading">Content</h3>': ['Content', 'heading', 'level', 3],
+        '<h4 role="heading">Content</h4>': ['Content', 'heading', 'level', 4],
+        '<h5 role="heading">Content</h5>': ['Content', 'heading', 'level', 5],
+        '<h6 role="heading">Content</h6>': ['Content', 'heading', 'level', 6],
         '<div role="tablist"><h1 role="tab">Content</h1></div>': ['tablist', 'Content', 'tab'],
         '<div role="tablist"><h2 role="tab">Content</h2></div>': ['tablist', 'Content', 'tab'],
         '<div role="tablist"><h3 role="tab">Content</h3></div>': ['tablist', 'Content', 'tab'],
@@ -349,17 +340,25 @@ describe('loud', function() {
         */
     };
 
+    afterEach(function() {
+        this.elem.remove();
+        this.elem = null;
+    });
+
     Object.keys(data).forEach(function(key) {
         it('handles ' + key, function() {
-            assert.deepEqual(loud.say(jsdom(key)), data[key]);
+            this.elem = document.createElement('div');
+            this.elem.innerHTML = key;
+            document.body.appendChild(this.elem);
+            expect(loud.say(this.elem)).toEqual(data[key]);
         });
     });
 
     it('handles indeterminate', function() {
-        var elem = jsdom('<input type="checkbox">'),
-            value = ['checkbox', 'mixed'];
-
-        elem.firstChild.indeterminate = true;
-        assert.deepEqual(loud.say(elem), value);
+        this.elem = document.createElement('input');
+        this.elem.setAttribute('type', 'checkbox');
+        this.elem.indeterminate = true;
+        document.body.appendChild(this.elem);
+        expect(loud.say(this.elem)).toEqual(['checkbox', 'mixed']);
     });
 });
