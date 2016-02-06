@@ -341,7 +341,7 @@ describe('loud', function() {
     };
 
     afterEach(function() {
-        this.elem.remove();
+        document.body.removeChild(this.elem);
         this.elem = null;
     });
 

@@ -28,7 +28,7 @@ describe('loud', function() {
 
     describe('handles', function() {
         afterEach(function() {
-            this.elem.remove();
+            document.body.removeChild(this.elem);
             this.elem = null;
         });
 
@@ -43,7 +43,7 @@ describe('loud', function() {
 
         describe('arrays', function() {
             afterEach(function() {
-                this.elem2.remove();
+                document.body.removeChild(this.elem2);
                 this.elem2 = null;
             });
 
