@@ -91,7 +91,7 @@ describe('loud', function() {
         '<progress min="0" value="1" max="4">': ['progressbar', 25, 'percent'],
 
         '<dd>Content</dd>': ['Content'],
-        '<dl>Content</dd>': ['Content'],
+        '<dl>Content</dl>': ['Content'],
         '<dt>Content</dt>': ['Content'],
         '<dl><dt>Term</dt><dd>Content</dd></dl>': ['list', 'Term', 'listitem', 'Content', 'listitem', 'list end'],
         '<dl><dt>Term</dt></dl>': ['list', 'Term', 'listitem', 'list end'],
