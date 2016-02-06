@@ -70,6 +70,12 @@ describe('loud', function() {
             expect(loud.say(this.elem)).toEqual(['Text']);
         });
 
+        it('handles empty text', function() {
+            this.elem = document.createTextNode('');
+            document.body.appendChild(this.elem);
+            expect(loud.say(this.elem)).toEqual([]);
+        });
+
         it('handles comments', function() {
             this.elem = document.createComment('comment');
             document.body.appendChild(this.elem);
