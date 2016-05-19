@@ -33,6 +33,7 @@
     "no-extra-bind": "error",
     "no-extend-native": "error",
     "no-floating-decimal": "error",
+    "no-implicit-coercion": "error",
     "no-implied-eval": "error",
     "no-labels": "error",
     "no-lone-blocks": "error",
