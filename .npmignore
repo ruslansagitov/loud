@@ -10,6 +10,5 @@ karma.conf.js
 .editorconfig
 .eslintrc
 .eslintignore
-.jshintrc
 .npmignore
 .travis.yml
