@@ -1,3 +1,6 @@
+/* globals loud */
+'use strict';
+
 describe('loud', function() {
     var data = {
         /* aria-labelledby */

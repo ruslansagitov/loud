@@ -1,3 +1,6 @@
+/* globals loud */
+'use strict';
+
 describe('loud', function() {
     var data = {
         '<div role="alert">Content</div>': ['alert', 'Content', 'alert end'],

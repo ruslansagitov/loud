@@ -1,3 +1,6 @@
+/* globals loud */
+'use strict';
+
 if (window.html5) {
     window.html5.addElements(['menu', 'menuitem', document]);
 }

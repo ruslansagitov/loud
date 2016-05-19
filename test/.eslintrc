@@ -3,6 +3,6 @@
     "browser": true
   },
   "rules": {
-    "strict": 0
+    "max-len": "off"
   }
 }
