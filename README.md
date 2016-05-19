@@ -70,10 +70,10 @@ describe('loud', function() {
 
 ## Going Further
 
-Read the full documentation on [loud.readthedocs.org][].
+Read the full documentation on [loud.readthedocs.io][].
 
  [npm]: <https://github.com/npm/npm> "npm — A package manager for JavaScript"
  [browserify]: <https://github.com/substack/node-browserify> "browserify — Browser-side require() the Node.js way"
  [bower]: <https://github.com/bower/bower> "Bower — A package manager for the web"
  [Jasmine]: <http://jasmine.github.io/> "Jasmine — Behavior-Driven JavaScript"
- [loud.readthedocs.org]: <https://loud.readthedocs.org> "Loud Documentation"
+ [loud.readthedocs.io]: <https://loud.readthedocs.io> "Loud Documentation"
