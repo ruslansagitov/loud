@@ -85,6 +85,7 @@
     "max-len": ["error", {"code": 72, "ignoreComments": true}],
     "new-cap": "error",
     "new-parens": "error",
+    "newline-per-chained-call": "error",
     "no-array-constructor": "error",
     "no-multiple-empty-lines": "error",
     "no-new-object": "error",
