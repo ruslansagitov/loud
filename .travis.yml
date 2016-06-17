@@ -21,13 +21,13 @@ cache:
     - node_modules
 
 before_install:
-  - npm install --global npm@^3.9.0
-  - npm install --global eslint@^2.10.2 write-good@^0.9.1
+  - npm install --global npm@^3.9.6
+  - npm install --global eslint@^2.12.0 write-good@^0.9.1
   - npm install --global karma-cli@^1.0.0
 
 before_script:
   - npm install karma-firefox-launcher@^1.0.0 karma-phantomjs-launcher@^1.0.0 phantomjs-prebuilt@^2.1.7
-  - npm install codeclimate-test-reporter@^0.3.1 coveralls@^2.11.9
+  - npm install codeclimate-test-reporter@^0.3.3 coveralls@^2.11.9
   - test -n "$SAUCE_ACCESS_KEY" && npm install karma-sauce-launcher@^1.0.0
   - export KARMA_BROWSERS=Firefox,PhantomJS
   - mkdir build

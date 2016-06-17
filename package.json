@@ -39,7 +39,7 @@
   "devDependencies": {
     "browserify": "^13.0.1",
     "browserify-istanbul": "^2.0.0",
-    "es5-shim": "^4.5.8",
+    "es5-shim": "^4.5.9",
     "html5shiv": "^3.7.3",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.22",
