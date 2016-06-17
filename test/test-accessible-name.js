@@ -26,7 +26,7 @@ describe('loud', function() {
 
         '<button aria-labelledby="label"></button><menu><menuitem id="label" title="Label"></menu>': ['Label', 'button', 'menu', 'Label', 'menuitem'],
 
-        '<button aria-labelledby="label"></button><input id="label" type="range" value="1">': ['button', 'slider', 1],
+        '<button aria-labelledby="label"></button><input id="label" type="range" value="1">': ['button', 'slider', '1'],
 
         /* presentation */
         '<h1 role="presentation">Label</h1>': ['Label'],

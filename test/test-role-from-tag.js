@@ -86,15 +86,15 @@ describe('loud', function() {
 
         '<summary>Content</summary>': ['Content'],
 
-        '<input type="range" value="10">': ['slider', 10],
-        '<input type="range" min="0" value="1" max="4">': ['slider', 1],
+        '<input type="range" value="10">': ['slider', '10'],
+        '<input type="range" min="0" value="1" max="4">': ['slider', '1'],
 
         '<input type="number">': ['spinbutton'],
-        '<input type="number" value="10">': ['spinbutton', 10],
-        '<input type="number" min="0" value="1" max="4">': ['spinbutton', 1],
+        '<input type="number" value="10">': ['spinbutton', '10'],
+        '<input type="number" min="0" value="1" max="4">': ['spinbutton', '1'],
 
-        '<progress value="1">': ['progressbar', 1],
-        '<progress min="0" value="1" max="4">': ['progressbar', 25, 'percent'],
+        '<progress value="1">': ['progressbar', '1'],
+        '<progress min="0" value="1" max="4">': ['progressbar', '25', 'percent'],
 
         '<dd>Content</dd>': ['Content'],
         '<dl>Content</dl>': ['Content'],
@@ -149,7 +149,7 @@ describe('loud', function() {
 
         /* Has readonly */
         '<input readonly>': ['textbox', 'readonly'],
-        '<input type="range" value="50" readonly>': ['slider', 50],
+        '<input type="range" value="50" readonly>': ['slider', '50'],
 
         /* Cannot be presentation */
         '<aside role="presentation">Content</aside>': ['Content'],
@@ -182,7 +182,7 @@ describe('loud', function() {
         '<input role="presentation">': ['textbox'],
         '<select><option role="presentation">Content</option></select>': ['listbox', 'Content', 'option', 'selected'],
         '<select role="presentation"><option>Content</option></select>': ['listbox', 'Content', 'option', 'selected'],
-        '<progress value="1" role="presentation">': ['progressbar', 1],
+        '<progress value="1" role="presentation">': ['progressbar', '1'],
         '<textarea role="presentation">Content</textarea>': ['multiline', 'textbox', 'Content'],
         '<video role="presentation">Content</video>': ['Content'],
 
