@@ -27,8 +27,8 @@ before_install:
 
 before_script:
   - npm install karma-firefox-launcher@^1.0.0 karma-phantomjs-launcher@^1.0.0 phantomjs-prebuilt@^2.1.7
-  - npm install codeclimate-test-reporter@^0.3.3 coveralls@^2.11.9
   - test -n "$SAUCE_ACCESS_KEY" && npm install karma-sauce-launcher@^1.0.0
+  - npm install codeclimate-test-reporter@^0.3.3 coveralls@^2.11.9
   - export KARMA_BROWSERS=Firefox,PhantomJS
   - mkdir build
   - npm run-script build
