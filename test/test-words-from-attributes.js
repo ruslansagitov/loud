@@ -162,6 +162,18 @@ describe('loud', function() {
         '<div role="textbox" aria-autocomplete="unknown">Content</div>': ['textbox', 'Content'],
         '<div role="textbox" aria-autocomplete="">Content</div>': ['textbox', 'Content'],
 
+        '<div role="region" aria-dropeffect="copy">Content</div>': ['region', 'dropeffect', 'copy', 'Content', 'region end'],
+        '<div role="region" aria-dropeffect="move">Content</div>': ['region', 'dropeffect', 'move', 'Content', 'region end'],
+        '<div role="region" aria-dropeffect="link">Content</div>': ['region', 'dropeffect', 'link', 'Content', 'region end'],
+        '<div role="region" aria-dropeffect="execute">Content</div>': ['region', 'dropeffect', 'execute', 'Content', 'region end'],
+        '<div role="region" aria-dropeffect="popup">Content</div>': ['region', 'dropeffect', 'popup', 'Content', 'region end'],
+        '<div role="region" aria-dropeffect="none">Content</div>': ['region', 'Content', 'region end'],
+        '<div role="region" aria-dropeffect="copy move">Content</div>': ['region', 'dropeffect', 'copy move', 'Content', 'region end'],
+        '<div role="region" aria-dropeffect="none copy">Content</div>': ['region', 'dropeffect', 'copy', 'Content', 'region end'],
+        '<div role="region" aria-dropeffect="unknown copy">Content</div>': ['region', 'dropeffect', 'copy', 'Content', 'region end'],
+        '<div role="region" aria-dropeffect="unknown">Content</div>': ['region', 'Content', 'region end'],
+        '<div role="region" aria-dropeffect="">Content</div>': ['region', 'Content', 'region end'],
+
         '<div role="textbox" aria-activedescendant="text">Content</div><div id="text">Text</div>': ['textbox', 'Text', 'Content', 'Text'],
         '<div role="textbox" aria-activedescendant="unknown">Content</div><div id="text">Text</div>': ['textbox', 'Content', 'Text'],
         '<div role="textbox" aria-activedescendant="">Content</div><div id="text">Text</div>': ['textbox', 'Content', 'Text'],
