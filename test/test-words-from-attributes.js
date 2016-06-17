@@ -174,6 +174,15 @@ describe('loud', function() {
         '<div role="region" aria-dropeffect="unknown">Content</div>': ['region', 'Content', 'region end'],
         '<div role="region" aria-dropeffect="">Content</div>': ['region', 'Content', 'region end'],
 
+        '<div role="region" aria-live="polite">Content</div>': ['region', 'live', 'polite', 'Content', 'region end'],
+        '<div role="region" aria-live="assertive">Content</div>': ['region', 'live', 'assertive', 'Content', 'region end'],
+        '<div role="region" aria-live="off">Content</div>': ['region', 'Content', 'region end'],
+        '<div role="region" aria-live="unknown">Content</div>': ['region', 'Content', 'region end'],
+        '<div role="region" aria-live="">Content</div>': ['region', 'Content', 'region end'],
+        '<div role="alert" aria-live="polite">Content</div>': ['alert', 'live', 'polite', 'Content', 'alert end'],
+        '<div role="log" aria-live="assertive">Content</div>': ['log', 'live', 'assertive', 'Content', 'log end'],
+        '<div role="status" aria-live="assertive">Content</div>': ['status', 'live', 'assertive', 'Content', 'status end'],
+
         '<div role="textbox" aria-activedescendant="text">Content</div><div id="text">Text</div>': ['textbox', 'Text', 'Content', 'Text'],
         '<div role="textbox" aria-activedescendant="unknown">Content</div><div id="text">Text</div>': ['textbox', 'Content', 'Text'],
         '<div role="textbox" aria-activedescendant="">Content</div><div id="text">Text</div>': ['textbox', 'Content', 'Text'],

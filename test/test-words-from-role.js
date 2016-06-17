@@ -3,7 +3,7 @@
 
 describe('loud', function() {
     var data = {
-        '<div role="alert">Content</div>': ['alert', 'Content', 'alert end'],
+        '<div role="alert">Content</div>': ['alert', 'live', 'assertive', 'Content', 'alert end'],
         '<div role="alertdialog">Content</div>': ['alertdialog', 'Content', 'alertdialog end'],
         '<div role="application">Content</div>': ['application', 'Content', 'application end'],
         '<div role="button">Content</div>': ['Content', 'button'],
@@ -24,7 +24,7 @@ describe('loud', function() {
         '<div role="list"><div role="listitem">Content</div></div>': ['list', 'Content', 'listitem', 'list end'],
         '<div role="listbox">Content</div>': ['Content'],
         '<div role="listitem">Content</div>': ['Content'],
-        '<div role="log">Content</div>': ['log', 'Content', 'log end'],
+        '<div role="log">Content</div>': ['log', 'live', 'polite', 'Content', 'log end'],
         '<div role="marquee">Content</div>': ['marquee', 'Content', 'marquee end'],
         '<div role="math">Content</div>': ['math'],
         '<div role="menu">Content</div>': ['Content'],
@@ -46,7 +46,7 @@ describe('loud', function() {
         '<div role="separator">Content</div>': ['separator'],
         '<div role="slider">Content</div>': ['slider'],
         '<div role="spinbutton">Content</div>': ['spinbutton'],
-        '<div role="status">Content</div>': ['status', 'Content', 'status end'],
+        '<div role="status">Content</div>': ['status', 'live', 'polite', 'Content', 'status end'],
         '<div role="tab">Content</div>': ['Content'],
         '<div role="tablist">Content</div>': ['Content'],
         '<div role="tablist"><div role="tab">Content</div></div>': ['tablist', 'Content', 'tab'],
