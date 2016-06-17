@@ -45,3 +45,5 @@ Table of Contents
    getting-started
    api
    examples
+   predicting-output
+   developing
