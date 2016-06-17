@@ -25,11 +25,10 @@
     "lib": "./lib"
   },
   "scripts": {
-    "test": "npm run-script lint && npm run-script check-writing && npm run-script security && npm run-script karma-test",
+    "test": "npm run-script lint && npm run-script check-writing && npm run-script karma-test",
     "karma-test": "karma start --single-run",
     "lint": "eslint .",
     "check-writing": "write-good README.md && write-good CONTRIBUTING.md --no-tooWordy",
-    "security": "nsp check",
     "coverage": "npm run-script build-coverage && KARMA_COVERAGE=html npm run karma-test",
     "doc": "sphinx-build -b html doc/ build/doc/",
     "jsdoc": "jsdoc -d jsdoc lib/loud.js README.md",

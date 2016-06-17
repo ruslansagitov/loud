@@ -17,7 +17,7 @@ install:
   - node --version
   - npm --version
   - npm install --global npm@^3.9.0
-  - npm install --global eslint@^2.10.2 write-good@^0.9.1 nsp@^2.3.3
+  - npm install --global eslint@^2.10.2 write-good@^0.9.1
   - npm install --global karma-cli@^1.0.0
   - npm install
   - npm install karma-ie-launcher@^1.0.0
