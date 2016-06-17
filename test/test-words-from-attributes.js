@@ -179,9 +179,9 @@ describe('loud', function() {
         '<div role="region" aria-live="off">Content</div>': ['region', 'Content', 'region end'],
         '<div role="region" aria-live="unknown">Content</div>': ['region', 'Content', 'region end'],
         '<div role="region" aria-live="">Content</div>': ['region', 'Content', 'region end'],
-        '<div role="alert" aria-live="polite">Content</div>': ['alert', 'live', 'polite', 'Content', 'alert end'],
+        '<div role="alert" aria-live="polite">Content</div>': ['alert', 'live', 'polite', 'atomic', 'Content', 'alert end'],
         '<div role="log" aria-live="assertive">Content</div>': ['log', 'live', 'assertive', 'Content', 'log end'],
-        '<div role="status" aria-live="assertive">Content</div>': ['status', 'live', 'assertive', 'Content', 'status end'],
+        '<div role="status" aria-live="assertive">Content</div>': ['status', 'live', 'assertive', 'atomic', 'Content', 'status end'],
 
         '<div role="region" aria-relevant="additions">Content</div>': ['region', 'relevant', 'additions', 'Content', 'region end'],
         '<div role="region" aria-relevant="removals">Content</div>': ['region', 'relevant', 'removals', 'Content', 'region end'],
@@ -191,6 +191,11 @@ describe('loud', function() {
         '<div role="region" aria-relevant=" unknown  text ">Content</div>': ['region', 'relevant', 'text', 'Content', 'region end'],
         '<div role="region" aria-relevant="unknown">Content</div>': ['region', 'Content', 'region end'],
         '<div role="region" aria-relevant="">Content</div>': ['region', 'Content', 'region end'],
+
+        '<div role="region" aria-atomic="true">Content</div>': ['region', 'atomic', 'Content', 'region end'],
+        '<div role="region" aria-atomic="false">Content</div>': ['region', 'Content', 'region end'],
+        '<div role="region" aria-atomic="unknown">Content</div>': ['region', 'Content', 'region end'],
+        '<div role="region" aria-atomic="">Content</div>': ['region', 'Content', 'region end'],
 
         '<div role="textbox" aria-activedescendant="text">Content</div><div id="text">Text</div>': ['textbox', 'Text', 'Content', 'Text'],
         '<div role="textbox" aria-activedescendant="unknown">Content</div><div id="text">Text</div>': ['textbox', 'Content', 'Text'],
