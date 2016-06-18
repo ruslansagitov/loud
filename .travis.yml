@@ -40,6 +40,7 @@ after_success:
   - KARMA_COVERAGE=lcovonly KARMA_BROWSERS=Firefox SAUCE_ACCESS_KEY= npm run-script karma-test
   - cat ./coverage/*/lcov.info | ./node_modules/.bin/codeclimate-test-reporter
   - cat ./coverage/*/lcov.info | ./node_modules/.bin/coveralls
+  - npm run-script build
 
 deploy:
   - provider: npm
