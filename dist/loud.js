@@ -1294,7 +1294,7 @@ module.exports = {
      * @type {String}
      * @readonly
      */
-    VERSION: '0.9.0',
+    VERSION: '0.9.1',
 
     /**
      * Force markup to be valid.
