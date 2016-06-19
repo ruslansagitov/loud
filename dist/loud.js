@@ -30,7 +30,8 @@ var ROLE_FROM_TAG = require('./role-from-tag'),
 var extend = UTIL.extend,
     flatten = UTIL.flatten,
     toArray = UTIL.toArray,
-    capitalize = UTIL.capitalize;
+    capitalize = UTIL.capitalize,
+    forEach = UTIL.forEach;
 
 var TAG_NO_ROLE = {
     base: 1,
@@ -520,10 +521,10 @@ A11yNode.prototype.free = function() {
     delete this.childs;
 };
 
-[
+forEach([
     'setRole',
     'fixRole'
-].forEach(function(item) {
+], function(item) {
     A11yNode.prototype[item] = function(inst) {
         ROLE_FROM_TAG[item].call(inst, this);
 
@@ -819,12 +820,12 @@ extend(A11yNode.prototype, {
 });
 
 /* attributes */
-[
+forEach([
     'autocomplete',
     'orientation',
     'sort',
     'live'
-].forEach(function(item) {
+], function(item) {
     var funcName = 'get' + capitalize(item);
 
     A11yNode.prototype[funcName] = function() {
@@ -838,10 +839,10 @@ extend(A11yNode.prototype, {
     };
 });
 
-[
+forEach([
     'dropeffect',
     'relevant'
-].forEach(function(item) {
+], function(item) {
     var funcName = 'get' + capitalize(item);
 
     A11yNode.prototype[funcName] = function() {
@@ -858,11 +859,11 @@ extend(A11yNode.prototype, {
     };
 });
 
-[
+forEach([
     'expanded',
     'pressed',
     'grabbed'
-].forEach(function(item) {
+], function(item) {
     var funcName = 'get' + capitalize(item);
 
     A11yNode.prototype[funcName] = function() {
@@ -1819,14 +1820,10 @@ exports.fixRole = fixRole;
 'use strict';
 
 exports.extend = function(obj, src) {
-    var props = Object.keys(src),
-        length = props.length,
-        i = -1,
-        key;
-
-    while (++i < length) {
-        key = props[i];
-        obj[key] = src[key];
+    for (var key in src) {
+        if (src.hasOwnProperty(key)) {
+            obj[key] = src[key];
+        }
     }
 
     return obj;
@@ -1866,6 +1863,12 @@ var flatten = exports.flatten = function(array) {
 
 exports.capitalize = function(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
+exports.forEach = function(items, func) {
+    for (var i = 0; i < items.length; i++) {
+        func(items[i]);
+    }
 };
 
 },{}],6:[function(require,module,exports){
