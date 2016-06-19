@@ -12,9 +12,9 @@ module.exports = function(config) {
         frameworks: ['jasmine'],
         browsers: browsers,
         files: [
+            'dist/loud.js',
             require.resolve('es5-shim'),
             require.resolve('html5shiv/dist/html5shiv'),
-            'dist/loud.js',
             'test/**/*.js'
         ]
     });
