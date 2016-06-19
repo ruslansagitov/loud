@@ -31,11 +31,10 @@ module.exports = function(config) {
                 browserName: 'safari',
                 version: '9.0'
             },
-            sauceLabsIPhone: {
+            sauceLabsOpera12: {
                 base: 'SauceLabs',
-                browserName: 'iphone',
-                deviceName: 'iPhone Simulator',
-                version: '9.3'
+                browserName: 'opera',
+                version: '12.12'
             },
             sauceLabsAndroid: {
                 base: 'SauceLabs',
