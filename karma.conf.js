@@ -21,9 +21,25 @@ module.exports = function(config) {
 
     if (process.env.CI && process.env.SAUCE_ACCESS_KEY) {
         var customLaunchers = {
-            sauceLabsIE11: {
+            sauceLabsEdge: {
                 base: 'SauceLabs',
-                browserName: 'Android',
+                browserName: 'MicrosoftEdge',
+                version: '13.10586'
+            },
+            sauceLabsSafari: {
+                base: 'SauceLabs',
+                browserName: 'safari',
+                version: '9.0'
+            },
+            sauceLabsIPhone: {
+                base: 'SauceLabs',
+                browserName: 'iphone',
+                deviceName: 'iPhone Simulator',
+                version: '9.3'
+            },
+            sauceLabsAndroid: {
+                base: 'SauceLabs',
+                browserName: 'android',
                 deviceName: 'Android Emulator',
                 version: '5.1'
             },
