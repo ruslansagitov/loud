@@ -1,7 +1,7 @@
 version: '{build}'
 
 environment:
-  nodejs_version: 4
+  nodejs_version: 6
 
 matrix:
   fast_finish: true
@@ -16,9 +16,9 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - node --version
   - npm --version
-  - npm install --global npm@^3.9.6
-  - npm install --global eslint@^2.12.0 write-good@^0.9.1
-  - npm install --global karma-cli@^1.0.0
+  - npm install --global npm@^3.10.9
+  - npm install --global eslint@^3.9.1 write-good@^0.9.1
+  - npm install --global karma-cli@^1.0.1
   - npm install
   - npm install karma-ie-launcher@^1.0.0
   - set KARMA_BROWSERS=IE
