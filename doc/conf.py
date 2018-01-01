@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 project = 'Loud'
-copyright = u'2014–2017, Ruslan Sagitov'
+copyright = u'2014–2018, Ruslan Sagitov'
 
 version = '0.9'
 release = '0.9.2'
