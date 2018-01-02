@@ -29,7 +29,7 @@ module.exports = function(config) {
             sauceLabsSafari: {
                 base: 'SauceLabs',
                 browserName: 'safari',
-                version: '10.0'
+                version: '11.0'
             },
             sauceLabsIOs: {
                 base: 'SauceLabs',
