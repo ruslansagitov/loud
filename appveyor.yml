@@ -1,7 +1,7 @@
 version: '{build}'
 
 environment:
-  nodejs_version: 6
+  nodejs_version: 8
 
 matrix:
   fast_finish: true
@@ -16,7 +16,6 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - node --version
   - npm --version
-  - npm install --global npm@^3.10.10
   - npm install --global eslint@^3.12.2 write-good@^0.10.0
   - npm install --global karma-cli@^1.0.1
   - npm install
