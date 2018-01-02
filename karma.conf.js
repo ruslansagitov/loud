@@ -40,7 +40,7 @@ module.exports = function(config) {
                 base: 'SauceLabs',
                 browserName: 'android',
                 deviceName: 'Android Emulator',
-                version: '5.1'
+                version: '6.0'
             },
             sauceLabsIE8: {
                 base: 'SauceLabs',
