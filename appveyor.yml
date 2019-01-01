@@ -16,10 +16,10 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - node --version
   - npm --version
-  - npm install --global eslint@^4.14.0 write-good@^0.11.3
-  - npm install --global karma-cli@^1.0.1
+  - npm install --global eslint@^4.19.1 write-good@^0.13.1
+  - npm install --global karma-cli@^2.0.0
   - npm install
-  - npm install karma-ie-launcher@^1.0.0
+  - npm install --no-save karma-ie-launcher@^1.0.0
   - set KARMA_BROWSERS=IE
 
 before_test:
