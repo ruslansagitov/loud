@@ -39,13 +39,23 @@
   "devDependencies": {
     "browserify": "^16.2.3",
     "browserify-istanbul": "^3.0.1",
+    "codeclimate-test-reporter": "^0.5.1",
+    "coveralls": "^3.0.2",
     "es5-shim": "^4.5.12",
+    "eslint": "^4.19.1",
     "html5shiv": "^3.7.3",
     "jasmine-core": "^3.3.0",
     "karma": "^3.1.4",
+    "karma-cli": "^2.0.0",
     "karma-coverage": "^1.1.2",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-ie-launcher": "^1.0.0",
     "karma-jasmine": "^2.0.1",
-    "karma-sourcemap-loader": "^0.3.7"
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-sauce-launcher": "^2.0.2",
+    "karma-sourcemap-loader": "^0.3.7",
+    "phantomjs-prebuilt": "^2.1.16",
+    "write-good": "^0.13.1"
   },
   "engines": {
     "node": ">=8"
