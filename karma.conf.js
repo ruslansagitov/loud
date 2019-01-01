@@ -24,25 +24,25 @@ module.exports = function(config) {
             sauceLabsEdge: {
                 base: 'SauceLabs',
                 browserName: 'MicrosoftEdge',
-                version: '16.16299'
+                version: '18.17763'
             },
             sauceLabsSafari: {
                 base: 'SauceLabs',
                 browserName: 'safari',
-                version: '11.0'
+                version: '12.0'
             },
             sauceLabsIOs: {
                 base: 'SauceLabs',
                 browserName: 'Safari',
                 deviceName: 'iPhone X Simulator',
-                platformVersion: '11.1',
+                platformVersion: '12.0',
                 platformName: 'iOS'
             },
             sauceLabsAndroid: {
                 base: 'SauceLabs',
                 browserName: 'android',
-                deviceName: 'Android Emulator',
-                version: '6.0'
+                deviceName: 'Android GoogleAPI Emulator',
+                version: '7.1'
             },
             sauceLabsIE8: {
                 base: 'SauceLabs',
