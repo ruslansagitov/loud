@@ -37,7 +37,7 @@ module.exports = function(config) {
                 base: 'SauceLabs',
                 browserName: 'Safari',
                 deviceName: 'iPhone X Simulator',
-                platformVersion: '11.3',
+                platformVersion: '13.0',
                 platformName: 'iOS'
             },
             sauceLabsAndroid: {
