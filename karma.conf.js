@@ -24,7 +24,8 @@ module.exports = function(config) {
             sauceLabsEdge: {
                 base: 'SauceLabs',
                 browserName: 'MicrosoftEdge',
-                version: '16.16299'
+                browserVersion: '18.17763',
+                platformName: 'Windows 10'
             },
             sauceLabsSafari: {
                 base: 'SauceLabs',
