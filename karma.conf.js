@@ -21,6 +21,12 @@ module.exports = function(config) {
 
     if (process.env.CI && process.env.SAUCE_ACCESS_KEY) {
         var customLaunchers = {
+            sauceLabsChrome: {
+                base: 'SauceLabs',
+                browserName: 'chrome',
+                browserVersion: '79.0',
+                platformName: 'Windows 10'
+            },
             sauceLabsEdge: {
                 base: 'SauceLabs',
                 browserName: 'MicrosoftEdge',
@@ -46,11 +52,6 @@ module.exports = function(config) {
                 deviceName: 'Android GoogleAPI Emulator',
                 platformVersion: '9.0',
                 platformName: 'Android'
-            },
-            sauceLabsIE8: {
-                base: 'SauceLabs',
-                browserName: 'internet explorer',
-                version: 8
             }
         };
 
