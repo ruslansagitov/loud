@@ -30,7 +30,8 @@ module.exports = function(config) {
             sauceLabsSafari: {
                 base: 'SauceLabs',
                 browserName: 'safari',
-                version: '11.1'
+                browserVersion: '12.0',
+                platformName: 'macOS 10.14'
             },
             sauceLabsIOs: {
                 base: 'SauceLabs',
