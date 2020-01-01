@@ -33,12 +33,12 @@ module.exports = function(config) {
                 browserVersion: '18.17763',
                 platformName: 'Windows 10'
             },
-            sauceLabsSafari: {
+            /*sauceLabsSafari: {
                 base: 'SauceLabs',
                 browserName: 'safari',
-                browserVersion: '11.0',
-                platformName: 'macOS 10.12'
-            },
+                browserVersion: '13.0',
+                platformName: 'macOS 10.13'
+            },*/
             sauceLabsIOs: {
                 base: 'SauceLabs',
                 browserName: 'Safari',
