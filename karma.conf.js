@@ -38,7 +38,7 @@ module.exports = function(config) {
                 base: 'SauceLabs',
                 browserName: 'Chrome',
                 deviceName: 'Android GoogleAPI Emulator',
-                platformVersion: '10.0',
+                platformVersion: '8.1',
                 platformName: 'Android'
             }
         };
