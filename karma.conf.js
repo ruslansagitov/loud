@@ -24,33 +24,21 @@ module.exports = function(config) {
             sauceLabsChrome: {
                 base: 'SauceLabs',
                 browserName: 'chrome',
-                browserVersion: '79.0',
+                browserVersion: '87.0',
                 platformName: 'Windows 10'
             },
-            sauceLabsEdge: {
-                base: 'SauceLabs',
-                browserName: 'MicrosoftEdge',
-                browserVersion: '18.17763',
-                platformName: 'Windows 10'
-            },
-            /*sauceLabsSafari: {
-                base: 'SauceLabs',
-                browserName: 'safari',
-                browserVersion: '13.0',
-                platformName: 'macOS 10.13'
-            },*/
             sauceLabsIOs: {
                 base: 'SauceLabs',
                 browserName: 'Safari',
                 deviceName: 'iPhone X Simulator',
-                platformVersion: '13.0',
+                platformVersion: '14.0',
                 platformName: 'iOS'
             },
             sauceLabsAndroid: {
                 base: 'SauceLabs',
                 browserName: 'Chrome',
                 deviceName: 'Android GoogleAPI Emulator',
-                platformVersion: '8.1',
+                platformVersion: '11.0',
                 platformName: 'Android'
             }
         };
