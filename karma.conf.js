@@ -33,13 +33,6 @@ module.exports = function(config) {
                 deviceName: 'iPhone X Simulator',
                 platformVersion: '14.0',
                 platformName: 'iOS'
-            },
-            sauceLabsAndroid: {
-                base: 'SauceLabs',
-                browserName: 'Chrome',
-                deviceName: 'Android GoogleAPI Emulator',
-                platformVersion: '8.1',
-                platformName: 'Android'
             }
         };
 
