@@ -35,28 +35,27 @@
     "build": "browserify --standalone loud -o ./dist/loud.js ./lib/loud.js",
     "build-coverage": "browserify -d -g browserify-istanbul --standalone loud -o ./dist/loud.js ./lib/loud.js"
   },
-  "dependencies": {},
   "devDependencies": {
     "browserify": "^17.0.0",
     "browserify-istanbul": "^3.0.1",
     "codeclimate-test-reporter": "^0.5.1",
-    "coveralls": "^3.1.0",
-    "es5-shim": "^4.5.14",
-    "eslint": "^7.16.0",
+    "coveralls": "^3.1.1",
+    "es5-shim": "^4.6.4",
+    "eslint": "^8.6.0",
     "html5shiv": "^3.7.3",
-    "jasmine-core": "^3.6.0",
-    "karma": "^5.2.3",
+    "jasmine-core": "^3.10.1",
+    "karma": "^6.3.9",
     "karma-chrome-launcher": "^3.1.0",
     "karma-cli": "^2.0.0",
-    "karma-coverage": "^2.0.3",
-    "karma-firefox-launcher": "^2.1.0",
+    "karma-coverage": "^2.1.0",
+    "karma-firefox-launcher": "^2.1.2",
     "karma-ie-launcher": "^1.0.0",
     "karma-jasmine": "^4.0.1",
     "karma-phantomjs-launcher": "^1.0.4",
-    "karma-sauce-launcher": "^4.3.4",
+    "karma-sauce-launcher": "^4.1.4",
     "karma-sourcemap-loader": "^0.3.8",
     "phantomjs-prebuilt": "^2.1.16",
-    "write-good": "^1.0.4"
+    "write-good": "^1.0.8"
   },
   "engines": {
     "node": ">=12"
