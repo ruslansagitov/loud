@@ -1,0 +1,35 @@
+name: test
+on: [push, pull_request]
+jobs:
+  test:
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - run: node --version
+      - run: npm --version
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run check-writing
+      - run: npm run build-coverage
+      - uses: saucelabs/sauce-connect-action@v2
+        with:
+          username: ${{secrets.SAUCE_USERNAME}}
+          accessKey: ${{secrets.SAUCE_ACCESS_KEY}}
+          tunnelName: github-action-tunnel
+      - run: npm run karma-test
+        env:
+          CI: '1'
+          SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
+          SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}
+      - run: npm run build
+      - uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          path-to-lcov: ${{github.workspace}}/coverage/*/lcov.info
+      - uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        with:
+          coverageLocations: ${{github.workspace}}/coverage/*/lcov.info:lcov
