@@ -1,8 +1,8 @@
 /* globals loud */
 'use strict';
 
-describe('loud', function() {
-    var data = {
+describe('loud', () => {
+    let data = {
         '<div role="button" style="display:none">Content</div>': [],
         '<div role="button" aria-hidden="true">Content</div>': [],
         '<div role="button" style="visibility:hidden">Content</div>': [],
@@ -228,8 +228,8 @@ describe('loud', function() {
         this.elem = null;
     });
 
-    Object.keys(data).forEach(function(key) {
-        it('handles ' + key, function() {
+    Object.keys(data).forEach(key => {
+        it(`handles ${key}`, function() {
             this.elem = document.createElement('div');
             this.elem.innerHTML = key;
             document.body.appendChild(this.elem);

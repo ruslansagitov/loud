@@ -1,8 +1,8 @@
 /* globals loud */
 'use strict';
 
-describe('loud', function() {
-    var data = {
+describe('loud', () => {
+    let data = {
         /* aria-labelledby */
         '<button aria-labelledby="label"><span id="label">Label</span></button>': ['Label', 'button'],
 
@@ -84,8 +84,8 @@ describe('loud', function() {
         this.elem = null;
     });
 
-    Object.keys(data).forEach(function(key) {
-        it('handles ' + key, function() {
+    Object.keys(data).forEach(key => {
+        it(`handles ${key}`, function() {
             this.elem = document.createElement('div');
             this.elem.innerHTML = key;
             document.body.appendChild(this.elem);

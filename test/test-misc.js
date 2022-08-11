@@ -1,8 +1,8 @@
 /* globals loud */
 'use strict';
 
-describe('loud', function() {
-    var data = {
+describe('loud', () => {
+    let data = {
         /* abstract roles */
         '<div role="command">Content</div>': ['Content'],
         '<div role="composite">Content</div>': ['Content'],
@@ -29,13 +29,13 @@ describe('loud', function() {
         '<div>Content</div>': ['Content']
     };
 
-    describe('handles', function() {
+    describe('handles', () => {
         afterEach(function() {
             document.body.removeChild(this.elem);
             this.elem = null;
         });
 
-        Object.keys(data).forEach(function(key) {
+        Object.keys(data).forEach(key => {
             it(key, function() {
                 this.elem = document.createElement('div');
                 this.elem.innerHTML = key;
@@ -44,7 +44,7 @@ describe('loud', function() {
             });
         });
 
-        describe('arrays', function() {
+        describe('arrays', () => {
             afterEach(function() {
                 document.body.removeChild(this.elem2);
                 this.elem2 = null;
@@ -86,11 +86,11 @@ describe('loud', function() {
         });
     });
 
-    it('provides VERSION as String', function() {
+    it('provides VERSION as String', () => {
         expect(typeof loud.VERSION).toEqual('string');
     });
 
-    it('handles undefined', function() {
+    it('handles undefined', () => {
         expect(loud.say()).toEqual([]);
     });
 });

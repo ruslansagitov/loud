@@ -1,7 +1,7 @@
 /* globals loud */
 'use strict';
 
-describe('loud validator', function() {
+describe('loud validator', () => {
     beforeEach(function() {
         this.warn = loud.warn;
         this.forceValidMarkup = loud.FORCE_VALID_MARKUP;
@@ -40,11 +40,11 @@ describe('loud validator', function() {
     });
 
     it('throws an error instead of warning', function() {
-        var elem = this.elem = document.createElement('div');
+        let elem = this.elem = document.createElement('div');
         this.elem.innerHTML = '<div role="list">Content</div>';
         document.body.appendChild(this.elem);
         loud.warn = loud.error;
-        expect(function() {
+        expect(() => {
             loud.say(elem);
         }).toThrowError(loud.ValidationError, 'Element with role "list" does not own elements with valid roles');
     });

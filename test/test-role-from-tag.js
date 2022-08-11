@@ -5,8 +5,8 @@ if (window.html5) {
     window.html5.addElements(['menu', 'menuitem', document]);
 }
 
-describe('loud', function() {
-    var data = {
+describe('loud', () => {
+    let data = {
         '<a>Content</a>': ['Content', 'link'],
         '<address>Content</address>': ['contentinfo', 'Content', 'contentinfo end'],
         /* Does not work in Firefox */
@@ -356,8 +356,8 @@ describe('loud', function() {
         this.elem = null;
     });
 
-    Object.keys(data).forEach(function(key) {
-        it('handles ' + key, function() {
+    Object.keys(data).forEach(key => {
+        it(`handles ${key}`, function() {
             this.elem = document.createElement('div');
             this.elem.innerHTML = key;
             document.body.appendChild(this.elem);

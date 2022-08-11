@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function(config) {
-    var browsers,
+    let browsers,
         reporters = ['dots'];
 
     if (process.env.KARMA_BROWSERS) {
@@ -10,7 +10,7 @@ module.exports = function(config) {
 
     config.set({
         frameworks: ['jasmine'],
-        browsers: browsers,
+        browsers,
         files: [
             'dist/loud.js',
             require.resolve('es5-shim'),
@@ -20,7 +20,7 @@ module.exports = function(config) {
     });
 
     if (process.env.CI && process.env.SAUCE_ACCESS_KEY) {
-        var customLaunchers = {
+        let customLaunchers = {
             sauceLabsChrome: {
                 base: 'SauceLabs',
                 browserName: 'chrome',
@@ -43,7 +43,7 @@ module.exports = function(config) {
             sauceLabs: {
                 testName: 'Loud'
             },
-            customLaunchers: customLaunchers
+            customLaunchers
         });
     }
 
@@ -62,6 +62,6 @@ module.exports = function(config) {
     }
 
     config.set({
-        reporters: reporters
+        reporters
     });
 };

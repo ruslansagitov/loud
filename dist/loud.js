@@ -1,4 +1,4 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.loud = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.loud = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 /*
  * The MIT License (MIT)
  *
@@ -24,16 +24,16 @@
  */
 'use strict';
 
-var ROLE_FROM_TAG = require('./role-from-tag'),
+const ROLE_FROM_TAG = require('./role-from-tag'),
     UTIL = require('./util');
 
-var extend = UTIL.extend,
+const extend = UTIL.extend,
     flatten = UTIL.flatten,
     toArray = UTIL.toArray,
     capitalize = UTIL.capitalize,
     forEach = UTIL.forEach;
 
-var TAG_NO_ROLE = {
+const TAG_NO_ROLE = {
     base: 1,
     head: 1,
     html: 1,
@@ -51,14 +51,14 @@ var TAG_NO_ROLE = {
     title: 1
 };
 
-var TAG_STRONG_ROLE = {
+const TAG_STRONG_ROLE = {
     area: 1,
     datalist: 1,
     fieldset: 1,
     footer: 1
 };
 
-var TAG_CAN_BE_PRESENTATION = {
+const TAG_CAN_BE_PRESENTATION = {
     aside: 1,
     fieldset: 1,
     footer: 1,
@@ -82,7 +82,7 @@ var TAG_CAN_BE_PRESENTATION = {
     span: 1
 };
 
-var TAG_NO_CLOSING = {
+const TAG_NO_CLOSING = {
     hr: 1,
     img: 1,
     input: 1,
@@ -90,7 +90,7 @@ var TAG_NO_CLOSING = {
     progress: 1
 };
 
-var INPUT_TYPE_NO_ROLE = {
+const INPUT_TYPE_NO_ROLE = {
     color: 1,
     date: 1,
     datetime: 1,
@@ -101,7 +101,7 @@ var INPUT_TYPE_NO_ROLE = {
     week: 1
 };
 
-var TAG_TO_ROLE_RESTRICTIONS = {
+const TAG_TO_ROLE_RESTRICTIONS = {
     address: {
         contentinfo: 1
     },
@@ -224,7 +224,7 @@ var TAG_TO_ROLE_RESTRICTIONS = {
     }
 };
 
-var ROLE_CONTEXT = {
+const ROLE_CONTEXT = {
     columnheader: {
         row: 1
     },
@@ -275,7 +275,7 @@ var ROLE_CONTEXT = {
     }
 };
 
-var ROLE_GROUP_CONTEXT = {
+const ROLE_GROUP_CONTEXT = {
     group: {
         listitem: {
             list: 1
@@ -294,7 +294,7 @@ var ROLE_GROUP_CONTEXT = {
     }
 };
 
-var ROLE_DESCENDANTS = {
+const ROLE_DESCENDANTS = {
     /*combobox: {
         listbox: 1,
         textbox: 1
@@ -356,7 +356,7 @@ var ROLE_DESCENDANTS = {
     }
 };
 
-var ROLE_INLINE_VALUE = {
+const ROLE_INLINE_VALUE = {
     textbox: 1,
     combobox: 1,
     menuitem: 1,
@@ -364,19 +364,19 @@ var ROLE_INLINE_VALUE = {
     slider: 1
 };
 
-var TAG_HAS_ALT = {
+const TAG_HAS_ALT = {
     applet: 1,
     area: 1,
     img: 1,
     input: 1
 };
 
-var TAG_HAS_HREF = {
+const TAG_HAS_HREF = {
     a: 1,
     link: 1
 };
 
-var HYPERLINK_TYPES = {
+const HYPERLINK_TYPES = {
     alternative: 1,
     author: 1,
     help: 1,
@@ -386,7 +386,7 @@ var HYPERLINK_TYPES = {
     search: 1
 };
 
-var ACCESSIBLE_NAME_FROM_CONTENTS = {
+const ACCESSIBLE_NAME_FROM_CONTENTS = {
     button: 1,
     checkbox: 1,
     columnheader: 1,
@@ -409,7 +409,7 @@ var ACCESSIBLE_NAME_FROM_CONTENTS = {
     presentation: 1
 };
 
-var ABSTRACT_ROLES = {
+const ABSTRACT_ROLES = {
     command: 1,
     composite: 1,
     input: 1,
@@ -424,7 +424,7 @@ var ABSTRACT_ROLES = {
     window: 1
 };
 
-var ATTR_VALUES = {
+const ATTR_VALUES = {
     autocomplete: {
         inline: 1,
         list: 1,
@@ -461,7 +461,7 @@ var ATTR_VALUES = {
     }
 };
 
-var TAG_HEADING_LEVEL = {
+const TAG_HEADING_LEVEL = {
     h1: '1',
     h2: '2',
     h3: '3',
@@ -485,7 +485,7 @@ function A11yNode(node) {
 }
 
 A11yNode.prototype.parse = function() {
-    var node = this.node.firstChild,
+    let node = this.node.firstChild,
         newNode;
 
     this.childs = [];
@@ -496,9 +496,9 @@ A11yNode.prototype.parse = function() {
         this.childs.push(newNode);
     }
 
-    var that = this;
+    let that = this;
 
-    this.childs.forEach(function(child, idx) {
+    this.childs.forEach((child, idx) => {
         child.nextSibling = that.childs[idx + 1];
     });
 
@@ -514,7 +514,7 @@ A11yNode.prototype.free = function() {
     delete this.firstChild;
     delete this.nextSibling;
 
-    this.childs.forEach(function(child) {
+    this.childs.forEach(child => {
         child.free();
     });
 
@@ -524,11 +524,11 @@ A11yNode.prototype.free = function() {
 forEach([
     'setRole',
     'fixRole'
-], function(item) {
+], item => {
     A11yNode.prototype[item] = function(inst) {
         ROLE_FROM_TAG[item].call(inst, this);
 
-        var node = this.firstChild;
+        let node = this.firstChild;
         for (; node; node = node.nextSibling) {
             if (node.nodeType === 1) {
                 node[item](inst);
@@ -541,13 +541,13 @@ forEach([
 
 A11yNode.prototype.setIds = function(inst) {
     if (this.nodeType === 1) {
-        var id = this.getAttribute('id');
+        let id = this.getAttribute('id');
         if (id) {
             inst.setElementId(id, this);
         }
     }
 
-    var node = this.firstChild;
+    let node = this.firstChild;
     for (; node; node = node.nextSibling) {
         node.setIds(inst);
     }
@@ -556,7 +556,7 @@ A11yNode.prototype.setIds = function(inst) {
 };
 
 A11yNode.prototype.getElementsByTagName = function(name) {
-    var node = this.firstChild,
+    let node = this.firstChild,
         nodes = [];
 
     if (this.tag === name) {
@@ -572,28 +572,28 @@ A11yNode.prototype.getElementsByTagName = function(name) {
 
 /* proxy */
 extend(A11yNode.prototype, {
-    hasAttribute: function() {
-        return this.node.hasAttribute.apply(this.node, arguments);
+    hasAttribute(...args) {
+        return this.node.hasAttribute(...args);
     },
 
-    getAttribute: function() {
-        return this.node.getAttribute.apply(this.node, arguments);
+    getAttribute(...args) {
+        return this.node.getAttribute(...args);
     }
 });
 
 /* utils */
 extend(A11yNode.prototype, {
-    isEmbeddedControl: function() {
+    isEmbeddedControl() {
         return Boolean(ROLE_INLINE_VALUE[this.role]);
     },
 
-    isHyperlink: /* istanbul ignore next */ function() {
-        var rel = this.getAttribute('rel') || '';
+    /* istanbul ignore next */ isHyperlink() {
+        let rel = this.getAttribute('rel') || '';
         rel = rel.toLowerCase();
         return Boolean(HYPERLINK_TYPES[rel]);
     },
 
-    isNodeNonEmpty: function(node) {
+    isNodeNonEmpty(node) {
         node = node.firstChild;
         for (; node; node = node.nextSibling) {
             if (node.nodeType === 1) {
@@ -617,20 +617,20 @@ extend(A11yNode.prototype, {
         return false;
     },
 
-    isEmpty: function() {
+    isEmpty() {
         return !this.isNodeNonEmpty(this);
     },
 
-    isPresentation: function() {
+    isPresentation() {
         return this.role === 'presentation';
     },
 
-    isStrongRole: function() {
+    isStrongRole() {
         return Boolean(TAG_STRONG_ROLE[this.tag]);
     },
 
-    hasParent: function(parentName) {
-        var node = this.parentNode;
+    hasParent(parentName) {
+        let node = this.parentNode;
         for (; node; node = node.parentNode) {
             if (node.tag === parentName) {
                 return node;
@@ -640,36 +640,36 @@ extend(A11yNode.prototype, {
         return false;
     },
 
-    mustNoRole: function() {
+    mustNoRole() {
         if (this.tag === 'input') {
-            var type = this.getAttribute('type') || 'text';
+            let type = this.getAttribute('type') || 'text';
             type = type.toLowerCase();
             return Boolean(INPUT_TYPE_NO_ROLE[type]);
         }
         return Boolean(TAG_NO_ROLE[this.tag]);
     },
 
-    mayBePresentation: function() {
+    mayBePresentation() {
         return Boolean(TAG_CAN_BE_PRESENTATION[this.tag]);
     },
 
-    mayTransitionToRole: function(role) {
-        var allowed = TAG_TO_ROLE_RESTRICTIONS[this.tag];
+    mayTransitionToRole(role) {
+        let allowed = TAG_TO_ROLE_RESTRICTIONS[this.tag];
         if (!allowed) {
             return true;
         }
         return allowed && allowed[role];
     },
 
-    mayAccessibleNameFromContents: function() {
-        var role = this.role;
+    mayAccessibleNameFromContents() {
+        let role = this.role;
         return (!role || ACCESSIBLE_NAME_FROM_CONTENTS[role]);
     },
 
-    isInputInsideLabel: function() {
-        var id = this.getAttribute('id');
+    isInputInsideLabel() {
+        let id = this.getAttribute('id');
         if (id && this.tag === 'input') {
-            var node = this.parentNode;
+            let node = this.parentNode;
             for (; node; node = node.parentNode) {
                 if (node.tag === 'label' &&
                     node.getAttribute('for') === id) {
@@ -679,37 +679,37 @@ extend(A11yNode.prototype, {
         }
     },
 
-    mayHaveAlt: function() {
+    mayHaveAlt() {
         return Boolean(TAG_HAS_ALT[this.tag]);
     },
 
-    mayHaveHref: function() {
+    mayHaveHref() {
         return Boolean(TAG_HAS_HREF[this.tag]);
     },
 
-    getRoleFromAttr: function() {
+    getRoleFromAttr() {
         if (this.nodeType !== 1) {
             return;
         }
 
-        var roles = this.getAttribute('role');
+        let roles = this.getAttribute('role');
         if (!roles) {
             return;
         }
 
         return roles
             .split(/\s+/)
-            .filter(function(role) {
+            .filter(role => {
                 return !ABSTRACT_ROLES[role];
             })
-            .filter(function(str) {
+            .filter(str => {
                 return str;
             })
             .shift();
     },
 
-    hasOnlyTextChilds: function() {
-        var node = this.firstChild;
+    hasOnlyTextChilds() {
+        let node = this.firstChild;
         for (; node; node = node.nextSibling) {
             if (node.nodeType !== 3) {
                 return false;
@@ -719,8 +719,8 @@ extend(A11yNode.prototype, {
         return true;
     },
 
-    getTextContentFromDirectChild: function(childName) {
-        var node = this.firstChild,
+    getTextContentFromDirectChild(childName) {
+        let node = this.firstChild,
             iter;
         for (; node; node = node.nextSibling) {
             if (node.nodeType !== 1) {
@@ -743,13 +743,13 @@ extend(A11yNode.prototype, {
 
 /* relationship */
 extend(A11yNode.prototype, {
-    ownedByValidRolesFor: function(role) {
-        var context = ROLE_CONTEXT[role];
+    ownedByValidRolesFor(role) {
+        let context = ROLE_CONTEXT[role];
         if (!context) {
             return true;
         }
 
-        var node = this.parentNode,
+        let node = this.parentNode,
             parentRole;
         for (; node; node = node.parentNode) {
             if (typeof node.role !== 'undefined') {
@@ -773,8 +773,8 @@ extend(A11yNode.prototype, {
         return false;
     },
 
-    ownsValidRolesFor: function(role) {
-        var limits = ROLE_DESCENDANTS[role];
+    ownsValidRolesFor(role) {
+        let limits = ROLE_DESCENDANTS[role];
         if (!limits) {
             return true;
         }
@@ -782,8 +782,8 @@ extend(A11yNode.prototype, {
         return this.isDescendantsValid(limits);
     },
 
-    isDescendantsValid: function(limits) {
-        var node = this.firstChild,
+    isDescendantsValid(limits) {
+        let node = this.firstChild,
             nodeCount = 0,
             role, lim;
         for (; node; node = node.nextSibling) {
@@ -825,11 +825,11 @@ forEach([
     'orientation',
     'sort',
     'live'
-], function(item) {
-    var funcName = 'get' + capitalize(item);
+], item => {
+    let funcName = `get${capitalize(item)}`;
 
     A11yNode.prototype[funcName] = function() {
-        var data = this.getAttribute('aria-' + item);
+        let data = this.getAttribute(`aria-${item}`);
         if (data) {
             data = data.toLowerCase();
             if (ATTR_VALUES[item][data]) {
@@ -842,16 +842,16 @@ forEach([
 forEach([
     'dropeffect',
     'relevant'
-], function(item) {
-    var funcName = 'get' + capitalize(item);
+], item => {
+    let funcName = `get${capitalize(item)}`;
 
     A11yNode.prototype[funcName] = function() {
-        var data = this.getAttribute('aria-' + item);
+        let data = this.getAttribute(`aria-${item}`);
         if (data) {
             return data
                 .toLowerCase()
                 .split(/\s+/)
-                .filter(function(value) {
+                .filter(value => {
                     return ATTR_VALUES[item][value];
                 })
                 .join(' ');
@@ -863,20 +863,20 @@ forEach([
     'expanded',
     'pressed',
     'grabbed'
-], function(item) {
-    var funcName = 'get' + capitalize(item);
+], item => {
+    let funcName = `get${capitalize(item)}`;
 
     A11yNode.prototype[funcName] = function() {
-        var attr = 'aria-' + item;
+        let attr = `aria-${item}`;
         if (this.hasAttribute(attr)) {
-            var a = this.getAttribute(attr);
+            let a = this.getAttribute(attr);
             return a === 'true' ? true : (a === 'false' ? false : a);
         }
     };
 });
 
 extend(A11yNode.prototype, {
-    getChecked: function() {
+    getChecked() {
         /* Firefox defines node.checked on <menuitem>. */
         if (this.tag === 'menuitem') {
             return null;
@@ -895,28 +895,28 @@ extend(A11yNode.prototype, {
         return this.node.checked;
     },
 
-    getSelected: function() {
+    getSelected() {
         if (this.hasAttribute('aria-selected')) {
             return this.getAttribute('aria-selected') === 'true';
         }
     },
 
-    getReadonly: function() {
+    getReadonly() {
         return (this.hasAttribute('readonly') ||
                 this.getAttribute('aria-readonly') === 'true');
     },
 
-    getRequired: function() {
+    getRequired() {
         return this.hasAttribute('required') ||
                this.getAttribute('aria-required') === 'true';
     },
 
-    getMultiselectable: function() {
+    getMultiselectable() {
         return this.hasAttribute('multiple') ||
                this.getAttribute('aria-multiselectable') === 'true';
     },
 
-    getLevel: function() {
+    getLevel() {
         if (this.hasAttribute('aria-level')) {
             return this.getAttribute('aria-level');
         }
@@ -927,12 +927,12 @@ extend(A11yNode.prototype, {
 
 /* states */
 extend(A11yNode.prototype, {
-    isSelected: function() {
+    isSelected() {
         return this.node.selected;
     },
 
-    isDisabled: function() {
-        var fieldset = this.hasParent('fieldset');
+    isDisabled() {
+        let fieldset = this.hasParent('fieldset');
 
         return (this.node.disabled ||
                 this.getAttribute('aria-disabled') === 'true' ||
@@ -947,8 +947,8 @@ extend(A11yNode.prototype, {
                 !this.hasParent('legend'));
     },
 
-    isHidden: function(inst) {
-        var node = this.node;
+    isHidden(inst) {
+        let node = this.node;
 
         if (this.nodeType !== 1) {
             return false;
@@ -956,10 +956,10 @@ extend(A11yNode.prototype, {
 
         /* istanbul ignore next */
         if (this.tag === 'datalist') {
-            var id = this.getAttribute('id');
+            let id = this.getAttribute('id');
             if (id) {
-                var elems = inst.getElementsByTagName('input');
-                elems = toArray.call(elems).filter(function(input) {
+                let elems = inst.getElementsByTagName('input');
+                elems = toArray.call(elems).filter(input => {
                     return input.getAttribute('list') === id;
                 });
                 if (elems.length) {
@@ -988,7 +988,7 @@ extend(A11yNode.prototype, {
         return true;
     },
 
-    isInvalid: function() {
+    isInvalid() {
         return this.getAttribute('aria-invalid') === 'true';
     }
 });
@@ -1021,32 +1021,34 @@ module.exports = A11yNode;
  */
 'use strict';
 
-var UTIL = require('./util');
+const UTIL = require('./util');
 
-var toArray = UTIL.toArray;
+const toArray = UTIL.toArray;
 
-var TAG_LABEL_TAG = {
+const TAG_LABEL_TAG = {
     table: 'caption',
     fieldset: 'legend',
     figure: 'figcaption',
     details: 'summary'
 };
 
-var getFrom = [
+const getFrom = [
     function(node, recurse) {
-        var ids = node.getAttribute('aria-labelledby');
+        let ids = node.getAttribute('aria-labelledby');
         if (!recurse && ids) {
-            var that = this;
+            let that = this;
             return ids
                 .split(/\s+/)
-                .map(function(id) {
-                    var elem = that.getElementById(id);
+                .map(id => {
+                    let elem = that.getElementById(id);
                     if (elem) {
-                        var val = that.getAccessibleName(elem, true);
+                        let val = that.getAccessibleName(elem, true);
                         return val && val.trim();
                     }
+
+                    return '';
                 })
-                .filter(function(str) {
+                .filter(str => {
                     return str;
                 })
                 .join(' ');
@@ -1069,7 +1071,7 @@ var getFrom = [
     function(node, recurse) {
         if ((!recurse || !node.isEmbeddedControl()) &&
             !node.isPresentation()) {
-            var label = TAG_LABEL_TAG[node.tag];
+            let label = TAG_LABEL_TAG[node.tag];
             if (label) {
                 return node.getTextContentFromDirectChild(label);
             }
@@ -1079,10 +1081,10 @@ var getFrom = [
     function(node, recurse) {
         if ((!recurse || !node.isEmbeddedControl()) &&
             !node.isPresentation()) {
-            var id = node.getAttribute('id');
+            let id = node.getAttribute('id');
             if (id) {
-                var elems = this.getElementsByTagName('label');
-                elems = toArray.call(elems).filter(function(label) {
+                let elems = this.getElementsByTagName('label');
+                elems = toArray.call(elems).filter(label => {
                     return label.getAttribute('for') === id;
                 });
 
@@ -1100,7 +1102,7 @@ var getFrom = [
 
         node = node.firstChild;
 
-        var name = [],
+        let name = [],
             value;
         for (; node; node = node.nextSibling) {
             switch (node.nodeType) {
@@ -1142,13 +1144,13 @@ var getFrom = [
 ];
 
 module.exports = function(node, recurse) {
-    var name = node.accessibleName,
+    let name = node.accessibleName,
         that = this;
     if (typeof name !== 'undefined') {
         return name;
     }
 
-    getFrom.some(function(callback) {
+    getFrom.some(callback => {
         name = callback.call(that, node, recurse);
         return name;
     });
@@ -1188,16 +1190,16 @@ module.exports = function(node, recurse) {
  * @module loud
  */
 
-var getWordsFromRole = require('./words-from-role'),
+const getWordsFromRole = require('./words-from-role'),
     getWordsFromAttributes = require('./words-from-attributes'),
     getAccessibleName = require('./accessible-name'),
     A11yNode = require('./a11y-node'),
     UTIL = require('./util');
 
-var flatten = UTIL.flatten;
+const flatten = UTIL.flatten;
 
 function Loud() {
-    var settings = module.exports;
+    let settings = module.exports;
     this.warn = settings.warn;
     this.forceValidMarkup = settings.FORCE_VALID_MARKUP;
     return this;
@@ -1208,10 +1210,10 @@ Loud.prototype.say = function(node) {
         node = [node];
     }
 
-    var res = [],
+    let res = [],
         val;
 
-    for (var i = 0; i < node.length; i++) {
+    for (let i = 0; i < node.length; i++) {
         if (!node[i]) {
             continue;
         }
@@ -1251,7 +1253,7 @@ Loud.prototype.getElementsByTagName = function(name) {
 };
 
 Loud.prototype.traverse = function(node) {
-    var iter = node.firstChild,
+    let iter = node.firstChild,
         value = [],
         val;
     for (; iter; iter = iter.nextSibling) {
@@ -1323,7 +1325,7 @@ module.exports = {
      * @throws {loud.ValidationError}
      * @since 0.9.0
      */
-    error: function(message) {
+    error(message) {
         throw new LoudValidationError(message);
     },
 
@@ -1333,7 +1335,7 @@ module.exports = {
      * @param {String} message - Error message
      * @since 0.9.0
      */
-    warn: function() {},
+    warn() {},
 
     /**
      * Transform a DOM element to words.
@@ -1342,7 +1344,7 @@ module.exports = {
      *                                 DOM elements
      * @returns {String[]} Words
      */
-    say: function(node) {
+    say(node) {
         return (new Loud()).say(node);
     }
 };
@@ -1373,14 +1375,14 @@ module.exports = {
  */
 'use strict';
 
-var UTIL = require('./util');
+const UTIL = require('./util');
 
-var isFunction = UTIL.isFunction,
+const isFunction = UTIL.isFunction,
     extend = UTIL.extend,
     capitalize = UTIL.capitalize;
 
 /* eslint-disable max-len */
-var ROLE_LOCAL_ATTRS = {
+const ROLE_LOCAL_ATTRS = {
     alert: ['expanded'],
     alertdialog: ['expanded'],
     application: ['expanded'],
@@ -1444,7 +1446,7 @@ var ROLE_LOCAL_ATTRS = {
 };
 /* eslint-enable max-len */
 
-var DEFAULT_FOR = {
+const DEFAULT_FOR = {
     alert: {
         live: 'assertive',
         atomic: true
@@ -1480,7 +1482,7 @@ var DEFAULT_FOR = {
     }
 };
 
-var roleToObject = function(roleData) {
+const roleToObject = function(roleData) {
     if (typeof roleData === 'string') {
         return {role: roleData};
     }
@@ -1488,8 +1490,8 @@ var roleToObject = function(roleData) {
     return extend({}, roleData || {});
 };
 
-var getTextboxRole = function(node) {
-    var listId = node.getAttribute('list'),
+const getTextboxRole = function(node) {
+    let listId = node.getAttribute('list'),
         datalist;
 
     /* istanbul ignore if */
@@ -1508,10 +1510,10 @@ var getTextboxRole = function(node) {
     return 'textbox';
 };
 
-var range = function(role) {
+const range = function(role) {
     return function(node) {
         return {
-            role: role,
+            role,
             valuenow: node.getAttribute('value'),
             valuemin: node.getAttribute('min'),
             valuemax: node.getAttribute('max')
@@ -1519,7 +1521,7 @@ var range = function(role) {
     };
 };
 
-var TAG_INPUT_GET_ROLE = {
+const TAG_INPUT_GET_ROLE = {
     checkbox: 'checkbox',
     email: getTextboxRole,
     image: 'button',
@@ -1535,7 +1537,7 @@ var TAG_INPUT_GET_ROLE = {
     url: getTextboxRole
 };
 
-var TAG_TO_ROLE = {
+const TAG_TO_ROLE = {
     a: 'link',
     address: 'contentinfo',
     area: 'link',
@@ -1543,7 +1545,7 @@ var TAG_TO_ROLE = {
     aside: 'complementary',
     body: 'document',
     button: 'button',
-    caption: function(node) {
+    caption(node) {
         /* istanbul ignore else */
         if (node.hasParent('table')) {
             return {
@@ -1552,7 +1554,7 @@ var TAG_TO_ROLE = {
             };
         }
     },
-    colgroup: function(node) {
+    colgroup(node) {
         /* istanbul ignore else */
         if (node.hasParent('table')) {
             return {part: true};
@@ -1564,13 +1566,13 @@ var TAG_TO_ROLE = {
     dl: 'list',
     dt: 'listitem',
     fieldset: 'group',
-    figcaption: function(node) {
+    figcaption(node) {
         if (node.hasParent('figure') &&
             node.hasOnlyTextChilds()) {
             return {hidden: true};
         }
     },
-    footer: function(node) {
+    footer(node) {
         if (!node.hasParent('article') &&
             !node.hasParent('section')) {
             return 'contentinfo';
@@ -1583,7 +1585,7 @@ var TAG_TO_ROLE = {
     h4: 'heading',
     h5: 'heading',
     h6: 'heading',
-    header: function(node) {
+    header(node) {
         if (!node.hasParent('article') &&
             !node.hasParent('section')) {
             return 'banner';
@@ -1591,33 +1593,33 @@ var TAG_TO_ROLE = {
         return '';
     },
     hr: 'separator',
-    img: function(node) {
-        var alt = node.getAttribute('alt');
+    img(node) {
+        let alt = node.getAttribute('alt');
         if (alt === '') {
             return 'presentation';
         }
         return 'img';
     },
-    input: function(node) {
+    input(node) {
         if (node.mustNoRole()) {
             return '';
         }
 
-        var type = node.getAttribute('type') || 'text',
+        let type = node.getAttribute('type') || 'text',
             getRole = TAG_INPUT_GET_ROLE[type],
             roleData = isFunction(getRole) ?
-                       getRole.call(this, node) : getRole;
+                getRole.call(this, node) : getRole;
 
         return roleToObject(roleData);
     },
-    legend: function(node) {
+    legend(node) {
         if (node.hasParent('fieldset') &&
             node.hasOnlyTextChilds()) {
             return {hidden: true};
         }
     },
     li: 'listitem',
-    link: /* istanbul ignore next */ function(node) {
+    /* istanbul ignore next */ link(node) {
         if (node.isHyperlink()) {
             return 'link';
         }
@@ -1625,21 +1627,21 @@ var TAG_TO_ROLE = {
         return '';
     },
     main: 'main',
-    menu: function(node) {
-        var type = node.getAttribute('type');
+    menu(node) {
+        let type = node.getAttribute('type');
         return type === 'toolbar' ? 'toolbar' : 'menu';
     },
     menuitem: 'menuitem',
     nav: 'navigation',
     ol: 'list',
-    optgroup: /* istanbul ignore next */ function(node) {
+    /* istanbul ignore next */ optgroup(node) {
         if (node.hasParent('select')) {
             return 'group';
         }
 
         return '';
     },
-    option: function(node) {
+    option(node) {
         return {
             role: 'option',
             selected: node.isSelected()
@@ -1647,13 +1649,13 @@ var TAG_TO_ROLE = {
     },
     progress: range('progressbar'),
     section: 'region',
-    select: function(node) {
+    select(node) {
         return {
             role: 'listbox',
             multiselectable: node.hasAttribute('multiple')
         };
     },
-    summary: function(node) {
+    summary(node) {
         if (node.hasParent('details') &&
             node.hasOnlyTextChilds()) {
             return {hidden: true};
@@ -1664,7 +1666,7 @@ var TAG_TO_ROLE = {
     td: 'gridcell',
     textarea: {role: 'textbox', multiline: true},
     tfoot: 'rowgroup',
-    th: function(node) {
+    th(node) {
         if (node.getAttribute('scope') === 'row') {
             return 'rowheader';
         }
@@ -1676,7 +1678,7 @@ var TAG_TO_ROLE = {
     ul: {role: 'list', numbered: true}
 };
 
-var setGlobalAttrs = function(node) {
+const setGlobalAttrs = function(node) {
     extend(node, {
         describedby: node.getAttribute('aria-describedby'),
 
@@ -1697,16 +1699,16 @@ var setGlobalAttrs = function(node) {
     });
 };
 
-var setLocalAttrs = function(node) {
-    var role = node.role,
+const setLocalAttrs = function(node) {
+    let role = node.role,
         attrs = ROLE_LOCAL_ATTRS[role] || [];
 
-    attrs.forEach(function(attr) {
+    attrs.forEach(attr => {
         if (typeof node[attr] !== 'undefined') {
             return;
         }
 
-        var funcName = 'get' + capitalize(attr),
+        let funcName = `get${capitalize(attr)}`,
             value;
         if (isFunction(node[funcName])) {
             value = node[funcName]();
@@ -1714,19 +1716,19 @@ var setLocalAttrs = function(node) {
                 node[attr] = value;
             }
         } else {
-            if (node.hasAttribute('aria-' + attr)) {
-                node[attr] = node.getAttribute('aria-' + attr);
+            if (node.hasAttribute(`aria-${attr}`)) {
+                node[attr] = node.getAttribute(`aria-${attr}`);
             }
         }
     });
 };
 
-var setDefaults = function(node) {
-    var role = node.role,
+const setDefaults = function(node) {
+    let role = node.role,
         data = DEFAULT_FOR[role];
 
     if (data) {
-        Object.keys(data).forEach(function(key) {
+        Object.keys(data).forEach(key => {
             if (!node[key]) {
                 node[key] = data[key];
             }
@@ -1734,8 +1736,8 @@ var setDefaults = function(node) {
     }
 };
 
-var setRole = function(node) {
-    var getRole = TAG_TO_ROLE[node.tag] || '',
+const setRole = function(node) {
+    let getRole = TAG_TO_ROLE[node.tag] || '',
         roleData, role;
 
     roleData = isFunction(getRole) ? getRole.call(this, node) : getRole;
@@ -1768,18 +1770,18 @@ var setRole = function(node) {
     }
 };
 
-var fixRole = function(node) {
-    var role = node.role;
+const fixRole = function(node) {
+    let role = node.role;
     if (role && role !== 'presentation') {
         if (!node.ownsValidRolesFor(role)) {
-            this.warn('Element with role "' + role +
-                      '" does not own elements with valid roles');
+            this.warn(`Element with role "${role
+            }" does not own elements with valid roles`);
             if (this.forceValidMarkup) {
                 delete node.role;
             }
         } else if (!node.ownedByValidRolesFor(role)) {
-            this.warn('Element with role "' + role +
-                      '" is not owned by elements with valid roles');
+            this.warn(`Element with role "${role
+            }" is not owned by elements with valid roles`);
             if (this.forceValidMarkup) {
                 delete node.role;
             }
@@ -1817,10 +1819,11 @@ exports.fixRole = fixRole;
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
+/* eslint-disable no-prototype-builtins */
 'use strict';
 
 exports.extend = function(obj, src) {
-    for (var key in src) {
+    for (let key in src) {
         if (src.hasOwnProperty(key)) {
             obj[key] = src[key];
         }
@@ -1835,17 +1838,17 @@ exports.isFunction = function(val) {
 
 exports.toArray = Array.prototype.slice;
 
-var flatten = exports.flatten = function(array) {
-    var i = -1,
+const flatten = exports.flatten = function(array) {
+    let i = -1,
         length = array.length,
         res = [];
 
     while (++i < length) {
-        var value = array[i];
+        let value = array[i];
 
         if (Array.isArray(value)) {
             value = flatten(value);
-            var valIdx = -1,
+            let valIdx = -1,
                 valLength = value.length,
                 resIdx = res.length;
 
@@ -1866,7 +1869,7 @@ exports.capitalize = function(str) {
 };
 
 exports.forEach = function(items, func) {
-    for (var i = 0; i < items.length; i++) {
+    for (let i = 0; i < items.length; i++) {
         func(items[i]);
     }
 };
@@ -1897,10 +1900,10 @@ exports.forEach = function(items, func) {
  */
 'use strict';
 
-var pushStates = function(result, node) {
+const pushStates = function(result, node) {
     if (typeof node.checked !== 'undefined') {
         result.push(node.checked === 'mixed' ? 'mixed' :
-                    node.checked ? 'checked' : 'not checked');
+            node.checked ? 'checked' : 'not checked');
     }
 
     if (node.expanded === true) {
@@ -1930,7 +1933,7 @@ var pushStates = function(result, node) {
     }
 };
 
-var pushProperties = function(result, node) {
+const pushProperties = function(result, node) {
     if (node.required) {
         result.push('required');
     }
@@ -1955,7 +1958,7 @@ var pushProperties = function(result, node) {
         'dropeffect',
         'live',
         'relevant'
-    ].forEach(function(item) {
+    ].forEach(item => {
         if (node[item]) {
             result.push(item, node[item]);
         }
@@ -1966,11 +1969,11 @@ var pushProperties = function(result, node) {
     }
 };
 
-var pushActiveDescendant = function(result, node) {
+const pushActiveDescendant = function(result, node) {
     if (node.activedescendant) {
-        var elem = this.getElementById(node.activedescendant);
+        let elem = this.getElementById(node.activedescendant);
         if (elem) {
-            var name = this.getAccessibleName(elem);
+            let name = this.getAccessibleName(elem);
             if (name) {
                 result.push(name);
             }
@@ -1978,18 +1981,20 @@ var pushActiveDescendant = function(result, node) {
     }
 };
 
-var pushDescribedBy = function(result, node) {
+const pushDescribedBy = function(result, node) {
     if (node.describedby) {
-        var that = this;
-        var desc = node.describedby
+        let that = this;
+        let desc = node.describedby
             .split(/\s+/)
-            .map(function(id) {
-                var elem = that.getElementById(id);
+            .map(id => {
+                let elem = that.getElementById(id);
                 if (elem) {
                     return elem.textContent;
                 }
+
+                return '';
             })
-            .filter(function(str) {
+            .filter(str => {
                 return str;
             });
 
@@ -2000,7 +2005,7 @@ var pushDescribedBy = function(result, node) {
 };
 
 module.exports = function(node) {
-    var that = this,
+    let that = this,
         result = [],
         ids;
 
@@ -2031,14 +2036,14 @@ module.exports = function(node) {
         'controls',
         'owns',
         'flowto'
-    ].forEach(function(item) {
+    ].forEach(item => {
         if (node[item]) {
             ids = node[item]
                 .split(/\s+/)
-                .map(function(id) {
+                .map(id => {
                     return that.getElementById(id) ? id : '';
                 })
-                .filter(function(str) {
+                .filter(str => {
                     return str;
                 });
 
@@ -2081,16 +2086,16 @@ module.exports = function(node) {
  */
 'use strict';
 
-var UTIL = require('./util');
+const UTIL = require('./util');
 
-var flatten = UTIL.flatten;
+const flatten = UTIL.flatten;
 
-var ROLE_USE_PROCENT = {
+const ROLE_USE_PROCENT = {
     progressbar: 1,
     scrollbar: 1
 };
 
-var deep = function(roleName) {
+const deep = function(roleName) {
     return function(node) {
         return [
             this.getAccessibleName(node),
@@ -2101,7 +2106,7 @@ var deep = function(roleName) {
     };
 };
 
-var flat = function(roleName) {
+const flat = function(roleName) {
     return function(node) {
         return [
             this.getAccessibleName(node),
@@ -2111,9 +2116,9 @@ var flat = function(roleName) {
     };
 };
 
-var range = function(roleName) {
+const range = function(roleName) {
     return function(node) {
-        var role = node.role,
+        let role = node.role,
             valuetext = node.valuetext,
             valuenow = node.valuenow,
             valuemin = node.valuemin,
@@ -2124,9 +2129,9 @@ var range = function(roleName) {
         if (valuetext) {
             value = valuetext;
         } else if (valuenow && valuemin && valuemax) {
-            valuenow = parseInt(valuenow, 10);
-            valuemin = parseInt(valuemin, 10);
-            valuemax = parseInt(valuemax, 10);
+            valuenow = parseInt(valuenow);
+            valuemin = parseInt(valuemin);
+            valuemax = parseInt(valuemax);
 
             if (ROLE_USE_PROCENT[role]) {
                 if (valuemin < valuemax &&
@@ -2153,13 +2158,13 @@ var range = function(roleName) {
     };
 };
 
-var region = function(before, after) {
+const region = function(before, after) {
     return function(node) {
         if (node.isEmpty()) {
             return [];
         }
 
-        var name = this.getAccessibleName(node);
+        let name = this.getAccessibleName(node);
 
         return [
             name, before,
@@ -2170,13 +2175,13 @@ var region = function(before, after) {
     };
 };
 
-var HANDLERS = {
+const HANDLERS = {
     alert: region('alert', 'alert end'),
     alertdialog: region('alertdialog', 'alertdialog end'),
     application: region('application', 'application end'),
     article: region('article', 'article end'),
     banner: region('banner', 'banner end'),
-    button: function(node) {
+    button(node) {
         return [
             this.getAccessibleName(node),
             (node.expanded === true ||
@@ -2198,8 +2203,8 @@ var HANDLERS = {
     directory: region('directory', 'directory end'),
     document: region('document', 'document end'),
     group: region('group', 'group end'),
-    grid: function(node) {
-        var table = node.table;
+    grid(node) {
+        let table = node.table;
         return [
             this.getAccessibleName(node),
             table ? 'table' : 'grid',
@@ -2236,8 +2241,8 @@ var HANDLERS = {
     rowgroup: deep('rowgroup'),
     rowheader: flat('rowheader'),
     search: region('search', 'search end'),
-    separator: function(node) {
-        var orientation = node.orientation;
+    separator(node) {
+        let orientation = node.orientation;
         return [
             orientation && orientation !== 'none' ? orientation : '',
             'separator',
@@ -2251,8 +2256,8 @@ var HANDLERS = {
     tab: flat('tab'),
     tablist: deep('tablist'),
     tabpanel: region('tabpanel', 'tabpanel end'),
-    textbox: function(node) {
-        var multiline = node.multiline,
+    textbox(node) {
+        let multiline = node.multiline,
             password = node.password;
         return [
             this.getAccessibleName(node),
@@ -2272,14 +2277,14 @@ var HANDLERS = {
 };
 
 module.exports = function(node) {
-    var handler = HANDLERS[node.role];
+    let handler = HANDLERS[node.role];
     if (!handler) {
         return this.traverse(node);
     }
 
-    var value = flatten(handler.call(this, node));
+    let value = flatten(handler.call(this, node));
 
-    return value.filter(function(str) {
+    return value.filter(str => {
         return str;
     });
 };
