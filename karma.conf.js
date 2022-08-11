@@ -13,8 +13,6 @@ module.exports = function(config) {
         browsers,
         files: [
             'dist/loud.js',
-            require.resolve('es5-shim'),
-            require.resolve('html5shiv/dist/html5shiv'),
             'test/**/*.js'
         ]
     });
