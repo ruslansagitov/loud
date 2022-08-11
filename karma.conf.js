@@ -22,14 +22,14 @@ module.exports = function(config) {
             sauceLabsChrome: {
                 base: 'SauceLabs',
                 browserName: 'chrome',
-                browserVersion: '87.0',
+                browserVersion: '104',
                 platformName: 'Windows 10'
             },
             sauceLabsIOs: {
                 base: 'SauceLabs',
                 browserName: 'Safari',
-                deviceName: 'iPhone X Simulator',
-                platformVersion: '14.0',
+                deviceName: 'iPhone 13 Simulator',
+                platformVersion: '15.4',
                 platformName: 'iOS'
             }
         };
