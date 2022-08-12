@@ -19,12 +19,11 @@ module.exports = function(config) {
 
     if (process.env.CI && process.env.SAUCE_ACCESS_KEY) {
         let customLaunchers = {
-            sauceLabsAndroid: {
+            sauceLabsSafari: {
                 base: 'SauceLabs',
-                browserName: 'Chrome',
-                'appium:deviceName': 'Google Pixel 4 GoogleAPI Emulator',
-                'appium:platformVersion': '12.0',
-                platformName: 'Android'
+                browserName: 'safari',
+                browserVersion: '15',
+                platformName: 'macOS 12'
             },
             sauceLabsIOs: {
                 base: 'SauceLabs',
