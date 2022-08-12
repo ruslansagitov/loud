@@ -23,7 +23,8 @@ module.exports = function(config) {
                 base: 'SauceLabs',
                 browserName: 'Chrome',
                 'appium:deviceName': 'Google Pixel 4 GoogleAPI Emulator',
-                'appium:platformVersion': '12.0'
+                'appium:platformVersion': '12.0',
+                platformName: 'Android'
             },
             sauceLabsIOs: {
                 base: 'SauceLabs',
