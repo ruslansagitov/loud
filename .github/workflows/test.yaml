@@ -1,35 +1,84 @@
 name: test
-on: [push, pull_request]
+
+on:
+  push:
+    branches: [$default-branch]
+  pull_request:
+    branches: [$default-branch]
+  workflow_dispatch:
+
 jobs:
   test:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Cache
+        uses: actions/cache@v3
+        id: cache-npm
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: NodeJS
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - run: node --version
-      - run: npm --version
-      - run: npm ci
-      - run: npm run lint
-      - run: npm run check-writing
-      - run: npm run build-coverage
-      - uses: saucelabs/sauce-connect-action@v2
+          registry-url: https://registry.npmjs.org/
+
+      - name: Install
+        run: |
+          node --version
+          npm --version
+          npm ci
+
+      - name: Lint
+        run: |
+          npm run lint
+          npm run check-writing
+
+      - name: Build (with coverage)
+        run: npm run build-coverage
+
+      - name: SauceLabs
+        uses: saucelabs/sauce-connect-action@v2
         with:
-          username: ${{secrets.SAUCE_USERNAME}}
-          accessKey: ${{secrets.SAUCE_ACCESS_KEY}}
+          username: ${{ secrets.SAUCE_USERNAME }}
+          accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
           tunnelName: github-action-tunnel
-      - run: npm run karma-test
+
+      - name: Test
+        run: npm run karma-test
         env:
           CI: '1'
-          SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
-          SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}
-      - run: npm run build
-      - uses: coverallsapp/github-action@master
+          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
+          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
+
+      - name: Build (without coverage)
+        run: npm run build
+
+      - name: Upload dist
+        uses: actions/upload-artifact@v3
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          path-to-lcov: ${{github.workspace}}/coverage/*/lcov.info
-      - uses: paambaati/codeclimate-action@v3.0.0
+          name: dist
+          path: dist/loud.js
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ${{ github.workspace }}/coverage/*/lcov.info
+
+      - name: CodeClimate
+        uses: paambaati/codeclimate-action@v3.0.0
         env:
-          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageLocations: ${{github.workspace}}/coverage/*/lcov.info:lcov
+          coverageLocations: ${{ github.workspace }}/coverage/*/lcov.info:lcov
