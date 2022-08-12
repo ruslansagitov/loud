@@ -2,9 +2,9 @@ name: test
 
 on:
   push:
-    branches: [$default-branch]
+    branches: [ $default-branch ]
   pull_request:
-    branches: [$default-branch]
+    branches: [ $default-branch ]
   workflow_dispatch:
 
 jobs:
@@ -58,6 +58,7 @@ jobs:
         run: npm run karma-test
         env:
           CI: '1'
+          KARMA_COVERAGE: lcovonly
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
 
