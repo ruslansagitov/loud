@@ -10,6 +10,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      DISPLAY: ':0'
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -53,7 +55,8 @@ jobs:
       - name: Install Firefox
         uses: browser-actions/setup-firefox@latest
 
-      - run: |
+      - name: Start Xvfb
+        run: |
           sudo apt-get install xvfb && \
           Xvfb $DISPLAY &> /dev/null &
 
@@ -67,7 +70,6 @@ jobs:
       - name: Test
         run: npm run karma-test
         env:
-          CI: '1'
           KARMA_BROWSERS: Firefox,Chrome
           KARMA_COVERAGE: lcovonly
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
