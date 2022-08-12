@@ -54,7 +54,10 @@ module.exports = function(config) {
             },
             coverageReporter: {
                 type: process.env.KARMA_COVERAGE,
-                dir: 'coverage/'
+                dir: 'coverage/',
+                subdir(browser) {
+                    return browser.toLowerCase().split(/[ /-]/)[0];
+                }
             }
         });
     }
