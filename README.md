@@ -1,4 +1,4 @@
-# Loud [![Build Status](https://travis-ci.org/ruslansagitov/loud.svg?branch=master)](https://travis-ci.org/ruslansagitov/loud) [![Coverage Status](https://coveralls.io/repos/ruslansagitov/loud/badge.svg)](https://coveralls.io/r/ruslansagitov/loud) [![Code Climate](https://codeclimate.com/github/ruslansagitov/loud/badges/gpa.svg)](https://codeclimate.com/github/ruslansagitov/loud)
+# Loud [![Build Status](https://github.com/ruslansagitov/loud/actions/workflows/test.yaml/badge.svg)](https://github.com/ruslansagitov/loud/actions/workflows/test.yaml) [![Coverage Status](https://coveralls.io/repos/ruslansagitov/loud/badge.svg)](https://coveralls.io/r/ruslansagitov/loud) [![Code Climate](https://codeclimate.com/github/ruslansagitov/loud/badges/gpa.svg)](https://codeclimate.com/github/ruslansagitov/loud)
 
 Web accessibility testing helper
 
