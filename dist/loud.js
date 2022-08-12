@@ -25,81 +25,75 @@
 'use strict';
 
 const ROLE_FROM_TAG = require('./role-from-tag'),
-    UTIL = require('./util');
+    {flatten, toArray, capitalize, forEach} = require('./util');
 
-const extend = UTIL.extend,
-    flatten = UTIL.flatten,
-    toArray = UTIL.toArray,
-    capitalize = UTIL.capitalize,
-    forEach = UTIL.forEach;
+const TAG_NO_ROLE = new Set([
+    'base',
+    'head',
+    'html',
+    'keygen',
+    'label',
+    'meta',
+    'meter',
+    'noscript',
+    'optgroup',
+    'param',
+    'script',
+    'source',
+    'style',
+    'template',
+    'title',
+]);
 
-const TAG_NO_ROLE = {
-    base: 1,
-    head: 1,
-    html: 1,
-    keygen: 1,
-    label: 1,
-    meta: 1,
-    meter: 1,
-    noscript: 1,
-    optgroup: 1,
-    param: 1,
-    script: 1,
-    source: 1,
-    style: 1,
-    template: 1,
-    title: 1
-};
+const TAG_STRONG_ROLE = new Set([
+    'area',
+    'datalist',
+    'fieldset',
+    'footer',
+]);
 
-const TAG_STRONG_ROLE = {
-    area: 1,
-    datalist: 1,
-    fieldset: 1,
-    footer: 1
-};
+const TAG_CAN_BE_PRESENTATION = new Set([
+    'aside',
+    'fieldset',
+    'footer',
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'header',
+    'hr',
+    'iframe',
+    'li',
+    'main',
+    'menu',
+    'nav',
+    'object',
+    'ol',
+    'ul',
+    'div',
+    'span',
+]);
 
-const TAG_CAN_BE_PRESENTATION = {
-    aside: 1,
-    fieldset: 1,
-    footer: 1,
-    h1: 1,
-    h2: 1,
-    h3: 1,
-    h4: 1,
-    h5: 1,
-    h6: 1,
-    header: 1,
-    hr: 1,
-    iframe: 1,
-    li: 1,
-    main: 1,
-    menu: 1,
-    nav: 1,
-    object: 1,
-    ol: 1,
-    ul: 1,
-    div: 1,
-    span: 1
-};
+const TAG_NO_CLOSING = new Set([
+    'hr',
+    'img',
+    'input',
+    'menuitem',
+    'progress',
+]);
 
-const TAG_NO_CLOSING = {
-    hr: 1,
-    img: 1,
-    input: 1,
-    menuitem: 1,
-    progress: 1
-};
-
-const INPUT_TYPE_NO_ROLE = {
-    color: 1,
-    date: 1,
-    datetime: 1,
-    file: 1,
-    hidden: 1,
-    month: 1,
-    time: 1,
-    week: 1
-};
+const INPUT_TYPE_NO_ROLE = new Set([
+    'color',
+    'date',
+    'datetime',
+    'file',
+    'hidden',
+    'month',
+    'time',
+    'week',
+]);
 
 const TAG_TO_ROLE_RESTRICTIONS = {
     address: {
@@ -356,73 +350,73 @@ const ROLE_DESCENDANTS = {
     }
 };
 
-const ROLE_INLINE_VALUE = {
-    textbox: 1,
-    combobox: 1,
-    menuitem: 1,
-    listbox: 1,
-    slider: 1
-};
+const ROLE_INLINE_VALUE = new Set([
+    'textbox',
+    'combobox',
+    'menuitem',
+    'listbox',
+    'slider',
+]);
 
-const TAG_HAS_ALT = {
-    applet: 1,
-    area: 1,
-    img: 1,
-    input: 1
-};
+const TAG_HAS_ALT = new Set([
+    'applet',
+    'area',
+    'img',
+    'input',
+]);
 
-const TAG_HAS_HREF = {
-    a: 1,
-    link: 1
-};
+const TAG_HAS_HREF = new Set([
+    'a',
+    'link',
+]);
 
-const HYPERLINK_TYPES = {
-    alternative: 1,
-    author: 1,
-    help: 1,
-    license: 1,
-    next: 1,
-    prev: 1,
-    search: 1
-};
+const HYPERLINK_TYPES = new Set([
+    'alternative',
+    'author',
+    'help',
+    'license',
+    'next',
+    'prev',
+    'search',
+]);
 
-const ACCESSIBLE_NAME_FROM_CONTENTS = {
-    button: 1,
-    checkbox: 1,
-    columnheader: 1,
-    /*directory: 1,*/
-    gridcell: 1,
-    heading: 1,
-    link: 1,
-    listitem: 1,
-    menuitem: 1,
-    menuitemcheckbox: 1,
-    menuitemradio: 1,
-    option: 1,
-    radio: 1,
-    /*row: 1,*/
-    /*rowgroup: 1,*/
-    rowheader: 1,
-    tab: 1,
-    tooltip: 1,
-    treeitem: 1,
-    presentation: 1
-};
+const ACCESSIBLE_NAME_FROM_CONTENTS = new Set([
+    'button',
+    'checkbox',
+    'columnheader',
+    /*'directory',*/
+    'gridcell',
+    'heading',
+    'link',
+    'listitem',
+    'menuitem',
+    'menuitemcheckbox',
+    'menuitemradio',
+    'option',
+    'radio',
+    /*'row',*/
+    /*'rowgroup',*/
+    'rowheader',
+    'tab',
+    'tooltip',
+    'treeitem',
+    'presentation',
+]);
 
-const ABSTRACT_ROLES = {
-    command: 1,
-    composite: 1,
-    input: 1,
-    landmark: 1,
-    range: 1,
-    roletype: 1,
-    section: 1,
-    sectionhead: 1,
-    select: 1,
-    structure: 1,
-    widget: 1,
-    window: 1
-};
+const ABSTRACT_ROLES = new Set([
+    'command',
+    'composite',
+    'input',
+    'landmark',
+    'range',
+    'roletype',
+    'section',
+    'sectionhead',
+    'select',
+    'structure',
+    'widget',
+    'window',
+]);
 
 const ATTR_VALUES = {
     autocomplete: {
@@ -470,128 +464,106 @@ const TAG_HEADING_LEVEL = {
     h6: '6'
 };
 
-function A11yNode(node) {
-    this.node = node;
+class A11yNode {
+    constructor(node) {
+        this.node = node;
 
-    this.childs = [];
+        this.childs = [];
 
-    this.nodeType = node.nodeType;
-    this.nodeValue = node.nodeValue;
-    this.value = node.value;
-    this.textContent = node.textContent || node.innerText;
-    this.tag = node.nodeName.toLowerCase();
+        this.nodeType = node.nodeType;
+        this.nodeValue = node.nodeValue;
+        this.value = node.value;
+        this.textContent = node.textContent || node.innerText;
+        this.tag = node.nodeName.toLowerCase();
 
-    return this;
-}
-
-A11yNode.prototype.parse = function() {
-    let node = this.node.firstChild,
-        newNode;
-
-    this.childs = [];
-    for (; node; node = node.nextSibling) {
-        newNode = new A11yNode(node).parse();
-        newNode.parentNode = this;
-
-        this.childs.push(newNode);
+        return this;
     }
 
-    let that = this;
+    parse() {
+        let node = this.node.firstChild,
+            newNode;
 
-    this.childs.forEach((child, idx) => {
-        child.nextSibling = that.childs[idx + 1];
-    });
-
-    this.firstChild = this.childs[0];
-
-    return this;
-};
-
-A11yNode.prototype.free = function() {
-    delete this.node;
-
-    delete this.parentNode;
-    delete this.firstChild;
-    delete this.nextSibling;
-
-    this.childs.forEach(child => {
-        child.free();
-    });
-
-    delete this.childs;
-};
-
-forEach([
-    'setRole',
-    'fixRole'
-], item => {
-    A11yNode.prototype[item] = function(inst) {
-        ROLE_FROM_TAG[item].call(inst, this);
-
-        let node = this.firstChild;
+        this.childs = [];
         for (; node; node = node.nextSibling) {
-            if (node.nodeType === 1) {
-                node[item](inst);
+            newNode = new A11yNode(node).parse();
+            newNode.parentNode = this;
+
+            this.childs.push(newNode);
+        }
+
+        let that = this;
+
+        this.childs.forEach((child, idx) => {
+            child.nextSibling = that.childs[idx + 1];
+        });
+
+        this.firstChild = this.childs[0];
+
+        return this;
+    }
+
+    free() {
+        delete this.node;
+
+        delete this.parentNode;
+        delete this.firstChild;
+        delete this.nextSibling;
+
+        this.childs.forEach(child => child.free());
+
+        delete this.childs;
+    }
+
+    setIds(inst) {
+        if (this.nodeType === 1) {
+            let id = this.getAttribute('id');
+            if (id) {
+                inst.setElementId(id, this);
             }
         }
 
-        return this;
-    };
-});
-
-A11yNode.prototype.setIds = function(inst) {
-    if (this.nodeType === 1) {
-        let id = this.getAttribute('id');
-        if (id) {
-            inst.setElementId(id, this);
+        let node = this.firstChild;
+        for (; node; node = node.nextSibling) {
+            node.setIds(inst);
         }
+
+        return this;
     }
 
-    let node = this.firstChild;
-    for (; node; node = node.nextSibling) {
-        node.setIds(inst);
+    getElementsByTagName(name) {
+        let node = this.firstChild,
+            nodes = [];
+
+        if (this.tag === name) {
+            nodes.push(this);
+        }
+
+        for (; node; node = node.nextSibling) {
+            nodes.push(node.getElementsByTagName(name));
+        }
+
+        return flatten(nodes);
     }
 
-    return this;
-};
-
-A11yNode.prototype.getElementsByTagName = function(name) {
-    let node = this.firstChild,
-        nodes = [];
-
-    if (this.tag === name) {
-        nodes.push(this);
-    }
-
-    for (; node; node = node.nextSibling) {
-        nodes.push(node.getElementsByTagName(name));
-    }
-
-    return flatten(nodes);
-};
-
-/* proxy */
-extend(A11yNode.prototype, {
+    /* proxy */
     hasAttribute(...args) {
         return this.node.hasAttribute(...args);
-    },
+    }
 
     getAttribute(...args) {
         return this.node.getAttribute(...args);
     }
-});
 
-/* utils */
-extend(A11yNode.prototype, {
+    /* utils */
     isEmbeddedControl() {
-        return Boolean(ROLE_INLINE_VALUE[this.role]);
-    },
+        return ROLE_INLINE_VALUE.has(this.role);
+    }
 
-    /* istanbul ignore next */ isHyperlink() {
+    /* istanbul ignore next: untestable */ isHyperlink() {
         let rel = this.getAttribute('rel') || '';
         rel = rel.toLowerCase();
-        return Boolean(HYPERLINK_TYPES[rel]);
-    },
+        return HYPERLINK_TYPES.has(rel);
+    }
 
     isNodeNonEmpty(node) {
         node = node.firstChild;
@@ -601,7 +573,7 @@ extend(A11yNode.prototype, {
                     continue;
                 }
 
-                if (TAG_NO_CLOSING[node.tag]) {
+                if (TAG_NO_CLOSING.has(node.tag)) {
                     return true;
                 }
 
@@ -615,19 +587,19 @@ extend(A11yNode.prototype, {
         }
 
         return false;
-    },
+    }
 
     isEmpty() {
         return !this.isNodeNonEmpty(this);
-    },
+    }
 
     isPresentation() {
         return this.role === 'presentation';
-    },
+    }
 
     isStrongRole() {
-        return Boolean(TAG_STRONG_ROLE[this.tag]);
-    },
+        return TAG_STRONG_ROLE.has(this.tag);
+    }
 
     hasParent(parentName) {
         let node = this.parentNode;
@@ -638,20 +610,20 @@ extend(A11yNode.prototype, {
         }
 
         return false;
-    },
+    }
 
     mustNoRole() {
         if (this.tag === 'input') {
             let type = this.getAttribute('type') || 'text';
             type = type.toLowerCase();
-            return Boolean(INPUT_TYPE_NO_ROLE[type]);
+            return INPUT_TYPE_NO_ROLE.has(type);
         }
-        return Boolean(TAG_NO_ROLE[this.tag]);
-    },
+        return TAG_NO_ROLE.has(this.tag);
+    }
 
     mayBePresentation() {
-        return Boolean(TAG_CAN_BE_PRESENTATION[this.tag]);
-    },
+        return TAG_CAN_BE_PRESENTATION.has(this.tag);
+    }
 
     mayTransitionToRole(role) {
         let allowed = TAG_TO_ROLE_RESTRICTIONS[this.tag];
@@ -659,12 +631,12 @@ extend(A11yNode.prototype, {
             return true;
         }
         return allowed && allowed[role];
-    },
+    }
 
     mayAccessibleNameFromContents() {
         let role = this.role;
-        return (!role || ACCESSIBLE_NAME_FROM_CONTENTS[role]);
-    },
+        return (!role || ACCESSIBLE_NAME_FROM_CONTENTS.has(role));
+    }
 
     isInputInsideLabel() {
         let id = this.getAttribute('id');
@@ -677,15 +649,15 @@ extend(A11yNode.prototype, {
                 }
             }
         }
-    },
+    }
 
     mayHaveAlt() {
-        return Boolean(TAG_HAS_ALT[this.tag]);
-    },
+        return TAG_HAS_ALT.has(this.tag);
+    }
 
     mayHaveHref() {
-        return Boolean(TAG_HAS_HREF[this.tag]);
-    },
+        return TAG_HAS_HREF.has(this.tag);
+    }
 
     getRoleFromAttr() {
         if (this.nodeType !== 1) {
@@ -699,14 +671,10 @@ extend(A11yNode.prototype, {
 
         return roles
             .split(/\s+/)
-            .filter(role => {
-                return !ABSTRACT_ROLES[role];
-            })
-            .filter(str => {
-                return str;
-            })
+            .filter(role => !ABSTRACT_ROLES.has(role))
+            .filter(str => str)
             .shift();
-    },
+    }
 
     hasOnlyTextChilds() {
         let node = this.firstChild;
@@ -717,7 +685,7 @@ extend(A11yNode.prototype, {
         }
 
         return true;
-    },
+    }
 
     getTextContentFromDirectChild(childName) {
         let node = this.firstChild,
@@ -739,10 +707,8 @@ extend(A11yNode.prototype, {
             }
         }
     }
-});
 
-/* relationship */
-extend(A11yNode.prototype, {
+    /* relationship */
     ownedByValidRolesFor(role) {
         let context = ROLE_CONTEXT[role];
         if (!context) {
@@ -771,7 +737,7 @@ extend(A11yNode.prototype, {
         }
 
         return false;
-    },
+    }
 
     ownsValidRolesFor(role) {
         let limits = ROLE_DESCENDANTS[role];
@@ -780,7 +746,7 @@ extend(A11yNode.prototype, {
         }
 
         return this.isDescendantsValid(limits);
-    },
+    }
 
     isDescendantsValid(limits) {
         let node = this.firstChild,
@@ -817,7 +783,139 @@ extend(A11yNode.prototype, {
 
         return nodeCount !== 0;
     }
+
+    getChecked() {
+        /* Firefox defines node.checked on <menuitem>. */
+        if (this.tag === 'menuitem') {
+            return null;
+        }
+
+        if (this.tag === 'input' &&
+            this.getAttribute('type') === 'checkbox' &&
+            this.node.indeterminate) {
+            return 'mixed';
+        }
+
+        if (this.hasAttribute('aria-checked')) {
+            return this.getAttribute('aria-checked') === 'true';
+        }
+
+        return this.node.checked;
+    }
+
+    getSelected() {
+        if (this.hasAttribute('aria-selected')) {
+            return this.getAttribute('aria-selected') === 'true';
+        }
+    }
+
+    getReadonly() {
+        return (this.hasAttribute('readonly') ||
+                this.getAttribute('aria-readonly') === 'true');
+    }
+
+    getRequired() {
+        return this.hasAttribute('required') ||
+               this.getAttribute('aria-required') === 'true';
+    }
+
+    getMultiselectable() {
+        return this.hasAttribute('multiple') ||
+               this.getAttribute('aria-multiselectable') === 'true';
+    }
+
+    getLevel() {
+        if (this.hasAttribute('aria-level')) {
+            return this.getAttribute('aria-level');
+        }
+
+        return TAG_HEADING_LEVEL[this.tag];
+    }
+
+    /* states */
+    isSelected() {
+        return this.node.selected;
+    }
+
+    isDisabled() {
+        let fieldset = this.hasParent('fieldset');
+
+        return (this.node.disabled ||
+                this.getAttribute('aria-disabled') === 'true' ||
+
+                this.tag === 'fieldset' &&
+                this.hasAttribute('disabled') ||
+
+                fieldset &&
+                (fieldset.node.disabled ||
+                 /* istanbul ignore next: untestable */
+                 fieldset.hasAttribute('disabled')) &&
+                !this.hasParent('legend'));
+    }
+
+    isHidden(inst) {
+        let node = this.node;
+
+        if (this.nodeType !== 1) {
+            return false;
+        }
+
+        /* istanbul ignore next: untestable */
+        if (this.tag === 'datalist') {
+            let id = this.getAttribute('id');
+            if (id) {
+                let elems = inst.getElementsByTagName('input');
+                elems = toArray.call(elems)
+                    .filter(input => input.getAttribute('list') === id);
+                if (elems.length) {
+                    return true;
+                }
+            }
+        } else if ((this.tag === 'option' || this.tag === 'optgroup') &&
+                   this.hasParent('select')) {
+            return false;
+        }
+
+        if (this.hasAttribute('hidden') ||
+            this.getAttribute('aria-hidden') === 'true' ||
+            this.tag === 'input' &&
+            this.getAttribute('type') === 'hidden' ||
+            node.style.visibility === 'hidden' ||
+            node.style.display === 'none') {
+            return true;
+        }
+
+        if (node.offsetWidth || node.offsetHeight ||
+            node.getClientRects && node.getClientRects().length) {
+            return false;
+        }
+
+        return true;
+    }
+
+    isInvalid() {
+        return this.getAttribute('aria-invalid') === 'true';
+    }
+}
+
+forEach([
+    'setRole',
+    'fixRole'
+], item => {
+    A11yNode.prototype[item] = function(inst) {
+        ROLE_FROM_TAG[item].call(inst, this);
+
+        let node = this.firstChild;
+        for (; node; node = node.nextSibling) {
+            if (node.nodeType === 1) {
+                node[item](inst);
+            }
+        }
+
+        return this;
+    };
 });
+
 
 /* attributes */
 forEach([
@@ -851,9 +949,7 @@ forEach([
             return data
                 .toLowerCase()
                 .split(/\s+/)
-                .filter(value => {
-                    return ATTR_VALUES[item][value];
-                })
+                .filter(value => ATTR_VALUES[item][value])
                 .join(' ');
         }
     };
@@ -873,124 +969,6 @@ forEach([
             return a === 'true' ? true : (a === 'false' ? false : a);
         }
     };
-});
-
-extend(A11yNode.prototype, {
-    getChecked() {
-        /* Firefox defines node.checked on <menuitem>. */
-        if (this.tag === 'menuitem') {
-            return null;
-        }
-
-        if (this.tag === 'input' &&
-            this.getAttribute('type') === 'checkbox' &&
-            this.node.indeterminate) {
-            return 'mixed';
-        }
-
-        if (this.hasAttribute('aria-checked')) {
-            return this.getAttribute('aria-checked') === 'true';
-        }
-
-        return this.node.checked;
-    },
-
-    getSelected() {
-        if (this.hasAttribute('aria-selected')) {
-            return this.getAttribute('aria-selected') === 'true';
-        }
-    },
-
-    getReadonly() {
-        return (this.hasAttribute('readonly') ||
-                this.getAttribute('aria-readonly') === 'true');
-    },
-
-    getRequired() {
-        return this.hasAttribute('required') ||
-               this.getAttribute('aria-required') === 'true';
-    },
-
-    getMultiselectable() {
-        return this.hasAttribute('multiple') ||
-               this.getAttribute('aria-multiselectable') === 'true';
-    },
-
-    getLevel() {
-        if (this.hasAttribute('aria-level')) {
-            return this.getAttribute('aria-level');
-        }
-
-        return TAG_HEADING_LEVEL[this.tag];
-    }
-});
-
-/* states */
-extend(A11yNode.prototype, {
-    isSelected() {
-        return this.node.selected;
-    },
-
-    isDisabled() {
-        let fieldset = this.hasParent('fieldset');
-
-        return (this.node.disabled ||
-                this.getAttribute('aria-disabled') === 'true' ||
-
-                this.tag === 'fieldset' &&
-                this.hasAttribute('disabled') ||
-
-                fieldset &&
-                (fieldset.node.disabled ||
-                 /* istanbul ignore next: phantomjs */
-                 fieldset.hasAttribute('disabled')) &&
-                !this.hasParent('legend'));
-    },
-
-    isHidden(inst) {
-        let node = this.node;
-
-        if (this.nodeType !== 1) {
-            return false;
-        }
-
-        /* istanbul ignore next */
-        if (this.tag === 'datalist') {
-            let id = this.getAttribute('id');
-            if (id) {
-                let elems = inst.getElementsByTagName('input');
-                elems = toArray.call(elems).filter(input => {
-                    return input.getAttribute('list') === id;
-                });
-                if (elems.length) {
-                    return true;
-                }
-            }
-        } else if ((this.tag === 'option' || this.tag === 'optgroup') &&
-                   this.hasParent('select')) {
-            return false;
-        }
-
-        if (this.hasAttribute('hidden') ||
-            this.getAttribute('aria-hidden') === 'true' ||
-            this.tag === 'input' &&
-            this.getAttribute('type') === 'hidden' ||
-            node.style.visibility === 'hidden' ||
-            node.style.display === 'none') {
-            return true;
-        }
-
-        if (node.offsetWidth || node.offsetHeight ||
-            node.getClientRects && node.getClientRects().length) {
-            return false;
-        }
-
-        return true;
-    },
-
-    isInvalid() {
-        return this.getAttribute('aria-invalid') === 'true';
-    }
 });
 
 module.exports = A11yNode;
@@ -1021,9 +999,7 @@ module.exports = A11yNode;
  */
 'use strict';
 
-const UTIL = require('./util');
-
-const toArray = UTIL.toArray;
+const {toArray} = require('./util');
 
 const TAG_LABEL_TAG = {
     table: 'caption',
@@ -1048,9 +1024,7 @@ const getFrom = [
 
                     return '';
                 })
-                .filter(str => {
-                    return str;
-                })
+                .filter(str => str)
                 .join(' ');
         }
     },
@@ -1084,9 +1058,8 @@ const getFrom = [
             let id = node.getAttribute('id');
             if (id) {
                 let elems = this.getElementsByTagName('label');
-                elems = toArray.call(elems).filter(label => {
-                    return label.getAttribute('for') === id;
-                });
+                elems = toArray.call(elems)
+                    .filter(label => label.getAttribute('for') === id);
 
                 if (elems.length) {
                     return this.getAccessibleName(elems[0], recurse);
@@ -1194,89 +1167,90 @@ const getWordsFromRole = require('./words-from-role'),
     getWordsFromAttributes = require('./words-from-attributes'),
     getAccessibleName = require('./accessible-name'),
     A11yNode = require('./a11y-node'),
-    UTIL = require('./util');
+    {flatten} = require('./util');
 
-const flatten = UTIL.flatten;
+class Loud {
+    constructor() {
+        let settings = module.exports;
+        this.warn = settings.warn;
+        this.forceValidMarkup = settings.FORCE_VALID_MARKUP;
+        return this;
+    }
 
-function Loud() {
-    let settings = module.exports;
-    this.warn = settings.warn;
-    this.forceValidMarkup = settings.FORCE_VALID_MARKUP;
-    return this;
+    say(node) {
+        if (!node || !node.length || node.nodeType === 3) {
+            node = [node];
+        }
+
+        let res = [],
+            val;
+
+        for (let i = 0; i < node.length; i++) {
+            if (!node[i]) {
+                continue;
+            }
+
+            this.elementById = {};
+
+            this.root = new A11yNode(node[i], this);
+            this.root
+                .parse()
+                .setIds(this)
+                .setRole(this)
+                .fixRole(this);
+
+            val = this.handleNode(this.root);
+            if (val) {
+                res.push(val);
+            }
+
+            this.root.free();
+            delete this.root;
+            delete this.elementById;
+        }
+
+        return flatten(res);
+    }
+
+    setElementId(id, node) {
+        this.elementById[id] = node;
+    }
+
+    getElementById(id) {
+        return this.elementById[id];
+    }
+
+    getElementsByTagName(name) {
+        return this.root.getElementsByTagName(name);
+    }
+
+    traverse(node) {
+        let iter = node.firstChild,
+            value = [],
+            val;
+        for (; iter; iter = iter.nextSibling) {
+            val = this.handleNode(iter);
+            if (val) {
+                value.push(val);
+            }
+        }
+
+        return flatten(value);
+    }
+
+    handleNode(node) {
+        if (node.nodeType === 3) {
+            return node.nodeValue.trim();
+        }
+
+        if (node.hidden) {
+            return '';
+        }
+
+        return this.getWordsFromRole(node);
+    }
 }
 
-Loud.prototype.say = function(node) {
-    if (!node || !node.length || node.nodeType === 3) {
-        node = [node];
-    }
-
-    let res = [],
-        val;
-
-    for (let i = 0; i < node.length; i++) {
-        if (!node[i]) {
-            continue;
-        }
-
-        this.elementById = {};
-
-        this.root = new A11yNode(node[i], this);
-        this.root
-            .parse()
-            .setIds(this)
-            .setRole(this)
-            .fixRole(this);
-
-        val = this.handleNode(this.root);
-        if (val) {
-            res.push(val);
-        }
-
-        this.root.free();
-        delete this.root;
-        delete this.elementById;
-    }
-
-    return flatten(res);
-};
-
-Loud.prototype.setElementId = function(id, node) {
-    this.elementById[id] = node;
-};
-
-Loud.prototype.getElementById = function(id) {
-    return this.elementById[id];
-};
-
-Loud.prototype.getElementsByTagName = function(name) {
-    return this.root.getElementsByTagName(name);
-};
-
-Loud.prototype.traverse = function(node) {
-    let iter = node.firstChild,
-        value = [],
-        val;
-    for (; iter; iter = iter.nextSibling) {
-        val = this.handleNode(iter);
-        if (val) {
-            value.push(val);
-        }
-    }
-
-    return flatten(value);
-};
-
-Loud.prototype.handleNode = function(node) {
-    if (node.nodeType === 3) {
-        return node.nodeValue.trim();
-    }
-
-    if (node.hidden) {
-        return '';
-    }
-
-    return this.getWordsFromRole(node);
-};
 
 Loud.prototype.getAccessibleName = getAccessibleName;
 Loud.prototype.getWordsFromRole = getWordsFromRole;
@@ -1375,13 +1349,8 @@ module.exports = {
  */
 'use strict';
 
-const UTIL = require('./util');
+const {isFunction, capitalize} = require('./util');
 
-const isFunction = UTIL.isFunction,
-    extend = UTIL.extend,
-    capitalize = UTIL.capitalize;
-
-/* eslint-disable max-len */
 const ROLE_LOCAL_ATTRS = {
     alert: ['expanded'],
     alertdialog: ['expanded'],
@@ -1444,7 +1413,6 @@ const ROLE_LOCAL_ATTRS = {
     treegrid: ['expanded', 'required', 'readonly', 'activedescendant', 'multiselectable'],
     treeitem: ['expanded', 'selected', 'posinset', 'setsize']
 };
-/* eslint-enable max-len */
 
 const DEFAULT_FOR = {
     alert: {
@@ -1482,24 +1450,24 @@ const DEFAULT_FOR = {
     }
 };
 
-const roleToObject = function(roleData) {
+function roleToObject(roleData) {
     if (typeof roleData === 'string') {
         return {role: roleData};
     }
 
-    return extend({}, roleData || {});
-};
+    return {...roleData};
+}
 
-const getTextboxRole = function(node) {
+function getTextboxRole(node) {
     let listId = node.getAttribute('list'),
         datalist;
 
-    /* istanbul ignore if */
+    /* istanbul ignore if: untestable */
     if (listId) {
         datalist = this.getElementById(listId);
     }
 
-    /* istanbul ignore next */
+    /* istanbul ignore next: untestable */
     if (datalist && datalist.tag === 'datalist') {
         return {
             role: 'combobox',
@@ -1508,9 +1476,9 @@ const getTextboxRole = function(node) {
     }
 
     return 'textbox';
-};
+}
 
-const range = function(role) {
+function range(role) {
     return function(node) {
         return {
             role,
@@ -1519,7 +1487,7 @@ const range = function(role) {
             valuemax: node.getAttribute('max')
         };
     };
-};
+}
 
 const TAG_INPUT_GET_ROLE = {
     checkbox: 'checkbox',
@@ -1619,7 +1587,8 @@ const TAG_TO_ROLE = {
         }
     },
     li: 'listitem',
-    /* istanbul ignore next */ link(node) {
+    link(node) {
+        /* istanbul ignore if: untestable */
         if (node.isHyperlink()) {
             return 'link';
         }
@@ -1634,11 +1603,13 @@ const TAG_TO_ROLE = {
     menuitem: 'menuitem',
     nav: 'navigation',
     ol: 'list',
-    /* istanbul ignore next */ optgroup(node) {
+    optgroup(node) {
+        /* istanbul ignore else: untestable */
         if (node.hasParent('select')) {
             return 'group';
         }
 
+        /* istanbul ignore next: untestable */
         return '';
     },
     option(node) {
@@ -1678,32 +1649,30 @@ const TAG_TO_ROLE = {
     ul: {role: 'list', numbered: true}
 };
 
-const setGlobalAttrs = function(node) {
-    extend(node, {
-        describedby: node.getAttribute('aria-describedby'),
+function setGlobalAttrs(node) {
+    node.describedby = node.getAttribute('aria-describedby');
 
-        controls: node.getAttribute('aria-controls'),
-        owns: node.getAttribute('aria-owns'),
-        flowto: node.getAttribute('aria-flowto'),
-        haspopup: node.getAttribute('aria-haspopup') === 'true',
-        dropeffect: node.getDropeffect(),
-        grabbed: node.getGrabbed(),
+    node.controls = node.getAttribute('aria-controls');
+    node.owns = node.getAttribute('aria-owns');
+    node.flowto = node.getAttribute('aria-flowto');
+    node.haspopup = node.getAttribute('aria-haspopup') === 'true';
+    node.dropeffect = node.getDropeffect();
+    node.grabbed = node.getGrabbed();
 
-        busy: node.getAttribute('aria-busy') === 'true',
-        atomic: node.getAttribute('aria-atomic') === 'true',
-        live: node.getLive(),
-        relevant: node.getRelevant(),
+    node.busy = node.getAttribute('aria-busy') === 'true';
+    node.atomic = node.getAttribute('aria-atomic') === 'true';
+    node.live = node.getLive();
+    node.relevant = node.getRelevant();
 
-        disabled: node.isDisabled(),
-        invalid: node.isInvalid()
-    });
-};
+    node.disabled = node.isDisabled();
+    node.invalid = node.isInvalid();
+}
 
-const setLocalAttrs = function(node) {
+function setLocalAttrs(node) {
     let role = node.role,
         attrs = ROLE_LOCAL_ATTRS[role] || [];
 
-    attrs.forEach(attr => {
+    for (let attr of attrs) {
         if (typeof node[attr] !== 'undefined') {
             return;
         }
@@ -1720,23 +1689,23 @@ const setLocalAttrs = function(node) {
                 node[attr] = node.getAttribute(`aria-${attr}`);
             }
         }
-    });
-};
+    }
+}
 
-const setDefaults = function(node) {
+function setDefaults(node) {
     let role = node.role,
         data = DEFAULT_FOR[role];
 
     if (data) {
-        Object.keys(data).forEach(key => {
+        for (let key of Object.keys(data)) {
             if (!node[key]) {
                 node[key] = data[key];
             }
-        });
+        }
     }
-};
+}
 
-const setRole = function(node) {
+function setRole(node) {
     let getRole = TAG_TO_ROLE[node.tag] || '',
         roleData, role;
 
@@ -1764,13 +1733,13 @@ const setRole = function(node) {
     node.hidden = roleData.hidden || node.isHidden();
 
     if (role && role !== 'presentation') {
-        extend(node, roleData);
+        Object.assign(node, roleData);
         node.role = role;
         setGlobalAttrs.call(this, node);
     }
-};
+}
 
-const fixRole = function(node) {
+function fixRole(node) {
     let role = node.role;
     if (role && role !== 'presentation') {
         if (!node.ownsValidRolesFor(role)) {
@@ -1790,7 +1759,7 @@ const fixRole = function(node) {
         setLocalAttrs.call(this, node);
         setDefaults.call(this, node);
     }
-};
+}
 
 exports.setRole = setRole;
 exports.fixRole = fixRole;
@@ -1819,26 +1788,15 @@ exports.fixRole = fixRole;
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  * IN THE SOFTWARE.
  */
-/* eslint-disable no-prototype-builtins */
 'use strict';
 
-exports.extend = function(obj, src) {
-    for (let key in src) {
-        if (src.hasOwnProperty(key)) {
-            obj[key] = src[key];
-        }
-    }
-
-    return obj;
-};
-
-exports.isFunction = function(val) {
+exports.isFunction = function isFunction(val) {
     return typeof val === 'function';
 };
 
 exports.toArray = Array.prototype.slice;
 
-const flatten = exports.flatten = function(array) {
+exports.flatten = function flatten(array) {
     let i = -1,
         length = array.length,
         res = [];
@@ -1864,11 +1822,11 @@ const flatten = exports.flatten = function(array) {
     return res;
 };
 
-exports.capitalize = function(str) {
+exports.capitalize = function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
-exports.forEach = function(items, func) {
+exports.forEach = function forEach(items, func) {
     for (let i = 0; i < items.length; i++) {
         func(items[i]);
     }
@@ -1900,7 +1858,7 @@ exports.forEach = function(items, func) {
  */
 'use strict';
 
-const pushStates = function(result, node) {
+function pushStates(result, node) {
     if (typeof node.checked !== 'undefined') {
         result.push(node.checked === 'mixed' ? 'mixed' :
             node.checked ? 'checked' : 'not checked');
@@ -1931,9 +1889,9 @@ const pushStates = function(result, node) {
     if (node.busy) {
         result.push('busy');
     }
-};
+}
 
-const pushProperties = function(result, node) {
+function pushProperties(result, node) {
     if (node.required) {
         result.push('required');
     }
@@ -1967,9 +1925,9 @@ const pushProperties = function(result, node) {
     if (node.atomic) {
         result.push('atomic');
     }
-};
+}
 
-const pushActiveDescendant = function(result, node) {
+function pushActiveDescendant(result, node) {
     if (node.activedescendant) {
         let elem = this.getElementById(node.activedescendant);
         if (elem) {
@@ -1979,9 +1937,9 @@ const pushActiveDescendant = function(result, node) {
             }
         }
     }
-};
+}
 
-const pushDescribedBy = function(result, node) {
+function pushDescribedBy(result, node) {
     if (node.describedby) {
         let that = this;
         let desc = node.describedby
@@ -1994,15 +1952,13 @@ const pushDescribedBy = function(result, node) {
 
                 return '';
             })
-            .filter(str => {
-                return str;
-            });
+            .filter(str => str);
 
         if (desc.length) {
             result.push(desc.join(' '));
         }
     }
-};
+}
 
 module.exports = function(node) {
     let that = this,
@@ -2043,9 +1999,7 @@ module.exports = function(node) {
                 .map(id => {
                     return that.getElementById(id) ? id : '';
                 })
-                .filter(str => {
-                    return str;
-                });
+                .filter(str => str);
 
             if (ids.length) {
                 result.push(item, ids);
@@ -2086,16 +2040,14 @@ module.exports = function(node) {
  */
 'use strict';
 
-const UTIL = require('./util');
-
-const flatten = UTIL.flatten;
+const {flatten} = require('./util');
 
 const ROLE_USE_PROCENT = {
     progressbar: 1,
     scrollbar: 1
 };
 
-const deep = function(roleName) {
+function deep(roleName) {
     return function(node) {
         return [
             this.getAccessibleName(node),
@@ -2104,9 +2056,9 @@ const deep = function(roleName) {
             this.traverse(node)
         ];
     };
-};
+}
 
-const flat = function(roleName) {
+function flat(roleName) {
     return function(node) {
         return [
             this.getAccessibleName(node),
@@ -2114,9 +2066,9 @@ const flat = function(roleName) {
             this.getWordsFromAttributes(node)
         ];
     };
-};
+}
 
-const range = function(roleName) {
+function range(roleName) {
     return function(node) {
         let role = node.role,
             valuetext = node.valuetext,
@@ -2156,9 +2108,9 @@ const range = function(roleName) {
             this.getWordsFromAttributes(node)
         ];
     };
-};
+}
 
-const region = function(before, after) {
+function region(before, after) {
     return function(node) {
         if (node.isEmpty()) {
             return [];
@@ -2173,7 +2125,7 @@ const region = function(before, after) {
             after
         ];
     };
-};
+}
 
 const HANDLERS = {
     alert: region('alert', 'alert end'),
@@ -2284,9 +2236,7 @@ module.exports = function(node) {
 
     let value = flatten(handler.call(this, node));
 
-    return value.filter(str => {
-        return str;
-    });
+    return value.filter(str => str);
 };
 
 },{"./util":5}]},{},[3])(3)
