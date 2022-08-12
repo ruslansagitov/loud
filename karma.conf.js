@@ -36,7 +36,7 @@ module.exports = function(config) {
 
         reporters.push('saucelabs');
         config.set({
-            browsers: browsers.concat(Object.keys(customLaunchers)),
+            browsers: Object.keys(customLaunchers),
             captureTimeout: 120000,
             sauceLabs: {
                 testName: 'Loud'
