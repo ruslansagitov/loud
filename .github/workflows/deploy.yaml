@@ -36,7 +36,7 @@ jobs:
           npm --version
           npm ci
 
-      - node: Publish
+      - name: Publish
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
