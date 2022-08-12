@@ -38,8 +38,8 @@
   "devDependencies": {
     "browserify": "^17.0.0",
     "browserify-istanbul": "^3.0.1",
-    "eslint": "^8.18.0",
-    "jasmine-core": "^4.2.0",
+    "eslint": "^8.21.0",
+    "jasmine-core": "^4.3.0",
     "karma": "^6.4.0",
     "karma-chrome-launcher": "^3.1.1",
     "karma-cli": "^2.0.0",
@@ -51,6 +51,6 @@
     "write-good": "^1.0.8"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=16"
   }
 }
