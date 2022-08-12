@@ -19,11 +19,11 @@ module.exports = function(config) {
 
     if (process.env.CI && process.env.SAUCE_ACCESS_KEY) {
         let customLaunchers = {
-            sauceLabsChrome: {
+            sauceLabsAndroid: {
                 base: 'SauceLabs',
-                browserName: 'chrome',
-                browserVersion: '104',
-                platformName: 'Windows 10'
+                browserName: 'Chrome',
+                'appium:deviceName': 'Google Pixel 4 GoogleAPI Emulator',
+                'appium:platformVersion': '12.0'
             },
             sauceLabsIOs: {
                 base: 'SauceLabs',
@@ -36,7 +36,7 @@ module.exports = function(config) {
 
         reporters.push('saucelabs');
         config.set({
-            browsers: Object.keys(customLaunchers),
+            browsers: browsers.concat(Object.keys(customLaunchers)),
             captureTimeout: 120000,
             sauceLabs: {
                 testName: 'Loud'
