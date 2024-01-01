@@ -38,19 +38,19 @@
   "devDependencies": {
     "browserify": "^17.0.0",
     "browserify-istanbul": "^3.0.1",
-    "eslint": "^8.31.0",
-    "jasmine-core": "^4.5.0",
-    "karma": "^6.4.1",
-    "karma-chrome-launcher": "^3.1.1",
+    "eslint": "^8.56.0",
+    "jasmine-core": "^5.1.1",
+    "karma": "^6.4.2",
+    "karma-chrome-launcher": "^3.2.0",
     "karma-cli": "^2.0.0",
-    "karma-coverage": "^2.2.0",
+    "karma-coverage": "^2.2.1",
     "karma-firefox-launcher": "^2.1.2",
     "karma-jasmine": "^5.1.0",
     "karma-sauce-launcher": "^4.3.6",
-    "karma-sourcemap-loader": "^0.3.8",
+    "karma-sourcemap-loader": "^0.4.0",
     "write-good": "^1.0.8"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=20"
   }
 }
