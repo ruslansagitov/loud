@@ -62,20 +62,11 @@ jobs:
           sudo apt-get install xvfb && \
           Xvfb $DISPLAY &> /dev/null &
 
-      - name: SauceLabs
-        uses: saucelabs/sauce-connect-action@v2
-        with:
-          username: ${{ secrets.SAUCE_USERNAME }}
-          accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
-          tunnelName: github-action-tunnel
-
       - name: Test
         run: npm run karma-test
         env:
           KARMA_BROWSERS: Firefox,Chrome
           KARMA_COVERAGE: lcovonly
-          SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
-          SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
 
       - name: Build (without coverage)
         run: npm run build
@@ -91,10 +82,3 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ${{ github.workspace }}/coverage/chrome/lcov.info
-
-      - name: CodeClimate
-        uses: paambaati/codeclimate-action@v9.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageLocations: ${{ github.workspace }}/coverage/*/lcov.info:lcov
