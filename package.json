@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "browserify": "^17.0.1",
-    "browserify-istanbul": "^2.0.0",
+    "browserify-istanbul": "^3.0.1",
     "eslint": "^8.57.1",
     "jasmine-core": "^5.13.0",
     "karma": "^6.4.4",
